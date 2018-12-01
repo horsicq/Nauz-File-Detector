@@ -36,3 +36,6 @@ macx {
 RESOURCES += \
     resources.qrc
 
+#QMAKE_MAC_SDK = macosx10.14
+#CONFIG += c++11
+#CONFIG+=sdk_no_version_check
