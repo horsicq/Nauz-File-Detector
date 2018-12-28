@@ -14,7 +14,7 @@ set QT_SPEC=win32-msvc2013
 call %VS_PATH%\VC\bin\vcvars32.bat
 set GUIEXE=nfd.exe
 set CONEXE=nfdc.exe
-set ZIP_NAME=nfd_win32_%RELEASE_VERSION%
+set ZIP_NAME=%BUILD_NAME%_%RELEASE_VERSION%
 set RES_FILE=rsrc
 
 cd gui_source
