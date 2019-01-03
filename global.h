@@ -22,7 +22,7 @@
 #define _GLOBAL_H
 
 #define X_APPLICATIONNAME "Nauz File Detector"
-#define X_APPLICATIONVERSION "0.01"
+#define X_APPLICATIONVERSION "0.02"
 #define X_ORGANIZATIONNAME "NTInfo"
 #define X_ORGANIZATIONDOMAIN "ntinfo.biz"
 
