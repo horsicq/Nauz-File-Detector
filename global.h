@@ -1,4 +1,4 @@
-// Copyright (c) 2018 hors<horsicq@gmail.com>
+// Copyright (c) 2018-2019 hors<horsicq@gmail.com>
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -21,9 +21,26 @@
 #ifndef _GLOBAL_H
 #define _GLOBAL_H
 
+#include <QString>
+
 #define X_APPLICATIONNAME "Nauz File Detector"
 #define X_APPLICATIONVERSION "0.02"
 #define X_ORGANIZATIONNAME "NTInfo"
 #define X_ORGANIZATIONDOMAIN "ntinfo.biz"
+
+namespace NFD
+{
+    struct OPTIONS
+    {
+        bool bScanAfterOpen;
+        bool bScanOverlay;
+        bool bDeepScan;
+        bool bSaveLastDirectory;
+        QString sLastDirectory;
+
+        bool bStayOnTop;
+        bool bContext;
+    };
+}
 
 #endif // _GLOBAL_H

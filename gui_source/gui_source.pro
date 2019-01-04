@@ -10,14 +10,17 @@ include(../build.pri)
 SOURCES +=\
         guimainwindow.cpp \
     dialogabout.cpp \
-    main_gui.cpp
+    main_gui.cpp \
+    dialogoptions.cpp
 
 HEADERS  += guimainwindow.h \
     ../global.h \
-    dialogabout.h
+    dialogabout.h \
+    dialogoptions.h
 
 FORMS    += guimainwindow.ui \
-    dialogabout.ui
+    dialogabout.ui \
+    dialogoptions.ui
 
 
 !contains(XCONFIG, dialogstaticscan) {

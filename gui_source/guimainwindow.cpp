@@ -1,4 +1,4 @@
-// Copyright (c) 2018 hors<horsicq@gmail.com>
+// Copyright (c) 2018-2019 hors<horsicq@gmail.com>
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -30,10 +30,14 @@ GuiMainWindow::GuiMainWindow(QWidget *parent) :
     setWindowTitle(QString("%1 v%2").arg(X_APPLICATIONNAME).arg(X_APPLICATIONVERSION));
 
     setAcceptDrops(true);
+
+    DialogOptions::loadOptions(&nfdOptions);
+    adjust();
 }
 
 GuiMainWindow::~GuiMainWindow()
 {
+    DialogOptions::saveOptions(&nfdOptions);
     delete ui;
 }
 
@@ -66,14 +70,26 @@ void GuiMainWindow::on_pushButtonExit_clicked()
 
 void GuiMainWindow::on_pushButtonOpenFile_clicked()
 {
+    QString sDirectory;
+    if(nfdOptions.bSaveLastDirectory&&QDir().exists(nfdOptions.sLastDirectory))
+    {
+        sDirectory=nfdOptions.sLastDirectory;
+    }
 //    QString sFileName=QFileDialog::getOpenFileName(this,tr("Open file..."),QDir::rootPath(),tr("All files (*)"));
-    QString sFileName=QFileDialog::getOpenFileName(this,tr("Open file..."),"",tr("All files (*)"));
+    QString sFileName=QFileDialog::getOpenFileName(this,tr("Open file..."),sDirectory,tr("All files (*)"));
 
     if(!sFileName.isEmpty())
     {
         ui->lineEditFileName->setText(sFileName);
-        // TODO Scan after open function
-        scanFile(sFileName);
+        if(nfdOptions.bScanAfterOpen)
+        {
+            scanFile(sFileName);
+        }
+        if(nfdOptions.bSaveLastDirectory)
+        {
+            QFileInfo fi(sFileName);
+            nfdOptions.sLastDirectory=fi.absolutePath();
+        }
     }
 }
 
@@ -118,7 +134,37 @@ void GuiMainWindow::dropEvent(QDropEvent *event)
             //qDebug(sFileName.toLatin1().data());
 
             ui->lineEditFileName->setText(sFileName);
-            scanFile(sFileName);
+            if(nfdOptions.bScanAfterOpen)
+            {
+                scanFile(sFileName);
+            }
         }
     }
+}
+
+void GuiMainWindow::on_pushButtonOptions_clicked()
+{
+    DialogOptions dialogOptions(this,&nfdOptions);
+    dialogOptions.exec();
+
+    adjust();
+}
+
+void GuiMainWindow::adjust()
+{
+    Qt::WindowFlags wf=windowFlags();
+    if(nfdOptions.bStayOnTop)
+    {
+        wf|=Qt::WindowStaysOnTopHint;
+    }
+    else
+    {
+        wf&=~(Qt::WindowStaysOnTopHint);
+    }
+    setWindowFlags(wf);
+
+    ui->checkBoxDeepScan->setChecked(nfdOptions.bDeepScan);
+    ui->checkBoxScanOverlay->setChecked(nfdOptions.bScanOverlay);
+
+    show();
 }

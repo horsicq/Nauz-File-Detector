@@ -162,9 +162,9 @@
     <item>
      <layout class="QHBoxLayout" name="horizontalLayout_3">
       <item>
-       <widget class="QPushButton" name="pushButtonAbout">
+       <widget class="QPushButton" name="pushButtonOptions">
         <property name="text">
-         <string>About</string>
+         <string>Options</string>
         </property>
        </widget>
       </item>
@@ -191,6 +191,13 @@
         </property>
         <property name="text">
          <string/>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushButtonAbout">
+        <property name="text">
+         <string>About</string>
         </property>
        </widget>
       </item>

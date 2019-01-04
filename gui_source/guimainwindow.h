@@ -1,4 +1,4 @@
-// Copyright (c) 2018 hors<horsicq@gmail.com>
+// Copyright (c) 2018-2019 hors<horsicq@gmail.com>
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -28,6 +28,7 @@
 #include <QMimeData>
 #include "dialogstaticscan.h"
 #include "dialogabout.h"
+#include "dialogoptions.h"
 
 namespace Ui
 {
@@ -39,8 +40,8 @@ class GuiMainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit GuiMainWindow(QWidget *parent = 0);
-    ~GuiMainWindow();
+    explicit GuiMainWindow(QWidget *parent = nullptr);
+    ~GuiMainWindow() override;
 
 private slots:
     void scanFile(QString sFileName);
@@ -49,6 +50,8 @@ private slots:
     void on_pushButtonOpenFile_clicked();
     void on_pushButtonAbout_clicked();
 
+    void on_pushButtonOptions_clicked();
+    void adjust();
 protected:
     void dragEnterEvent(QDragEnterEvent *event) override;
     void dragMoveEvent(QDragMoveEvent *event) override;
@@ -56,6 +59,7 @@ protected:
 
 private:
     Ui::GuiMainWindow *ui;
+    NFD::OPTIONS nfdOptions;
 };
 
 #endif // GUIMAINWINDOW_H
