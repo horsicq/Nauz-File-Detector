@@ -29,6 +29,7 @@
 #include "dialogstaticscan.h"
 #include "dialogabout.h"
 #include "dialogoptions.h"
+#include "dialogdirectoryscan.h"
 
 namespace Ui
 {
@@ -52,6 +53,8 @@ private slots:
 
     void on_pushButtonOptions_clicked();
     void adjust();
+    void on_pushButtonDirectoryScan_clicked();
+
 protected:
     void dragEnterEvent(QDragEnterEvent *event) override;
     void dragMoveEvent(QDragMoveEvent *event) override;

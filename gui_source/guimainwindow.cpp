@@ -33,6 +33,8 @@ GuiMainWindow::GuiMainWindow(QWidget *parent) :
 
     DialogOptions::loadOptions(&nfdOptions);
     adjust();
+
+    // TODO args
 }
 
 GuiMainWindow::~GuiMainWindow()
@@ -59,7 +61,7 @@ void GuiMainWindow::scanFile(QString sFileName)
         ui->treeViewResult->setModel(model);
         ui->treeViewResult->expandAll();
 
-        ui->labelTime->setText(QString("%1 msec").arg(scanResult.nScanTime));
+        ui->labelTime->setText(QString("%1 %2").arg(scanResult.nScanTime).arg(tr("msec")));
     }
 }
 
@@ -167,4 +169,12 @@ void GuiMainWindow::adjust()
     ui->checkBoxScanOverlay->setChecked(nfdOptions.bScanOverlay);
 
     show();
+}
+
+void GuiMainWindow::on_pushButtonDirectoryScan_clicked()
+{
+    DialogDirectoryScan dds(this,&nfdOptions);
+    dds.exec();
+
+    adjust();
 }

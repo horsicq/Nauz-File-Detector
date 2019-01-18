@@ -11,16 +11,19 @@ SOURCES +=\
         guimainwindow.cpp \
     dialogabout.cpp \
     main_gui.cpp \
-    dialogoptions.cpp
+    dialogoptions.cpp \
+    dialogdirectoryscan.cpp
 
 HEADERS  += guimainwindow.h \
     ../global.h \
     dialogabout.h \
-    dialogoptions.h
+    dialogoptions.h \
+    dialogdirectoryscan.h
 
 FORMS    += guimainwindow.ui \
     dialogabout.ui \
-    dialogoptions.ui
+    dialogoptions.ui \
+    dialogdirectoryscan.ui
 
 
 !contains(XCONFIG, dialogstaticscan) {

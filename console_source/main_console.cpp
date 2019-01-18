@@ -1,4 +1,4 @@
-// Copyright (c) 2018 hors<horsicq@gmail.com>
+// Copyright (c) 2018-2019 hors<horsicq@gmail.com>
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -78,7 +78,7 @@ void ScanFiles(QList<QString> *pListArgs,SpecAbstract::SCAN_OPTIONS *pScanOption
             printf("%s:\n",sFileName.toLatin1().data());
         }
 
-        SpecAbstract::SCAN_RESULT scanResult=StaticScan::process(sFileName,pScanOptions);
+        SpecAbstract::SCAN_RESULT scanResult=StaticScan::processFile(sFileName,pScanOptions);
         StaticScanItemModel model(&scanResult.listRecords);
 
         printf("%s\n",model.toString(pScanOptions).toLatin1().data());
@@ -101,13 +101,13 @@ int main(int argc, char *argv[])
 
     parser.addPositionalArgument("file","The file to open.");
 
-    QCommandLineOption clScanOverlay({"o","scanoverlay"},"Scan overlay.");
+    QCommandLineOption clScanOverlay(QStringList()<<"o"<<"scanoverlay","Scan overlay.");
     parser.addOption(clScanOverlay);
 
-    QCommandLineOption clDeepScan({"d","deepscan"},"Deep scan.");
+    QCommandLineOption clDeepScan(QStringList()<<"d"<<"deepscan","Deep scan.");
     parser.addOption(clDeepScan);
 
-    QCommandLineOption clResultAsXml({"x","xml"},"Result as XML.");
+    QCommandLineOption clResultAsXml(QStringList()<<"x"<<"xml","Result as XML.");
     parser.addOption(clResultAsXml);
 
     parser.process(app);
