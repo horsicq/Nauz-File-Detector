@@ -79,6 +79,8 @@ void DialogDirectoryScan::scanDirectory(QString sDirectoryName)
 {
     if(sDirectoryName!="")
     {
+        ui->textBrowserResult->clear();
+
         SpecAbstract::SCAN_OPTIONS options= {0};
         options.bScanOverlay=ui->checkBoxScanOverlay->isChecked();
         options.bDeepScan=ui->checkBoxDeepScan->isChecked();
