@@ -21,13 +21,15 @@
 #include "dialogdirectoryscan.h"
 #include "ui_dialogdirectoryscan.h"
 
-DialogDirectoryScan::DialogDirectoryScan(QWidget *parent, NFD::OPTIONS *pOptions) :
+DialogDirectoryScan::DialogDirectoryScan(QWidget *parent, NFD::OPTIONS *pOptions,QString sDirName) :
     QDialog(parent),
     ui(new Ui::DialogDirectoryScan)
 {
     ui->setupUi(this);
 
     this->pOptions=pOptions;
+
+     connect(this,SIGNAL(resultSignal(QString)),this,SLOT(appendResult(QString)));
 
     ui->checkBoxScanSubdirectories->setChecked(true);
 
@@ -36,7 +38,14 @@ DialogDirectoryScan::DialogDirectoryScan(QWidget *parent, NFD::OPTIONS *pOptions
         ui->lineEditDirectoryName->setText(pOptions->sLastDirectory);
     }
 
-    connect(this,SIGNAL(resultSignal(QString)),this,SLOT(appendResult(QString)));
+    if(sDirName!="")
+    {
+        ui->lineEditDirectoryName->setText(sDirName);
+        if(pOptions->bScanAfterOpen)
+        {
+            scanDirectory(sDirName);
+        }
+    }
 }
 
 DialogDirectoryScan::~DialogDirectoryScan()
@@ -56,14 +65,6 @@ void DialogDirectoryScan::on_pushButtonOpenDirectory_clicked()
         if(pOptions->bScanAfterOpen)
         {
             scanDirectory(sDirectoryName);
-        }
-        if(pOptions->bSaveLastDirectory)
-        {
-            QDir dir(sDirectoryName);
-            if(dir.exists())
-            {
-                pOptions->sLastDirectory=dir.absolutePath();
-            }
         }
     }
 }
@@ -92,6 +93,15 @@ void DialogDirectoryScan::scanDirectory(QString sDirectoryName)
         connect(&ds, SIGNAL(scanResult(SpecAbstract::SCAN_RESULT)),this,SLOT(scanResult(SpecAbstract::SCAN_RESULT)),Qt::DirectConnection);
         ds.setData(sDirectoryName,&options);
         ds.exec();
+
+        if(pOptions->bSaveLastDirectory)
+        {
+            QDir dir(sDirectoryName);
+            if(dir.exists())
+            {
+                pOptions->sLastDirectory=dir.absolutePath();
+            }
+        }
     }
 }
 
@@ -109,4 +119,37 @@ void DialogDirectoryScan::scanResult(SpecAbstract::SCAN_RESULT scanResult)
 void DialogDirectoryScan::appendResult(QString sResult)
 {
     ui->textBrowserResult->append(sResult);
+}
+
+void DialogDirectoryScan::on_pushButtonOK_clicked()
+{
+    this->close();
+}
+
+void DialogDirectoryScan::on_pushButtonClear_clicked()
+{
+    ui->textBrowserResult->clear();
+}
+
+void DialogDirectoryScan::on_pushButtonSave_clicked()
+{
+    QString sFilter;
+    sFilter+=QString("%1 (*.txt)").arg(tr("Text documents"));
+    QString sSaveFileName=pOptions->sLastDirectory+QDir::separator()+"result";
+//    QString sFileName=QFileDialog::getSaveFileName(this,tr("Save result"),pOptions->sLastDirectory,sFilter);
+    QString sFileName=QFileDialog::getSaveFileName(this,tr("Save result"),sSaveFileName,sFilter);
+
+    if(!sFileName.isEmpty())
+    {
+        QFile file;
+        file.setFileName(sFileName);
+
+        if(file.open(QIODevice::ReadWrite))
+        {
+            QString sText=ui->textBrowserResult->toPlainText();
+            file.write(sText.toLatin1().data());
+
+            file.close();
+        }
+    }
 }

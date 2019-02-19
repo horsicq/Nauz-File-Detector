@@ -46,6 +46,7 @@ public:
 
 private slots:
     void scanFile(QString sFileName);
+    void _scan(QString sName);
     void on_pushButtonScan_clicked();
     void on_pushButtonExit_clicked();
     void on_pushButtonOpenFile_clicked();

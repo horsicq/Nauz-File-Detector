@@ -36,7 +36,7 @@ class DialogDirectoryScan : public QDialog
     Q_OBJECT
 
 public:
-    explicit DialogDirectoryScan(QWidget *parent, NFD::OPTIONS *pOptions);
+    explicit DialogDirectoryScan(QWidget *parent, NFD::OPTIONS *pOptions, QString sDirName);
     ~DialogDirectoryScan();
 
 private slots:
@@ -46,6 +46,9 @@ private slots:
     void scanResult(SpecAbstract::SCAN_RESULT scanResult);
     void appendResult(QString sResult);
 
+    void on_pushButtonOK_clicked();
+    void on_pushButtonClear_clicked();
+    void on_pushButtonSave_clicked();
 signals:
     void resultSignal(QString sText);
 private:

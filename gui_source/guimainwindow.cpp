@@ -34,7 +34,10 @@ GuiMainWindow::GuiMainWindow(QWidget *parent) :
     DialogOptions::loadOptions(&nfdOptions);
     adjust();
 
-    // TODO args
+    if(QCoreApplication::arguments().count()>1)
+    {
+        _scan(QCoreApplication::arguments().at(1));
+    }
 }
 
 GuiMainWindow::~GuiMainWindow()
@@ -57,11 +60,36 @@ void GuiMainWindow::scanFile(QString sFileName)
         ds.setData(sFileName,&options,&scanResult);
         ds.exec();
 
-        StaticScanItemModel *model=new StaticScanItemModel(&scanResult.listRecords);
-        ui->treeViewResult->setModel(model);
-        ui->treeViewResult->expandAll();
+        if(nfdOptions.bSaveLastDirectory)
+        {
+            QFileInfo fi(sFileName);
+            nfdOptions.sLastDirectory=fi.absolutePath();
+        }
 
-        ui->labelTime->setText(QString("%1 %2").arg(scanResult.nScanTime).arg(tr("msec")));
+        QString sSaveDirectory=nfdOptions.sLastDirectory+QDir::separator()+"result"; // mb TODO
+
+        ui->widgetResult->setData(&scanResult,sSaveDirectory);
+    }
+}
+
+void GuiMainWindow::_scan(QString sName)
+{
+    QFileInfo fi(sName);
+
+    if(fi.isFile())
+    {
+        ui->lineEditFileName->setText(sName);
+        if(nfdOptions.bScanAfterOpen)
+        {
+            scanFile(sName);
+        }
+    }
+    else if(fi.isDir())
+    {
+        DialogDirectoryScan dds(this,&nfdOptions,sName);
+        dds.exec();
+
+        adjust();
     }
 }
 
@@ -82,16 +110,7 @@ void GuiMainWindow::on_pushButtonOpenFile_clicked()
 
     if(!sFileName.isEmpty())
     {
-        ui->lineEditFileName->setText(sFileName);
-        if(nfdOptions.bScanAfterOpen)
-        {
-            scanFile(sFileName);
-        }
-        if(nfdOptions.bSaveLastDirectory)
-        {
-            QFileInfo fi(sFileName);
-            nfdOptions.sLastDirectory=fi.absolutePath();
-        }
+        _scan(sFileName);
     }
 }
 
@@ -99,7 +118,7 @@ void GuiMainWindow::on_pushButtonScan_clicked()
 {
     QString sFileName=ui->lineEditFileName->text().trimmed();
 
-    scanFile(sFileName);
+    _scan(sFileName);
 }
 
 void GuiMainWindow::on_pushButtonAbout_clicked()
@@ -133,13 +152,7 @@ void GuiMainWindow::dropEvent(QDropEvent *event)
 
             sFileName=QBinary::convertFileName(sFileName);
 
-            //qDebug(sFileName.toLatin1().data());
-
-            ui->lineEditFileName->setText(sFileName);
-            if(nfdOptions.bScanAfterOpen)
-            {
-                scanFile(sFileName);
-            }
+            _scan(sFileName);
         }
     }
 }
@@ -173,7 +186,7 @@ void GuiMainWindow::adjust()
 
 void GuiMainWindow::on_pushButtonDirectoryScan_clicked()
 {
-    DialogDirectoryScan dds(this,&nfdOptions);
+    DialogDirectoryScan dds(this,&nfdOptions,"");
     dds.exec();
 
     adjust();

@@ -55,8 +55,13 @@ void DialogOptions::loadOptions(NFD::OPTIONS *pOptions)
 
     pOptions->bStayOnTop=settings.value("StayOnTop",false).toBool();
 #ifdef WIN32
-    pOptions->bContext=checkContext("*");;
+    pOptions->bContext=checkContext("*");
 #endif
+
+    if(!QDir(pOptions->sLastDirectory).exists())
+    {
+        pOptions->sLastDirectory="";
+    }
 }
 
 void DialogOptions::saveOptions(NFD::OPTIONS *pOptions)
