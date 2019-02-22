@@ -31,7 +31,8 @@ int main(int argc, char *argv[])
 	sLibraryPath=sLibraryPath.remove("MacOS/nfd")+"PlugIns";
     QCoreApplication::setLibraryPaths(QStringList(sLibraryPath));
 #endif
-#else
+#endif
+#ifdef Q_OS_WIN
     QString sLibraryPath=QString(argv[0]).replace("\\","/");
 
     sLibraryPath=sLibraryPath.section("/",0,-2)+QDir::separator()+"plugins";

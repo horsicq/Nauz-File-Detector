@@ -1,4 +1,4 @@
-#!/bin/sh -x
+#!/bin/bash -x
 QT_PATH=$HOME/Qt5.6.3/5.6.3/gcc_64
 RELEASE_VERSION=$(cat "release_version.txt")
 echo $RELEASE_VERSION
@@ -9,8 +9,6 @@ GUIEXE=nfd
 CONEXE=nfdc
 
 cd $SOURCE_PATH
-
-rm -rf build
 
 function makeproject
 {
@@ -27,6 +25,8 @@ function makeproject
 
     cd $SOURCE_PATH
 }
+
+rm -rf $SOURCE_PATH/build
 
 makeproject gui_source
 makeproject console_source
