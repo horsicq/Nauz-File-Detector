@@ -29,7 +29,7 @@ DialogDirectoryScan::DialogDirectoryScan(QWidget *parent, NFD::OPTIONS *pOptions
 
     this->pOptions=pOptions;
 
-     connect(this,SIGNAL(resultSignal(QString)),this,SLOT(appendResult(QString)));
+    connect(this,SIGNAL(resultSignal(QString)),this,SLOT(appendResult(QString)));
 
     ui->checkBoxScanSubdirectories->setChecked(true);
 
@@ -136,7 +136,6 @@ void DialogDirectoryScan::on_pushButtonSave_clicked()
     QString sFilter;
     sFilter+=QString("%1 (*.txt)").arg(tr("Text documents"));
     QString sSaveFileName=pOptions->sLastDirectory+QDir::separator()+"result";
-//    QString sFileName=QFileDialog::getSaveFileName(this,tr("Save result"),pOptions->sLastDirectory,sFilter);
     QString sFileName=QFileDialog::getSaveFileName(this,tr("Save result"),sSaveFileName,sFilter);
 
     if(!sFileName.isEmpty())

@@ -102,6 +102,9 @@ void DialogOptions::registerContext(QString sType)
 {
     QSettings settings(QString("HKEY_CLASSES_ROOT\\%1\\shell\\NFD\\command").arg(sType),QSettings::NativeFormat);
     settings.setValue(".","\""+QCoreApplication::applicationFilePath().replace("/","\\")+"\" \"%1\"");
+
+    QSettings settingsIcon(QString("HKEY_CLASSES_ROOT\\%1\\shell\\NFD").arg(sType),QSettings::NativeFormat);
+    settingsIcon.setValue("Icon","\""+QCoreApplication::applicationFilePath().replace("/","\\")+"\"");
 }
 
 bool DialogOptions::setContextState(QString sType, bool bState)
