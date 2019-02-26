@@ -32,12 +32,6 @@ int main(int argc, char *argv[])
     QCoreApplication::setLibraryPaths(QStringList(sLibraryPath));
 #endif
 #endif
-#ifdef Q_OS_WIN
-    QString sLibraryPath=QString(argv[0]).replace("\\","/");
-
-    sLibraryPath=sLibraryPath.section("/",0,-2)+QDir::separator()+"plugins";
-    QCoreApplication::addLibraryPath(sLibraryPath);
-#endif
 
     QCoreApplication::setOrganizationName(X_ORGANIZATIONNAME);
     QCoreApplication::setOrganizationDomain(X_ORGANIZATIONDOMAIN);
