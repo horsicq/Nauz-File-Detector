@@ -26,8 +26,8 @@ FORMS    += guimainwindow.ui \
     dialogdirectoryscan.ui
 
 
-!contains(XCONFIG, dialogstaticscan) {
-    XCONFIG += dialogstaticscan
+!contains(XCONFIG, formresult) {
+    XCONFIG += formresult
     include(../StaticScan/formresult.pri)
 }
 
