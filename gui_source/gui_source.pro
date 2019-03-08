@@ -28,7 +28,7 @@ FORMS    += guimainwindow.ui \
 
 !contains(XCONFIG, dialogstaticscan) {
     XCONFIG += dialogstaticscan
-    include(../../_mylibs/StaticScan/formresult.pri)
+    include(../StaticScan/formresult.pri)
 }
 
 win32 {
