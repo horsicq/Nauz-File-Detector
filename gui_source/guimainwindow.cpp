@@ -79,10 +79,8 @@ void GuiMainWindow::_scan(QString sName)
     if(fi.isFile())
     {
         ui->lineEditFileName->setText(sName);
-        if(nfdOptions.bScanAfterOpen)
-        {
-            scanFile(sName);
-        }
+        
+        scanFile(sName);
     }
     else if(fi.isDir())
     {
@@ -105,12 +103,17 @@ void GuiMainWindow::on_pushButtonOpenFile_clicked()
     {
         sDirectory=nfdOptions.sLastDirectory;
     }
-//    QString sFileName=QFileDialog::getOpenFileName(this,tr("Open file..."),QDir::rootPath(),tr("All files (*)"));
+
     QString sFileName=QFileDialog::getOpenFileName(this,tr("Open file..."),sDirectory,tr("All files (*)"));
 
     if(!sFileName.isEmpty())
     {
-        _scan(sFileName);
+        ui->lineEditFileName->setText(sFileName);
+    
+        if(nfdOptions.bScanAfterOpen)
+        {
+            _scan(sFileName);
+        }
     }
 }
 
@@ -152,7 +155,10 @@ void GuiMainWindow::dropEvent(QDropEvent *event)
 
             sFileName=QBinary::convertFileName(sFileName);
 
-            _scan(sFileName);
+            if(nfdOptions.bScanAfterOpen)
+            {
+                _scan(sFileName);
+            }
         }
     }
 }
