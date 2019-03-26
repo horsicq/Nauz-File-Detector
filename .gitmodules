@@ -4,3 +4,6 @@
 [submodule "StaticScan"]
 	path = StaticScan
 	url = https://github.com/horsicq/StaticScan
+[submodule "XArchive"]
+	path = XArchive
+	url = https://github.com/horsicq/XArchive.git
