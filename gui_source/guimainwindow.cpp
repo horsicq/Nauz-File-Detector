@@ -68,7 +68,7 @@ void GuiMainWindow::scanFile(QString sFileName)
 
         QString sSaveDirectory=nfdOptions.sLastDirectory+QDir::separator()+"result"; // mb TODO
 
-        ui->widgetResult->setData(&scanResult,sSaveDirectory);
+        ui->widgetResult->setData(scanResult,sSaveDirectory);
     }
 }
 
