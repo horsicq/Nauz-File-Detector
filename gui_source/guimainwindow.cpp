@@ -153,7 +153,7 @@ void GuiMainWindow::dropEvent(QDropEvent *event)
         {
             QString sFileName=urlList.at(0).toLocalFile();
 
-            sFileName=QBinary::convertFileName(sFileName);
+            sFileName=XBinary::convertFileName(sFileName);
 
             if(nfdOptions.bScanAfterOpen)
             {
