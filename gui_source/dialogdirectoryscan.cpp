@@ -29,6 +29,10 @@ DialogDirectoryScan::DialogDirectoryScan(QWidget *parent, NFD::OPTIONS *pOptions
 
     this->pOptions=pOptions;
 
+    setWindowFlags(windowFlags()|Qt::WindowMinMaxButtonsHint);
+
+//    Qt::WindowTitleHint
+
     connect(this,SIGNAL(resultSignal(QString)),this,SLOT(appendResult(QString)));
 
     ui->checkBoxScanSubdirectories->setChecked(true);
