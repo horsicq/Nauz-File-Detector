@@ -45,12 +45,13 @@ private slots:
     void scanDirectory(QString sDirectoryName);
     void scanResult(SpecAbstract::SCAN_RESULT scanResult);
     void appendResult(QString sResult);
-
     void on_pushButtonOK_clicked();
     void on_pushButtonClear_clicked();
     void on_pushButtonSave_clicked();
+
 signals:
     void resultSignal(QString sText);
+
 private:
     Ui::DialogDirectoryScan *ui;
     NFD::OPTIONS *pOptions;

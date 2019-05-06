@@ -37,7 +37,6 @@ namespace NFD
         bool bDeepScan;
         bool bSaveLastDirectory;
         QString sLastDirectory;
-
         bool bStayOnTop;
         bool bContext;
     };
