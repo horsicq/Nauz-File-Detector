@@ -104,8 +104,8 @@ int main(int argc, char *argv[])
 
     parser.addPositionalArgument("file","The file to open.");
 
-    QCommandLineOption clScanOverlay(QStringList()<<"o"<<"scanoverlay","Scan overlay.");
-    parser.addOption(clScanOverlay);
+    QCommandLineOption clRecursive(QStringList()<<"r"<<"recursive","Recursive.");
+    parser.addOption(clRecursive);
 
     QCommandLineOption clDeepScan(QStringList()<<"d"<<"deepscan","Deep scan.");
     parser.addOption(clDeepScan);
@@ -119,7 +119,7 @@ int main(int argc, char *argv[])
 
     SpecAbstract::SCAN_OPTIONS scanOptions={0};
 
-    scanOptions.bScanOverlay=parser.isSet(clScanOverlay);
+    scanOptions.bRecursive=parser.isSet(clRecursive);
     scanOptions.bDeepScan=parser.isSet(clDeepScan);
     scanOptions.bResultAsXML=parser.isSet(clResultAsXml);
 
