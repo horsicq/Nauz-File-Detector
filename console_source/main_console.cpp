@@ -105,13 +105,14 @@ int main(int argc, char *argv[])
     parser.addPositionalArgument("file","The file to open.");
 
     QCommandLineOption clRecursive(QStringList()<<"r"<<"recursive","Recursive.");
-    parser.addOption(clRecursive);
-
     QCommandLineOption clDeepScan(QStringList()<<"d"<<"deepscan","Deep scan.");
-    parser.addOption(clDeepScan);
-
     QCommandLineOption clResultAsXml(QStringList()<<"x"<<"xml","Result as XML.");
+    QCommandLineOption clResultAsJson(QStringList()<<"j"<<"json","Result as JSON.");
+
+    parser.addOption(clRecursive);
+    parser.addOption(clDeepScan);
     parser.addOption(clResultAsXml);
+    parser.addOption(clResultAsJson);
 
     parser.process(app);
 
@@ -122,6 +123,7 @@ int main(int argc, char *argv[])
     scanOptions.bRecursive=parser.isSet(clRecursive);
     scanOptions.bDeepScan=parser.isSet(clDeepScan);
     scanOptions.bResultAsXML=parser.isSet(clResultAsXml);
+    scanOptions.bResultAsJSON=parser.isSet(clResultAsJson);
 
     if(listArgs.count())
     {
