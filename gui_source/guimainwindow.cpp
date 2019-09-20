@@ -43,6 +43,7 @@ GuiMainWindow::GuiMainWindow(QWidget *parent) :
 GuiMainWindow::~GuiMainWindow()
 {
     DialogOptions::saveOptions(&nfdOptions);
+
     delete ui;
 }
 
@@ -52,7 +53,7 @@ void GuiMainWindow::scanFile(QString sFileName)
     {
         SpecAbstract::SCAN_RESULT scanResult;
 
-        SpecAbstract::SCAN_OPTIONS options= {0};
+        SpecAbstract::SCAN_OPTIONS options={0};
         options.bRecursive=ui->checkBoxRecursive->isChecked();
         options.bDeepScan=ui->checkBoxDeepScan->isChecked();
 
@@ -99,7 +100,10 @@ void GuiMainWindow::on_pushButtonExit_clicked()
 void GuiMainWindow::on_pushButtonOpenFile_clicked()
 {
     QString sDirectory;
-    if(nfdOptions.bSaveLastDirectory&&QDir().exists(nfdOptions.sLastDirectory))
+
+    if( (nfdOptions.bSaveLastDirectory)&&
+        (nfdOptions.sLastDirectory!="")&&
+        (QDir().exists(nfdOptions.sLastDirectory)))
     {
         sDirectory=nfdOptions.sLastDirectory;
     }
@@ -166,6 +170,7 @@ void GuiMainWindow::dropEvent(QDropEvent *event)
 void GuiMainWindow::on_pushButtonOptions_clicked()
 {
     DialogOptions dialogOptions(this,&nfdOptions);
+
     dialogOptions.exec();
 
     adjust();
@@ -174,6 +179,7 @@ void GuiMainWindow::on_pushButtonOptions_clicked()
 void GuiMainWindow::adjust()
 {
     Qt::WindowFlags wf=windowFlags();
+
     if(nfdOptions.bStayOnTop)
     {
         wf|=Qt::WindowStaysOnTopHint;
@@ -193,6 +199,7 @@ void GuiMainWindow::adjust()
 void GuiMainWindow::on_pushButtonDirectoryScan_clicked()
 {
     DialogDirectoryScan dds(this,&nfdOptions,"");
+
     dds.exec();
 
     adjust();
