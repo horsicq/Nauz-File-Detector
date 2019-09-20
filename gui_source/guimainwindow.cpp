@@ -51,9 +51,10 @@ void GuiMainWindow::scanFile(QString sFileName)
 {
     if(sFileName!="")
     {
-        SpecAbstract::SCAN_RESULT scanResult;
+        SpecAbstract::SCAN_RESULT scanResult={0};
 
         SpecAbstract::SCAN_OPTIONS options={0};
+
         options.bRecursive=ui->checkBoxRecursive->isChecked();
         options.bDeepScan=ui->checkBoxDeepScan->isChecked();
 
