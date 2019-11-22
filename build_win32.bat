@@ -41,7 +41,7 @@ cd ..
 
 cd winloader_source
 
-cl.exe /c winloader.cpp
+cl.exe /c winloader.cpp /D_USING_V110_SDK71_
 Rc.exe /v %RES_FILE%.rc
 link.exe winloader.obj %RES_FILE%.res user32.lib kernel32.lib shell32.lib /SUBSYSTEM:WINDOWS,5.01 /ENTRY:entry /OUT:%SOURCE_PATH%\build\loader\%GUIEXE%
 del /s winloader.obj
