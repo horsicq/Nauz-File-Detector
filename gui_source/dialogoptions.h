@@ -47,10 +47,12 @@ public:
 
     static void loadOptions(NFD::OPTIONS *pOptions);
     static void saveOptions(NFD::OPTIONS *pOptions);
+#ifdef WIN32
     static bool checkContext(QString sType);
     static void clearContext(QString sType);
     static void registerContext(QString sType);
     static bool setContextState(QString sType,bool bState);
+#endif
 
 private slots:
     void on_pushButtonOK_clicked();

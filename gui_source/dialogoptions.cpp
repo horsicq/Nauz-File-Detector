@@ -35,7 +35,11 @@ DialogOptions::DialogOptions(QWidget *parent, NFD::OPTIONS *pOptions) :
     ui->checkBoxSaveLastDirectory->setChecked(pOptions->bSaveLastDirectory);
 
     ui->checkBoxStayOnTop->setChecked(pOptions->bStayOnTop);
+#ifdef WIN32
     ui->checkBoxContext->setChecked(pOptions->bContext);
+#else
+    ui->checkBoxContext->hide();
+#endif
 }
 
 DialogOptions::~DialogOptions()
@@ -83,7 +87,7 @@ void DialogOptions::saveOptions(NFD::OPTIONS *pOptions)
     }
 #endif
 }
-
+#ifdef WIN32
 bool DialogOptions::checkContext(QString sType)
 {
     QSettings settings(QString("HKEY_CLASSES_ROOT\\%1\\shell").arg(sType),QSettings::NativeFormat);
@@ -91,13 +95,15 @@ bool DialogOptions::checkContext(QString sType)
 
     return (sRecord!="");
 }
-
+#endif
+#ifdef WIN32
 void DialogOptions::clearContext(QString sType)
 {
     QSettings settings(QString("HKEY_CLASSES_ROOT\\%1\\shell\\NFD").arg(sType),QSettings::NativeFormat);
     settings.clear();
 }
-
+#endif
+#ifdef WIN32
 void DialogOptions::registerContext(QString sType)
 {
     QSettings settings(QString("HKEY_CLASSES_ROOT\\%1\\shell\\NFD\\command").arg(sType),QSettings::NativeFormat);
@@ -106,7 +112,8 @@ void DialogOptions::registerContext(QString sType)
     QSettings settingsIcon(QString("HKEY_CLASSES_ROOT\\%1\\shell\\NFD").arg(sType),QSettings::NativeFormat);
     settingsIcon.setValue("Icon","\""+QCoreApplication::applicationFilePath().replace("/","\\")+"\"");
 }
-
+#endif
+#ifdef WIN32
 bool DialogOptions::setContextState(QString sType, bool bState)
 {
     if(checkContext(sType)!=bState)
@@ -123,7 +130,7 @@ bool DialogOptions::setContextState(QString sType, bool bState)
 
     return (checkContext(sType)==bState);
 }
-
+#endif
 void DialogOptions::on_pushButtonOK_clicked()
 {
     pOptions->bDeepScan=ui->checkBoxDeepScan->isChecked();
@@ -131,9 +138,9 @@ void DialogOptions::on_pushButtonOK_clicked()
     pOptions->bRecursive=ui->checkBoxRecursive->isChecked();
     pOptions->bSaveLastDirectory=ui->checkBoxSaveLastDirectory->isChecked();
     pOptions->bStayOnTop=ui->checkBoxStayOnTop->isChecked();
-
+#ifdef WIN32
     pOptions->bContext=ui->checkBoxContext->isChecked();
-
+#endif
     saveOptions(pOptions);
     this->close();
 }
