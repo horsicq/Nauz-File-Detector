@@ -2,7 +2,7 @@ set VS_PATH="C:\Program Files (x86)\Microsoft Visual Studio 12.0"
 set SEVENZIP_PATH="C:\Program Files\7-Zip"
 set QT_PATH="C:\Qt\5.6.3\msvc2013"
 
-set BUILD_NAME=nfd_win32_portable
+set BUILD_NAME=nfd_winxp_portable
 set SOURCE_PATH=%~dp0
 mkdir %SOURCE_PATH%\build
 mkdir %SOURCE_PATH%\build\loader
