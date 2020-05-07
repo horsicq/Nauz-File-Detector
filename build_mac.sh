@@ -49,7 +49,7 @@ function fiximport
     fixlibrary QtWidgets $1
     fixlibrary QtGui $1
     fixlibrary QtCore $1  
-	#fixlibrary QtDBus $1
+	fixlibrary QtDBus $1
 	fixlibrary QtPrintSupport $1
 }
 
@@ -81,7 +81,7 @@ fiximport $SOURCE_PATH/release/$BUILD_NAME/$GUIEXE.app/Contents/MacOS/$CONEXE
 copylibrary QtWidgets
 copylibrary QtGui
 copylibrary QtCore
-#copylibrary QtDBus
+copylibrary QtDBus
 copylibrary QtPrintSupport
 
 copyplugin platforms libqcocoa
