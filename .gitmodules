@@ -10,3 +10,6 @@
 [submodule "SpecAbstract"]
 	path = SpecAbstract
 	url = https://github.com/horsicq/SpecAbstract.git
+[submodule "XOptions"]
+	path = XOptions
+	url = https://github.com/horsicq/XOptions.git
