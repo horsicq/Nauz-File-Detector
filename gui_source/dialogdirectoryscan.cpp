@@ -87,8 +87,9 @@ void DialogDirectoryScan::scanDirectory(QString sDirectoryName)
         ui->textBrowserResult->clear();
 
         SpecAbstract::SCAN_OPTIONS options={0};
-        options.bRecursive=ui->checkBoxRecursive->isChecked();
+        options.bRecursiveScan=ui->checkBoxRecursiveScan->isChecked();
         options.bDeepScan=ui->checkBoxDeepScan->isChecked();
+        options.bHeuristicScan=ui->checkBoxHeuristicScan->isChecked();
         options.bSubdirectories=ui->checkBoxScanSubdirectories->isChecked();
         // TODO Filter
         // |flags|x all|

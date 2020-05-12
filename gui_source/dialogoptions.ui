@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>308</width>
-    <height>205</height>
+    <width>338</width>
+    <height>240</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -32,6 +32,13 @@
         </widget>
        </item>
        <item>
+        <widget class="QCheckBox" name="checkBoxRecursiveScan">
+         <property name="text">
+          <string>Recursive scan</string>
+         </property>
+        </widget>
+       </item>
+       <item>
         <widget class="QCheckBox" name="checkBoxDeepScan">
          <property name="text">
           <string>Deep scan</string>
@@ -39,9 +46,9 @@
         </widget>
        </item>
        <item>
-        <widget class="QCheckBox" name="checkBoxRecursive">
+        <widget class="QCheckBox" name="checkBoxHeuristicScan">
          <property name="text">
-          <string>Recursive</string>
+          <string>Heuristic scan</string>
          </property>
         </widget>
        </item>

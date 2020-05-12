@@ -104,13 +104,15 @@ int main(int argc, char *argv[])
 
     parser.addPositionalArgument("file","The file to open.");
 
-    QCommandLineOption clRecursive(QStringList()<<"r"<<"recursive","Recursive.");
+    QCommandLineOption clRecursiveScan(QStringList()<<"r"<<"recursivescan","Recursive scan.");
     QCommandLineOption clDeepScan(QStringList()<<"d"<<"deepscan","Deep scan.");
+    QCommandLineOption clHeuristicScan(QStringList()<<"h"<<"heuristicscan","Heuristic scan.");
     QCommandLineOption clResultAsXml(QStringList()<<"x"<<"xml","Result as XML.");
     QCommandLineOption clResultAsJson(QStringList()<<"j"<<"json","Result as JSON.");
 
-    parser.addOption(clRecursive);
+    parser.addOption(clRecursiveScan);
     parser.addOption(clDeepScan);
+    parser.addOption(clHeuristicScan);
     parser.addOption(clResultAsXml);
     parser.addOption(clResultAsJson);
 
@@ -120,8 +122,9 @@ int main(int argc, char *argv[])
 
     SpecAbstract::SCAN_OPTIONS scanOptions={0};
 
-    scanOptions.bRecursive=parser.isSet(clRecursive);
+    scanOptions.bRecursiveScan=parser.isSet(clRecursiveScan);
     scanOptions.bDeepScan=parser.isSet(clDeepScan);
+    scanOptions.bHeuristicScan=parser.isSet(clHeuristicScan);
     scanOptions.bResultAsXML=parser.isSet(clResultAsXml);
     scanOptions.bResultAsJSON=parser.isSet(clResultAsJson);
 

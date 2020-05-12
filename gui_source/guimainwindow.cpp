@@ -55,8 +55,9 @@ void GuiMainWindow::scanFile(QString sFileName)
 
         SpecAbstract::SCAN_OPTIONS options={0};
 
-        options.bRecursive=ui->checkBoxRecursive->isChecked();
+        options.bRecursiveScan=ui->checkBoxRecursiveScan->isChecked();
         options.bDeepScan=ui->checkBoxDeepScan->isChecked();
+        options.bHeuristicScan=ui->checkBoxHeuristicScan->isChecked();
 
         DialogStaticScan ds(this);
         ds.setData(sFileName,&options,&scanResult);
@@ -192,7 +193,8 @@ void GuiMainWindow::adjust()
     setWindowFlags(wf);
 
     ui->checkBoxDeepScan->setChecked(nfdOptions.bDeepScan);
-    ui->checkBoxRecursive->setChecked(nfdOptions.bRecursive);
+    ui->checkBoxRecursiveScan->setChecked(nfdOptions.bRecursiveScan);
+    ui->checkBoxHeuristicScan->setChecked(nfdOptions.bHeristicScan);
 
     show();
 }

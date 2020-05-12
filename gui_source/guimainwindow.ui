@@ -64,9 +64,9 @@
             </spacer>
            </item>
            <item>
-            <widget class="QCheckBox" name="checkBoxRecursive">
+            <widget class="QCheckBox" name="checkBoxRecursiveScan">
              <property name="text">
-              <string>Recursive</string>
+              <string>Recursive scan</string>
              </property>
              <property name="checked">
               <bool>true</bool>
@@ -76,7 +76,17 @@
            <item>
             <widget class="QCheckBox" name="checkBoxDeepScan">
              <property name="text">
-              <string>Deep Scan</string>
+              <string>Deep scan</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBoxHeuristicScan">
+             <property name="text">
+              <string>Heuristic scan</string>
              </property>
              <property name="checked">
               <bool>true</bool>

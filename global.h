@@ -33,8 +33,9 @@ namespace NFD
     struct OPTIONS
     {
         bool bScanAfterOpen;
-        bool bRecursive;
+        bool bRecursiveScan;
         bool bDeepScan;
+        bool bHeristicScan;
         bool bSaveLastDirectory;
         QString sLastDirectory;
         bool bStayOnTop;
