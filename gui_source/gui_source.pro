@@ -31,6 +31,11 @@ FORMS    += guimainwindow.ui \
     include(../StaticScan/formresult.pri)
 }
 
+!contains(XCONFIG, xoptions) {
+    XCONFIG += xoptions
+    include(../../_mylibs/XOptions/xoptions.pri)
+}
+
 win32 {
     RC_ICONS = ../icons/main.ico
 }
