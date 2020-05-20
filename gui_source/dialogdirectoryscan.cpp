@@ -61,7 +61,7 @@ void DialogDirectoryScan::on_pushButtonOpenDirectory_clicked()
 {
     QString sInitDirectory=ui->lineEditDirectoryName->text();
 
-    QString sDirectoryName=QFileDialog::getExistingDirectory(this,tr("Open directory..."),sInitDirectory,QFileDialog::ShowDirsOnly);
+    QString sDirectoryName=QFileDialog::getExistingDirectory(this,tr("Open directory")+QString("..."),sInitDirectory,QFileDialog::ShowDirsOnly);
 
     if(!sDirectoryName.isEmpty())
     {

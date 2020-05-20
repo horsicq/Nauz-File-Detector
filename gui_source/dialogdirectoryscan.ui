@@ -14,7 +14,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Directory Scan</string>
+   <string>Directory scan</string>
   </property>
   <property name="modal">
    <bool>true</bool>
@@ -116,7 +116,7 @@
            </font>
           </property>
           <property name="text">
-           <string>...</string>
+           <string notr="true">...</string>
           </property>
          </widget>
         </item>
