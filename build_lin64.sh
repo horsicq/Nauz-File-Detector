@@ -28,6 +28,7 @@ function makeproject
 
 rm -rf $SOURCE_PATH/build
 
+makeproject build_libs
 makeproject gui_source
 makeproject console_source
 
