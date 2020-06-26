@@ -110,7 +110,7 @@ void GuiMainWindow::on_pushButtonOpenFile_clicked()
         sDirectory=nfdOptions.sLastDirectory;
     }
 
-    QString sFileName=QFileDialog::getOpenFileName(this,tr("Open file")+QString("..."),sDirectory,tr("All files (*)"));
+    QString sFileName=QFileDialog::getOpenFileName(this,tr("Open file")+QString("..."),sDirectory,tr("All files")+QString(" (*)"));
 
     if(!sFileName.isEmpty())
     {
