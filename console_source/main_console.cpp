@@ -24,31 +24,6 @@
 #include "staticscanitemmodel.h"
 #include "../global.h"
 
-// TODO QBinary
-void FindFiles(QString sFileName,QList<QString> *pListFileNames)
-{
-    if((sFileName!=".")&&(sFileName!=".."))
-    {
-        QFileInfo fi(sFileName);
-
-        if(fi.isFile())
-        {
-            pListFileNames->append(fi.absoluteFilePath());
-        }
-        else if(fi.isDir())
-        {
-            QDir dir(sFileName);
-
-            QFileInfoList eil=dir.entryInfoList();
-
-            for(int i=0;i<eil.count();i++)
-            {
-                FindFiles(eil.at(i).absoluteFilePath(),pListFileNames);
-            }
-        }
-    }
-}
-
 void ScanFiles(QList<QString> *pListArgs,SpecAbstract::SCAN_OPTIONS *pScanOptions)
 {
     QList<QString> listFileNames;
@@ -59,7 +34,7 @@ void ScanFiles(QList<QString> *pListArgs,SpecAbstract::SCAN_OPTIONS *pScanOption
 
         if(QFileInfo::exists(sFileName))
         {
-            FindFiles(sFileName,&listFileNames);
+            XBinary::findFiles(sFileName,&listFileNames);
         }
         else
         {
