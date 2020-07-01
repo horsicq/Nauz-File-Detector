@@ -19,9 +19,6 @@
 [submodule "XTranslation"]
 	path = XTranslation
 	url = https://github.com/horsicq/XTranslation.git
-[submodule "die_script"]
-	path = die_script
-	url = https://github.com/horsicq/die_script.git
 [submodule "XDEX"]
 	path = XDEX
 	url = https://github.com/horsicq/XDEX.git
