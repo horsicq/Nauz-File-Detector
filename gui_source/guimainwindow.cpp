@@ -36,6 +36,7 @@ GuiMainWindow::GuiMainWindow(QWidget *parent) :
 
     if(QCoreApplication::arguments().count()>1)
     {
+        // TODO set lineedit
         _scan(QCoreApplication::arguments().at(1));
     }
 }
