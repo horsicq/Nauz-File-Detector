@@ -36,7 +36,7 @@ class DialogDirectoryScan : public QDialog
     Q_OBJECT
 
 public:
-    explicit DialogDirectoryScan(QWidget *parent, NFD::OPTIONS *pOptions, QString sDirName);
+    explicit DialogDirectoryScan(QWidget *pParent, NFD::OPTIONS *pOptions, QString sDirName);
     ~DialogDirectoryScan();
 
 private slots:

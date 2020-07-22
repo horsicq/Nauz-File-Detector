@@ -42,7 +42,7 @@ class DialogOptions : public QDialog
     };
 
 public:
-    explicit DialogOptions(QWidget *parent,NFD::OPTIONS *pOptions);
+    explicit DialogOptions(QWidget *pParent,NFD::OPTIONS *pOptions);
     ~DialogOptions();
 
     static void loadOptions(NFD::OPTIONS *pOptions);
