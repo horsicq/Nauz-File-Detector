@@ -41,7 +41,7 @@ class GuiMainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit GuiMainWindow(QWidget *pParent = nullptr);
+    explicit GuiMainWindow(QWidget *pParent=nullptr);
     ~GuiMainWindow() override;
 
 private slots:
