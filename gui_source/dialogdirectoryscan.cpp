@@ -21,8 +21,8 @@
 #include "dialogdirectoryscan.h"
 #include "ui_dialogdirectoryscan.h"
 
-DialogDirectoryScan::DialogDirectoryScan(QWidget *parent, NFD::OPTIONS *pOptions,QString sDirName) :
-    QDialog(parent),
+DialogDirectoryScan::DialogDirectoryScan(QWidget *pParent, NFD::OPTIONS *pOptions,QString sDirName) :
+    QDialog(pParent),
     ui(new Ui::DialogDirectoryScan)
 {
     ui->setupUi(this);
