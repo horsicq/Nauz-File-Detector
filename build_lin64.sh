@@ -63,11 +63,11 @@ mv $SOURCE_PATH/release/$BUILD_NAME/base/libicudata.so.56.1                 $SOU
 
 echo "#!/bin/sh" >> release/$BUILD_NAME/nfd.sh
 echo "export LD_LIBRARY_PATH=\"./base:$LD_LIBRARY_PATH\"" >> release/$BUILD_NAME/nfd.sh
-echo "./base/nfd $*" >> release/$BUILD_NAME/nfd.sh
+echo "./base/nfd \$*" >> release/$BUILD_NAME/nfd.sh
 
 echo "#!/bin/sh" >> release/$BUILD_NAME/nfdc.sh
 echo "export LD_LIBRARY_PATH=\"./base:$LD_LIBRARY_PATH\"" >> release/$BUILD_NAME/nfdc.sh
-echo "./base/nfdc $*" >> release/$BUILD_NAME/nfdc.sh
+echo "./base/nfdc \$*" >> release/$BUILD_NAME/nfdc.sh
 
 chmod +x release/$BUILD_NAME/nfd.sh
 chmod +x release/$BUILD_NAME/nfdc.sh
