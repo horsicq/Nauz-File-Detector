@@ -21,7 +21,7 @@
 #include "dialogoptions.h"
 #include "ui_dialogoptions.h"
 
-DialogOptions::DialogOptions(QWidget *pParent, NFD::OPTIONS *pOptions) :
+DialogOptions::DialogOptions(QWidget *pParent, XOptions *pOptions) :
     QDialog(pParent),
     ui(new Ui::DialogOptions)
 {
@@ -29,14 +29,15 @@ DialogOptions::DialogOptions(QWidget *pParent, NFD::OPTIONS *pOptions) :
 
     this->pOptions=pOptions;
 
-    ui->checkBoxDeepScan->setChecked(pOptions->bDeepScan);
-    ui->checkBoxScanAfterOpen->setChecked(pOptions->bScanAfterOpen);
-    ui->checkBoxRecursiveScan->setChecked(pOptions->bRecursiveScan);
-    ui->checkBoxSaveLastDirectory->setChecked(pOptions->bSaveLastDirectory);
+    pOptions->setCheckBox(ui->checkBoxScanAfterOpen,XOptions::ID_SCANAFTEROPEN);
+    pOptions->setCheckBox(ui->checkBoxRecursiveScan,XOptions::ID_RECURSIVESCAN);
+    pOptions->setCheckBox(ui->checkBoxDeepScan,XOptions::ID_DEEPSCAN);
+    pOptions->setCheckBox(ui->checkBoxHeuristicScan,XOptions::ID_HERISTICSCAN);
+    pOptions->setCheckBox(ui->checkBoxStayOnTop,XOptions::ID_STAYONTOP);
+    pOptions->setCheckBox(ui->checkBoxSaveLastDirectory,XOptions::ID_SAVELASTDIRECTORY);
 
-    ui->checkBoxStayOnTop->setChecked(pOptions->bStayOnTop);
 #ifdef WIN32
-    ui->checkBoxContext->setChecked(pOptions->bContext);
+    ui->checkBoxContext->setChecked(pOptions->checkContext(X_APPLICATIONNAME,"*"));
 #else
     ui->checkBoxContext->hide();
 #endif
@@ -47,103 +48,29 @@ DialogOptions::~DialogOptions()
     delete ui;
 }
 
-void DialogOptions::loadOptions(NFD::OPTIONS *pOptions)
+void DialogOptions::on_pushButtonOK_clicked()
 {
-    QSettings settings(QApplication::applicationDirPath()+QDir::separator()+"nfd.ini",QSettings::IniFormat);
+    pOptions->getCheckBox(ui->checkBoxDeepScan,XOptions::ID_DEEPSCAN);
+    pOptions->getCheckBox(ui->checkBoxScanAfterOpen,XOptions::ID_SCANAFTEROPEN);
+    pOptions->getCheckBox(ui->checkBoxRecursiveScan,XOptions::ID_RECURSIVESCAN);
+    pOptions->getCheckBox(ui->checkBoxHeuristicScan,XOptions::ID_HERISTICSCAN);
+    pOptions->getCheckBox(ui->checkBoxSaveLastDirectory,XOptions::ID_SAVELASTDIRECTORY);
+    pOptions->getCheckBox(ui->checkBoxStayOnTop,XOptions::ID_STAYONTOP);
 
-    pOptions->bScanAfterOpen=settings.value("ScanAfterOpen",true).toBool();
-    pOptions->bRecursiveScan=settings.value("RecursiveScan",true).toBool();
-    pOptions->bDeepScan=settings.value("DeepScan",true).toBool();
-    pOptions->bHeristicScan=settings.value("HeristicScan",true).toBool();
-    pOptions->bSaveLastDirectory=settings.value("SaveLastDirectory",true).toBool();
-    pOptions->sLastDirectory=settings.value("LastDirectory","").toString();
-
-    pOptions->bStayOnTop=settings.value("StayOnTop",false).toBool();
 #ifdef WIN32
-    pOptions->bContext=checkContext("*");
-#endif
-
-    if(!QDir(pOptions->sLastDirectory).exists())
+    if(pOptions->checkContext(X_APPLICATIONNAME,"*")!=ui->checkBoxContext->isChecked())
     {
-        pOptions->sLastDirectory="";
-    }
-}
-
-void DialogOptions::saveOptions(NFD::OPTIONS *pOptions)
-{
-    QSettings settings(QApplication::applicationDirPath()+QDir::separator()+"nfd.ini",QSettings::IniFormat);
-
-    settings.setValue("ScanAfterOpen",pOptions->bScanAfterOpen);
-    settings.setValue("RecursiveScan",pOptions->bRecursiveScan);
-    settings.setValue("DeepScan",pOptions->bDeepScan);
-    settings.setValue("HeristicScan",pOptions->bHeristicScan);
-    settings.setValue("SaveLastDirectory",pOptions->bSaveLastDirectory);
-    settings.setValue("LastDirectory",pOptions->sLastDirectory);
-
-    settings.setValue("StayOnTop",pOptions->bStayOnTop);
-
-#ifdef WIN32
-    if(!setContextState("*",pOptions->bContext))
-    {
-        pOptions->bContext=!pOptions->bContext;
-    }
-#endif
-}
-#ifdef WIN32
-bool DialogOptions::checkContext(QString sType)
-{
-    QSettings settings(QString("HKEY_CLASSES_ROOT\\%1\\shell").arg(sType),QSettings::NativeFormat);
-    QString sRecord=settings.value("NFD/command/Default").toString();
-
-    return (sRecord!="");
-}
-#endif
-#ifdef WIN32
-void DialogOptions::clearContext(QString sType)
-{
-    QSettings settings(QString("HKEY_CLASSES_ROOT\\%1\\shell\\NFD").arg(sType),QSettings::NativeFormat);
-    settings.clear();
-}
-#endif
-#ifdef WIN32
-void DialogOptions::registerContext(QString sType)
-{
-    QSettings settings(QString("HKEY_CLASSES_ROOT\\%1\\shell\\NFD\\command").arg(sType),QSettings::NativeFormat);
-    settings.setValue(".","\""+QCoreApplication::applicationFilePath().replace("/","\\")+"\" \"%1\"");
-
-    QSettings settingsIcon(QString("HKEY_CLASSES_ROOT\\%1\\shell\\NFD").arg(sType),QSettings::NativeFormat);
-    settingsIcon.setValue("Icon","\""+QCoreApplication::applicationFilePath().replace("/","\\")+"\"");
-}
-#endif
-#ifdef WIN32
-bool DialogOptions::setContextState(QString sType, bool bState)
-{
-    if(checkContext(sType)!=bState)
-    {
-        if(bState)
+        if(ui->checkBoxContext->isChecked())
         {
-            registerContext(sType);
+            pOptions->registerContext(X_APPLICATIONNAME,"*",qApp->applicationFilePath());
         }
         else
         {
-            clearContext(sType);
+            pOptions->clearContext(X_APPLICATIONNAME,"*");
         }
     }
+#endif
 
-    return (checkContext(sType)==bState);
-}
-#endif
-void DialogOptions::on_pushButtonOK_clicked()
-{
-    pOptions->bDeepScan=ui->checkBoxDeepScan->isChecked();
-    pOptions->bScanAfterOpen=ui->checkBoxScanAfterOpen->isChecked();
-    pOptions->bRecursiveScan=ui->checkBoxRecursiveScan->isChecked();
-    pOptions->bSaveLastDirectory=ui->checkBoxSaveLastDirectory->isChecked();
-    pOptions->bStayOnTop=ui->checkBoxStayOnTop->isChecked();
-#ifdef WIN32
-    pOptions->bContext=ui->checkBoxContext->isChecked();
-#endif
-    saveOptions(pOptions);
     this->close();
 }
 

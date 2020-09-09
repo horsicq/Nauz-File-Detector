@@ -30,6 +30,7 @@
 #include "dialogabout.h"
 #include "dialogoptions.h"
 #include "dialogdirectoryscan.h"
+#include "xoptions.h"
 
 namespace Ui
 {
@@ -62,7 +63,7 @@ protected:
 
 private:
     Ui::GuiMainWindow *ui;
-    NFD::OPTIONS nfdOptions;
+    XOptions xOptions;
 };
 
 #endif // GUIMAINWINDOW_H

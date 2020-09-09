@@ -24,6 +24,7 @@
 #include <QDialog>
 #include <QSettings>
 #include <QDir>
+#include "xoptions.h"
 #include "../global.h"
 
 namespace Ui {
@@ -42,11 +43,9 @@ class DialogOptions : public QDialog
     };
 
 public:
-    explicit DialogOptions(QWidget *pParent,NFD::OPTIONS *pOptions);
+    explicit DialogOptions(QWidget *pParent,XOptions *pOptions);
     ~DialogOptions();
 
-    static void loadOptions(NFD::OPTIONS *pOptions);
-    static void saveOptions(NFD::OPTIONS *pOptions);
 #ifdef WIN32
     static bool checkContext(QString sType);
     static void clearContext(QString sType);
@@ -60,7 +59,7 @@ private slots:
 
 private:
     Ui::DialogOptions *ui;
-    NFD::OPTIONS *pOptions;
+    XOptions *pOptions;
 };
 
 #endif // DIALOGOPTIONS_H

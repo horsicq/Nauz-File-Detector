@@ -21,7 +21,7 @@
 #include "dialogdirectoryscan.h"
 #include "ui_dialogdirectoryscan.h"
 
-DialogDirectoryScan::DialogDirectoryScan(QWidget *pParent, NFD::OPTIONS *pOptions,QString sDirName) :
+DialogDirectoryScan::DialogDirectoryScan(QWidget *pParent, XOptions *pOptions, QString sDirName) :
     QDialog(pParent),
     ui(new Ui::DialogDirectoryScan)
 {
@@ -37,15 +37,12 @@ DialogDirectoryScan::DialogDirectoryScan(QWidget *pParent, NFD::OPTIONS *pOption
 
     ui->checkBoxScanSubdirectories->setChecked(true);
 
-    if(pOptions->bSaveLastDirectory&&QDir().exists(pOptions->sLastDirectory))
-    {
-        ui->lineEditDirectoryName->setText(pOptions->sLastDirectory);
-    }
+    ui->lineEditDirectoryName->setText(pOptions->getLastDirectory());
 
     if(sDirName!="")
     {
         ui->lineEditDirectoryName->setText(sDirName);
-        if(pOptions->bScanAfterOpen)
+        if(pOptions->isScanAfterOpen())
         {
             scanDirectory(sDirName);
         }
@@ -66,7 +63,7 @@ void DialogDirectoryScan::on_pushButtonOpenDirectory_clicked()
     if(!sDirectoryName.isEmpty())
     {
         ui->lineEditDirectoryName->setText(sDirectoryName);
-        if(pOptions->bScanAfterOpen)
+        if(pOptions->isScanAfterOpen())
         {
             scanDirectory(sDirectoryName);
         }
@@ -99,14 +96,7 @@ void DialogDirectoryScan::scanDirectory(QString sDirectoryName)
         ds.setData(sDirectoryName,&options);
         ds.exec();
 
-        if(pOptions->bSaveLastDirectory)
-        {
-            QDir dir(sDirectoryName);
-            if(dir.exists())
-            {
-                pOptions->sLastDirectory=dir.absolutePath();
-            }
-        }
+        pOptions->setLastDirectory(sDirectoryName);
     }
 }
 
@@ -140,7 +130,7 @@ void DialogDirectoryScan::on_pushButtonSave_clicked()
 {
     QString sFilter;
     sFilter+=QString("%1 (*.txt)").arg(tr("Text documents"));
-    QString sSaveFileName=pOptions->sLastDirectory+QDir::separator()+"result";
+    QString sSaveFileName=pOptions->getLastDirectory()+QDir::separator()+"result";
     QString sFileName=QFileDialog::getSaveFileName(this,tr("Save result"),sSaveFileName,sFilter);
 
     if(!sFileName.isEmpty())
