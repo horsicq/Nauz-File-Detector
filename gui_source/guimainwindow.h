@@ -26,7 +26,7 @@
 #include <QFileDialog>
 #include <QDragEnterEvent>
 #include <QMimeData>
-#include "dialogstaticscan.h"
+#include "dialogstaticscanprocess.h"
 #include "dialogabout.h"
 #include "dialogoptions.h"
 #include "dialogdirectoryscan.h"
