@@ -25,7 +25,7 @@
 #include <QDialog>
 #include <QFileDialog>
 #include "dialogoptions.h"
-#include "dialogstaticscan.h"
+#include "dialogstaticscanprocess.h"
 #include "xoptions.h"
 
 namespace Ui {

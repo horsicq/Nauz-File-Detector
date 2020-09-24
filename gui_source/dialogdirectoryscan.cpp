@@ -91,7 +91,7 @@ void DialogDirectoryScan::scanDirectory(QString sDirectoryName)
         // TODO Filter
         // |flags|x all|
 
-        DialogStaticScan ds(this);
+        DialogStaticScanProcess ds(this);
         connect(&ds, SIGNAL(scanResult(SpecAbstract::SCAN_RESULT)),this,SLOT(scanResult(SpecAbstract::SCAN_RESULT)),Qt::DirectConnection);
         ds.setData(sDirectoryName,&options);
         ds.exec();

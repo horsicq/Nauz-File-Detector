@@ -74,15 +74,14 @@ void GuiMainWindow::scanFile(QString sFileName)
         options.bDeepScan=ui->checkBoxDeepScan->isChecked();
         options.bHeuristicScan=ui->checkBoxHeuristicScan->isChecked();
 
-        DialogStaticScan ds(this);
+        DialogStaticScanProcess ds(this);
         ds.setData(sFileName,&options,&scanResult);
         ds.exec();
 
-        xOptions.setLastDirectory(sFileName);
-
         QString sSaveDirectory=xOptions.getLastDirectory()+QDir::separator()+"result"; // mb TODO
-
         ui->widgetResult->setData(scanResult,sSaveDirectory);
+
+        xOptions.setLastDirectory(sFileName);
     }
 }
 
