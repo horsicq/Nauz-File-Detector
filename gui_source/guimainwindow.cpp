@@ -74,9 +74,9 @@ void GuiMainWindow::scanFile(QString sFileName)
         options.bDeepScan=ui->checkBoxDeepScan->isChecked();
         options.bHeuristicScan=ui->checkBoxHeuristicScan->isChecked();
 
-#ifdef QT_DEBUG
-        options.bIsTest=true;
-#endif
+//#ifdef QT_DEBUG
+//        options.bIsTest=true;
+//#endif
 
         DialogStaticScanProcess ds(this);
         ds.setData(sFileName,&options,&scanResult);
