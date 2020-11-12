@@ -32,7 +32,7 @@ DialogOptions::DialogOptions(QWidget *pParent, XOptions *pOptions) :
     pOptions->setCheckBox(ui->checkBoxScanAfterOpen,XOptions::ID_SCANAFTEROPEN);
     pOptions->setCheckBox(ui->checkBoxRecursiveScan,XOptions::ID_RECURSIVESCAN);
     pOptions->setCheckBox(ui->checkBoxDeepScan,XOptions::ID_DEEPSCAN);
-    pOptions->setCheckBox(ui->checkBoxHeuristicScan,XOptions::ID_HERISTICSCAN);
+    pOptions->setCheckBox(ui->checkBoxHeuristicScan,XOptions::ID_HEURISTICSCAN);
     pOptions->setCheckBox(ui->checkBoxStayOnTop,XOptions::ID_STAYONTOP);
     pOptions->setCheckBox(ui->checkBoxSaveLastDirectory,XOptions::ID_SAVELASTDIRECTORY);
 
@@ -53,7 +53,7 @@ void DialogOptions::on_pushButtonOK_clicked()
     pOptions->getCheckBox(ui->checkBoxDeepScan,XOptions::ID_DEEPSCAN);
     pOptions->getCheckBox(ui->checkBoxScanAfterOpen,XOptions::ID_SCANAFTEROPEN);
     pOptions->getCheckBox(ui->checkBoxRecursiveScan,XOptions::ID_RECURSIVESCAN);
-    pOptions->getCheckBox(ui->checkBoxHeuristicScan,XOptions::ID_HERISTICSCAN);
+    pOptions->getCheckBox(ui->checkBoxHeuristicScan,XOptions::ID_HEURISTICSCAN);
     pOptions->getCheckBox(ui->checkBoxSaveLastDirectory,XOptions::ID_SAVELASTDIRECTORY);
     pOptions->getCheckBox(ui->checkBoxStayOnTop,XOptions::ID_STAYONTOP);
 

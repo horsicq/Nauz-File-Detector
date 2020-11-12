@@ -38,7 +38,7 @@ GuiMainWindow::GuiMainWindow(QWidget *pParent) :
     listIDs.append(XOptions::ID_SCANAFTEROPEN);
     listIDs.append(XOptions::ID_RECURSIVESCAN);
     listIDs.append(XOptions::ID_DEEPSCAN);
-    listIDs.append(XOptions::ID_HERISTICSCAN);
+    listIDs.append(XOptions::ID_HEURISTICSCAN);
     listIDs.append(XOptions::ID_STAYONTOP);
     listIDs.append(XOptions::ID_SAVELASTDIRECTORY);
     listIDs.append(XOptions::ID_LASTDIRECTORY);
