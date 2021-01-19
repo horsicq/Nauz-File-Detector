@@ -22,3 +22,6 @@
 [submodule "XDEX"]
 	path = XDEX
 	url = https://github.com/horsicq/XDEX.git
+[submodule "XShortcuts"]
+	path = XShortcuts
+	url = https://github.com/horsicq/XShortcuts.git
