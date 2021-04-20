@@ -23,8 +23,9 @@
 
 #include <QString>
 
-#define X_APPLICATIONNAME "Nauz File Detector"
-#define X_APPLICATIONVERSION "0.05alpha"
+#define X_APPLICATIONDISPLAYNAME "Nauz File Detector"
+#define X_APPLICATIONNAME "nfd"
+#define X_APPLICATIONVERSION "0.06"
 #define X_ORGANIZATIONNAME "NTInfo"
 #define X_ORGANIZATIONDOMAIN "ntinfo.biz"
 #define X_OPTIONSFILE "nfd.ini"
