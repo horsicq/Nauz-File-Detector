@@ -34,7 +34,7 @@ RUN if [ "x$environment" = "xinternet" ]; then git clone --recursive https://git
 #####################################################
 FROM ${image} as source-darksite
 
-ADD Nauz-File-Detector.tar.g[z] /
+#ADD Nauz-File-Detector.tar.g[z] /
 
 
 
