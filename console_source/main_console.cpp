@@ -79,13 +79,13 @@ int main(int argc, char *argv[])
 
     parser.addPositionalArgument("target","The file or directory to open.");
 
-    QCommandLineOption clRecursiveScan(QStringList()<<"r"<<"recursivescan","Recursive scan.");
-    QCommandLineOption clDeepScan(QStringList()<<"d"<<"deepscan","Deep scan.");
-    QCommandLineOption clHeuristicScan(QStringList()<<"e"<<"heuristicscan","Heuristic scan.");
-    QCommandLineOption clResultAsXml(QStringList()<<"x"<<"xml","Result as XML.");
-    QCommandLineOption clResultAsJson(QStringList()<<"j"<<"json","Result as JSON.");
-    QCommandLineOption clResultAsCSV    (QStringList()<<    "c"<<   "csv",          "Result as CSV.");
-    QCommandLineOption clResultAsTSV    (QStringList()<<    "t"<<   "tsv",          "Result as TSV.");
+    QCommandLineOption clRecursiveScan  (QStringList()<<    "r"<<   "recursivescan",    "Recursive scan.");
+    QCommandLineOption clDeepScan       (QStringList()<<    "d"<<   "deepscan",         "Deep scan.");
+    QCommandLineOption clHeuristicScan  (QStringList()<<    "e"<<   "heuristicscan",    "Heuristic scan.");
+    QCommandLineOption clResultAsXml    (QStringList()<<    "x"<<   "xml",              "Result as XML.");
+    QCommandLineOption clResultAsJson   (QStringList()<<    "j"<<   "json",             "Result as JSON.");
+    QCommandLineOption clResultAsCSV    (QStringList()<<    "c"<<   "csv",              "Result as CSV.");
+    QCommandLineOption clResultAsTSV    (QStringList()<<    "t"<<   "tsv",              "Result as TSV.");
 
     parser.addOption(clRecursiveScan);
     parser.addOption(clDeepScan);

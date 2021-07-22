@@ -1,99 +1,37 @@
 #!/bin/sh -x
-QT_PATH=$HOME/Qt/5.15.2/clang_64
-RELEASE_VERSION=$(cat "release_version.txt")
-echo $RELEASE_VERSION
-SOURCE_PATH=$PWD
+export QMAKE_PATH=$HOME/Qt/5.15.2/clang_64/bin/qmake
 
-BUILD_NAME=nfd_mac_portable
-GUIEXE=nfd
-CONEXE=nfdc
+export X_SOURCE_PATH=$PWD
+export X_BUILD_NAME=nfd_mac_portable
+export X_RELEASE_VERSION=$(cat "release_version.txt")
 
-cd $SOURCE_PATH
+source build_tools/mac.sh
 
-rm -rf build
+check_file $QMAKE_PATH
 
-function makeproject
-{
-    cd $SOURCE_PATH/$1
-    
-    $QT_PATH/bin/qmake $1.pro -spec macx-clang CONFIG+=x86_64
-    make -f Makefile clean
-    make -f Makefile
+if [ -z "$X_ERROR" ]; then
+    make_init
+    make_build "$X_SOURCE_PATH/NFD_source.pro"
 
-    rm -rf Makefile
-    rm -rf Makefile.Release
-    rm -rf Makefile.Debug
-    rm -rf object_script.*     
+    check_file "$X_SOURCE_PATH/build/release/nfd.app/Contents/MacOS/nfd"
+    if [ -z "$X_ERROR" ]; then
+        cp -R "$X_SOURCE_PATH/build/release/nfd.app"    "$X_SOURCE_PATH/release/$X_BUILD_NAME"
 
-    cd $SOURCE_PATH
-}
+        mkdir -p $X_SOURCE_PATH/release/$X_BUILD_NAME/nfd.app/Contents/Resources/signatures
 
-makeproject build_libs
-makeproject gui_source
-makeproject console_source
+        fiximport "$X_SOURCE_PATH/build/release/nfd.app/Contents/MacOS/nfd"
 
-mkdir -p release
-rm -rf release/$BUILD_NAME
-mkdir -p release/$BUILD_NAME
+        deploy_qt_library QtWidgets nfd
+        deploy_qt_library QtGui nfd
+        deploy_qt_library QtCore nfd
+        deploy_qt_library QtDBus nfd
+        deploy_qt_library QtPrintSupport nfd
 
-cp -R $SOURCE_PATH/build/release/$GUIEXE.app               $SOURCE_PATH/release/$BUILD_NAME
-cp -R $SOURCE_PATH/build/release/$CONEXE                  $SOURCE_PATH/release/$BUILD_NAME/$GUIEXE.app/Contents/MacOS/
-mkdir $SOURCE_PATH/release/$BUILD_NAME/$GUIEXE.app/Contents/PlugIns
+        deploy_qt_plugin platforms libqcocoa nfd
+        deploy_qt_plugin platforms libqminimal nfd
+        deploy_qt_plugin platforms libqoffscreen nfd
 
-function fixlibrary
-{
-    install_name_tool -change @rpath/$1.framework/Versions/5/$1 @executable_path/../Frameworks/$1.framework/Versions/5/$1  $2    
-}
-
-function fiximport
-{
-    fixlibrary QtWidgets $1
-    fixlibrary QtGui $1
-    fixlibrary QtCore $1  
-	fixlibrary QtDBus $1
-	fixlibrary QtPrintSupport $1
-}
-
-function copylibrary
-{
-    mkdir $SOURCE_PATH/release/$BUILD_NAME/$GUIEXE.app/Contents/Frameworks
-    mkdir $SOURCE_PATH/release/$BUILD_NAME/$GUIEXE.app/Contents/Frameworks/$1.framework
-    mkdir $SOURCE_PATH/release/$BUILD_NAME/$GUIEXE.app/Contents/Frameworks/$1.framework/Versions
-    mkdir $SOURCE_PATH/release/$BUILD_NAME/$GUIEXE.app/Contents/Frameworks/$1.framework/Versions/5
-    
-    cp -R $QT_PATH/lib/$1.framework/Versions/5/$1 $SOURCE_PATH/release/$BUILD_NAME/$GUIEXE.app/Contents/Frameworks/$1.framework/Versions/5
-    
-    install_name_tool -id @executable_path/../Frameworks/$1.framework/Versions/5/$1 $SOURCE_PATH/release/$BUILD_NAME/$GUIEXE.app/Contents/Frameworks/$1.framework/Versions/5/$1
-    fiximport $SOURCE_PATH/release/$BUILD_NAME/$GUIEXE.app/Contents/Frameworks/$1.framework/Versions/5/$1
-}
-
-function copyplugin
-{
-    mkdir $SOURCE_PATH/release/$BUILD_NAME/$GUIEXE.app/Contents/PlugIns/$1/
-    cp -R $QT_PATH/plugins/$1/$2.dylib $SOURCE_PATH/release/$BUILD_NAME/$GUIEXE.app/Contents/PlugIns/$1/
-    
-    install_name_tool -id @executable_path/../PlugIns/$1/$2.dylib $SOURCE_PATH/release/$BUILD_NAME/$GUIEXE.app/Contents/PlugIns/$1/$2.dylib
-    fiximport $SOURCE_PATH/release/$BUILD_NAME/$GUIEXE.app/Contents/PlugIns/$1/$2.dylib
-}
-
-fiximport $SOURCE_PATH/release/$BUILD_NAME/$GUIEXE.app/Contents/MacOS/$GUIEXE
-fiximport $SOURCE_PATH/release/$BUILD_NAME/$GUIEXE.app/Contents/MacOS/$CONEXE
-
-copylibrary QtWidgets
-copylibrary QtGui
-copylibrary QtCore
-copylibrary QtDBus
-copylibrary QtPrintSupport
-
-copyplugin platforms libqcocoa
-copyplugin platforms libqminimal
-copyplugin platforms libqoffscreen
-
-rm -rf $SOURCE_PATH/release/${BUILD_NAME}_${RELEASE_VERSION}.dmg
-hdiutil create -format UDBZ -quiet -srcfolder $SOURCE_PATH/release/$BUILD_NAME $SOURCE_PATH/release/${BUILD_NAME}_${RELEASE_VERSION}.dmg
-cd $SOURCE_PATH/release/
-zip -r $SOURCE_PATH/release/${BUILD_NAME}_${RELEASE_VERSION}.zip ${BUILD_NAME}
-
-rm -rf $SOURCE_PATH/release/$BUILD_NAME
-
-
+        make_release
+        make_clear
+    fi
+fi

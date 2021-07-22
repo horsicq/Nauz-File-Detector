@@ -27,14 +27,15 @@ DialogOptions::DialogOptions(QWidget *pParent, XOptions *pOptions) :
 {
     ui->setupUi(this);
 
-    this->pOptions=pOptions;
+    this->g_pOptions=pOptions;
 
-    pOptions->setCheckBox(ui->checkBoxScanAfterOpen,XOptions::ID_SCANAFTEROPEN);
-    pOptions->setCheckBox(ui->checkBoxRecursiveScan,XOptions::ID_RECURSIVESCAN);
-    pOptions->setCheckBox(ui->checkBoxDeepScan,XOptions::ID_DEEPSCAN);
-    pOptions->setCheckBox(ui->checkBoxHeuristicScan,XOptions::ID_HEURISTICSCAN);
-    pOptions->setCheckBox(ui->checkBoxStayOnTop,XOptions::ID_STAYONTOP);
-    pOptions->setCheckBox(ui->checkBoxSaveLastDirectory,XOptions::ID_SAVELASTDIRECTORY);
+    g_pOptions->setCheckBox(ui->checkBoxScanAfterOpen,XOptions::ID_SCANAFTEROPEN);
+    g_pOptions->setCheckBox(ui->checkBoxRecursiveScan,XOptions::ID_RECURSIVESCAN);
+    g_pOptions->setCheckBox(ui->checkBoxDeepScan,XOptions::ID_DEEPSCAN);
+    g_pOptions->setCheckBox(ui->checkBoxHeuristicScan,XOptions::ID_HEURISTICSCAN);
+    g_pOptions->setCheckBox(ui->checkBoxStayOnTop,XOptions::ID_STAYONTOP);
+    g_pOptions->setCheckBox(ui->checkBoxSaveLastDirectory,XOptions::ID_SAVELASTDIRECTORY);
+    g_pOptions->setComboBox(ui->comboBoxStyle,XOptions::ID_STYLE);
 
 #ifdef WIN32
     ui->checkBoxContext->setChecked(pOptions->checkContext(X_APPLICATIONDISPLAYNAME,"*"));
@@ -50,28 +51,29 @@ DialogOptions::~DialogOptions()
 
 void DialogOptions::on_pushButtonOK_clicked()
 {
-    pOptions->getCheckBox(ui->checkBoxDeepScan,XOptions::ID_DEEPSCAN);
-    pOptions->getCheckBox(ui->checkBoxScanAfterOpen,XOptions::ID_SCANAFTEROPEN);
-    pOptions->getCheckBox(ui->checkBoxRecursiveScan,XOptions::ID_RECURSIVESCAN);
-    pOptions->getCheckBox(ui->checkBoxHeuristicScan,XOptions::ID_HEURISTICSCAN);
-    pOptions->getCheckBox(ui->checkBoxSaveLastDirectory,XOptions::ID_SAVELASTDIRECTORY);
-    pOptions->getCheckBox(ui->checkBoxStayOnTop,XOptions::ID_STAYONTOP);
+    g_pOptions->getCheckBox(ui->checkBoxDeepScan,XOptions::ID_DEEPSCAN);
+    g_pOptions->getCheckBox(ui->checkBoxScanAfterOpen,XOptions::ID_SCANAFTEROPEN);
+    g_pOptions->getCheckBox(ui->checkBoxRecursiveScan,XOptions::ID_RECURSIVESCAN);
+    g_pOptions->getCheckBox(ui->checkBoxHeuristicScan,XOptions::ID_HEURISTICSCAN);
+    g_pOptions->getCheckBox(ui->checkBoxSaveLastDirectory,XOptions::ID_SAVELASTDIRECTORY);
+    g_pOptions->getCheckBox(ui->checkBoxStayOnTop,XOptions::ID_STAYONTOP);
+    g_pOptions->getComboBox(ui->comboBoxStyle,XOptions::ID_STYLE);
 
 #ifdef WIN32
-    if(pOptions->checkContext(X_APPLICATIONDISPLAYNAME,"*")!=ui->checkBoxContext->isChecked())
+    if(g_pOptions->checkContext(X_APPLICATIONDISPLAYNAME,"*")!=ui->checkBoxContext->isChecked())
     {
         if(ui->checkBoxContext->isChecked())
         {
-            pOptions->registerContext(X_APPLICATIONDISPLAYNAME,"*",qApp->applicationFilePath());
+            g_pOptions->registerContext(X_APPLICATIONDISPLAYNAME,"*",qApp->applicationFilePath());
         }
         else
         {
-            pOptions->clearContext(X_APPLICATIONDISPLAYNAME,"*");
+            g_pOptions->clearContext(X_APPLICATIONDISPLAYNAME,"*");
         }
     }
 #endif
 
-    if(pOptions->isRestartNeeded())
+    if(g_pOptions->isRestartNeeded())
     {
         QMessageBox::information(this,tr("Information"),tr("Please restart the application"));
     }

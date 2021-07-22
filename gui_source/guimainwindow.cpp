@@ -41,7 +41,7 @@ GuiMainWindow::GuiMainWindow(QWidget *pParent) :
     listIDs.append(XOptions::ID_HEURISTICSCAN);
     listIDs.append(XOptions::ID_STAYONTOP);
     listIDs.append(XOptions::ID_SAVELASTDIRECTORY);
-    listIDs.append(XOptions::ID_LASTDIRECTORY);
+    listIDs.append(XOptions::ID_STYLE);
 
     xOptions.setValueIDs(listIDs);
     xOptions.load();
