@@ -14,6 +14,7 @@ if [ -z "$X_ERROR" ]; then
     make_build "$X_SOURCE_PATH/NFD_source.pro"
 
     check_file "$X_SOURCE_PATH/build/release/nfd"
+    check_file "$X_SOURCE_PATH/build/release/nfdc"
     if [ -z "$X_ERROR" ]; then
         create_deb_app_dir nfd
         
@@ -22,6 +23,7 @@ if [ -z "$X_ERROR" ]; then
         sed -i "s/#VERSION#/$X_RELEASE_VERSION/"                            $X_SOURCE_PATH/release/$X_BUILD_NAME/DEBIAN/control
         sed -i "s/#ARCH#/$X_ARCHITECTURE/"                                  $X_SOURCE_PATH/release/$X_BUILD_NAME/DEBIAN/control
         cp -f $X_SOURCE_PATH/build/release/nfd                              $X_SOURCE_PATH/release/$X_BUILD_NAME/usr/bin/
+        cp -f $X_SOURCE_PATH/build/release/nfdc                             $X_SOURCE_PATH/release/$X_BUILD_NAME/usr/bin/
         cp -f $X_SOURCE_PATH/DEBIAN/nfd.desktop                             $X_SOURCE_PATH/release/$X_BUILD_NAME/usr/share/applications/
         sed -i "s/#VERSION#/$X_RELEASE_VERSION/"                            $X_SOURCE_PATH/release/$X_BUILD_NAME/usr/share/applications/nfd.desktop
         cp -Rf $X_SOURCE_PATH/DEBIAN/hicolor/                               $X_SOURCE_PATH/release/$X_BUILD_NAME/usr/share/icons/
