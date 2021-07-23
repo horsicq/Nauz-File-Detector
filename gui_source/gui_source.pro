@@ -5,6 +5,8 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = nfd
 TEMPLATE = app
 
+CONFIG += c++11
+
 include(../build.pri)
 
 SOURCES +=\
