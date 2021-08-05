@@ -71,7 +71,7 @@ int main(int argc, char *argv[])
 
     QCommandLineParser parser;
     QString sDescription;
-    sDescription.append(QString("%1 v%2\n").arg(X_APPLICATIONDISPLAYNAME).arg(X_APPLICATIONVERSION));
+    sDescription.append(QString("%1 v%2\n").arg(X_APPLICATIONDISPLAYNAME,X_APPLICATIONVERSION));
     sDescription.append(QString("%1\n").arg("Copyright(C) 2017-2021 hors<horsicq@gmail.com> Web: http://ntinfo.biz"));
     parser.setApplicationDescription(sDescription);
     parser.addHelpOption();
