@@ -102,7 +102,7 @@ void DialogDirectoryScan::scanDirectory(QString sDirectoryName)
 
 void DialogDirectoryScan::scanResult(SpecAbstract::SCAN_RESULT scanResult)
 {
-    QString sResult=QString("%1 %2 %3").arg(scanResult.sFileName).arg(scanResult.nScanTime).arg(tr("msec"));
+    QString sResult=QString("%1 %2 %3").arg(scanResult.sFileName,QString::number(scanResult.nScanTime),tr("msec"));
     sResult+="\r\n";
     StaticScanItemModel model(&scanResult.listRecords);
     SpecAbstract::SCAN_OPTIONS scanOptions={};
