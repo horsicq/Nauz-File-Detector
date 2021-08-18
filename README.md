@@ -15,6 +15,7 @@ There are two versions of  program.
 ![alt text](https://github.com/horsicq/Nauz-File-Detector/blob/master/screenshot_console.jpg "Screenshot console")
 
 How to run portable version on Linux
+=======
 
 - download an appImage file (*.appImage)
 - make the file executable (chmod +x *.appImage)
