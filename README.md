@@ -27,7 +27,7 @@ How to build on Docker
 =======
 git clone --recursive https://github.com/horsicq/Nauz-File-Detector.git
 
-Nauz-File-Detector
+cd Nauz-File-Detector
 
 docker build .
 
@@ -44,7 +44,7 @@ Install packages:
 
 git clone --recursive https://github.com/horsicq/Nauz-File-Detector.git
 
-Nauz-File-Detector
+cd Nauz-File-Detector
 
 Run build script: bash -x build_dpkg.sh
 
@@ -61,6 +61,8 @@ Qt framework has to be installed on the system.
 
 Clone project: git clone --recursive https://github.com/horsicq/Nauz-File-Detector.git
 
+cd Nauz-File-Detector
+
 - chmod a+x configure
 - ./configure
 - make
@@ -74,6 +76,8 @@ How to build on OSX
 Install Qt 5.15.2: https://github.com/horsicq/build_tools
 
 Clone project: git clone --recursive https://github.com/horsicq/Nauz-File-Detector.git
+
+cd Nauz-File-Detector
 
 Edit build_mac.bat ( check QT_PATH variable)
 
