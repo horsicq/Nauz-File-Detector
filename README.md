@@ -113,6 +113,6 @@ Run build_win32.bat
 
 Run build_win64.bat
 
-![alt text](https://github.com/horsicq/Nauz-File-Detector/blob/master/mascots/nfd.jpg "Mascot")
+![alt text](https://github.com/horsicq/Nauz-File-Detector/blob/master/mascots/nfd.png "Mascot")
 
 
