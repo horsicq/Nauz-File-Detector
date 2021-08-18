@@ -94,6 +94,8 @@ Install 7-Zip: https://www.7-zip.org/
 
 Clone project: git clone --recursive https://github.com/horsicq/Nauz-File-Detector.git
 
+cd Nauz-File-Detector
+
 Edit build_winxp.bat ( check VS_PATH,  SEVENZIP_PATH, QT_PATH variables)
 
 Run build_winxp.bat
@@ -110,6 +112,8 @@ Install 7-Zip: https://www.7-zip.org/
 Install Inno Setup: https://github.com/horsicq/build_tools
 
 Clone project: git clone --recursive https://github.com/horsicq/Nauz-File-Detector.git
+
+cd Nauz-File-Detector
 
 Edit build_msvc_win32.bat ( check VSVARS_PATH, SEVENZIP_PATH, INNOSETUP_PATH, QMAKE_PATH variables)
 
