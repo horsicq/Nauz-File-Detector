@@ -3,7 +3,7 @@
 
 ![alt text](https://github.com/horsicq/Nauz-File-Detector/blob/master/mascots/0.06.png "Mascot")
 
-Nauz File Detector is a portable linker/compiler/packer identifier utility.
+**Nauz File Detector** is a portable linker/compiler/packer identifier utility.
 
 The program works on OSX, Linux and Windows.
 There are two versions of  program.
@@ -11,8 +11,8 @@ There are two versions of  program.
 **nfd** - GUI version
 **nfdc** - console version.
 
-![alt text](https://github.com/horsicq/Nauz-File-Detector/blob/master/screenshot_gui.jpg "Screenshot gui")
-![alt text](https://github.com/horsicq/Nauz-File-Detector/blob/master/screenshot_console.jpg "Screenshot console")
+![alt text](https://github.com/horsicq/Nauz-File-Detector/blob/master/docs/1.png "1")
+![alt text](https://github.com/horsicq/Nauz-File-Detector/blob/master/docs/2.png "2")
 
 How to run portable version on Linux
 =======
