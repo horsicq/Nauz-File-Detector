@@ -29,7 +29,8 @@ if [ -z "$X_ERROR" ]; then
         cp -Rf $X_SOURCE_PATH/DEBIAN/hicolor/                               $X_SOURCE_PATH/release/$X_BUILD_NAME/usr/share/icons/
 
         make_deb
-        mv $X_SOURCE_PATH/release/$X_BUILD_NAME.deb $X_SOURCE_PATH/release/nfd_${X_RELEASE_VERSION}-${X_REVISION}_${X_OS_VERSION}_${X_ARCHITECTURE}.deb
+        #mv $X_SOURCE_PATH/release/$X_BUILD_NAME.deb $X_SOURCE_PATH/release/nfd_${X_RELEASE_VERSION}-${X_REVISION}_${X_OS_VERSION}_${X_ARCHITECTURE}.deb
+        mv $X_SOURCE_PATH/release/$X_BUILD_NAME.deb $X_SOURCE_PATH/release/nfd_${X_RELEASE_VERSION}_${X_OS_VERSION}_${X_ARCHITECTURE}.deb
         make_clear
     fi
 fi

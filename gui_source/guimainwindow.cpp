@@ -81,7 +81,8 @@ void GuiMainWindow::scanFile(QString sFileName)
         ds.setData(sFileName,&options,&scanResult);
         ds.exec();
 
-        QString sSaveDirectory=xOptions.getLastDirectory()+QDir::separator()+"result"; // mb TODO
+        QString sSaveDirectory=XBinary::getResultFileName(sFileName,"result.txt");
+
         ui->widgetResult->setData(scanResult,sSaveDirectory);
 
         xOptions.setLastDirectory(sFileName);
