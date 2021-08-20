@@ -19,8 +19,8 @@ There are two versions of  program:
 How to run portable version on Linux
 =======
 
-- download an appImage file (*.appImage)
-- make the file executable (chmod +x *.appImage)
+- download an appImage file (NauzFileDetector-0.06-x86_64.AppImage)
+- make the file executable (chmod +x NauzFileDetector-0.06-x86_64.AppImage)
 - run it (./*.appImage)
 
 How to build on Docker
@@ -36,11 +36,8 @@ How to build on Linux(Debian package)
 
 Install packages:
 
-- sudo apt-get install qtbase5-dev -y
-- sudo apt-get install qttools5-dev-tools -y
-- sudo apt-get install git -y
-- sudo apt-get install build-essential -y
-- sudo apt-get install qt5-default -y
+- sudo apt-get install --quiet --assume-yes git
+- sudo apt-get install --quiet --assume-yes build-essential qtchooser qt5-qmake qtbase5-dev qttools5-dev-tools
 
 git clone --recursive https://github.com/horsicq/Nauz-File-Detector.git
 
@@ -57,7 +54,8 @@ How to build on Linux(Automake)
 
 Qt framework has to be installed on the system.
 
-(Ubuntu)Install Qt Framework: sudo apt-get install --quiet --assume-yes build-essential qt5-default qtbase5-dev qttools5-dev-tools
+(Ubuntu) Install GIT: sudo apt-get install --quiet --assume-yes git
+(Ubuntu)Install Qt Framework: sudo apt-get install --quiet --assume-yes build-essential qtchooser qt5-qmake qtbase5-dev qttools5-dev-tools
 
 Clone project: git clone --recursive https://github.com/horsicq/Nauz-File-Detector.git
 
