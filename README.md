@@ -55,8 +55,8 @@ How to build on Linux(Automake)
 
 Qt framework has to be installed on the system.
 
-(Ubuntu) Install GIT: sudo apt-get install --quiet --assume-yes git
-(Ubuntu 20.04)Install Qt Framework: sudo apt-get install --quiet --assume-yes build-essential qt5-default qtbase5-dev qttools5-dev-tools
+- (Ubuntu) Install GIT: sudo apt-get install --quiet --assume-yes git
+- (Ubuntu 20.04)Install Qt Framework: sudo apt-get install --quiet --assume-yes build-essential qt5-default qtbase5-dev qttools5-dev-tools
 
 Clone project: git clone --recursive https://github.com/horsicq/Nauz-File-Detector.git
 
