@@ -31,7 +31,7 @@ cd Nauz-File-Detector
 
 docker build .
 
-How to build on Linux(Debian package)
+How to build on Linux(Debian package, tested on Ubuntu 14.04-20.04)
 =======
 
 Install packages:
