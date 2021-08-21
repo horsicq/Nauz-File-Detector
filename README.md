@@ -38,7 +38,7 @@ Install packages:
 
 - sudo apt-get install --quiet --assume-yes git
 - sudo apt-get install --quiet --assume-yes build-essential
-- sudo apt-get install --quiet --assume-yes qtchooser qt5-qmake qtbase5-dev qttools5-dev-tools
+- sudo apt-get install --quiet --assume-yes qt5-default qtbase5-dev qttools5-dev-tools
 
 git clone --recursive https://github.com/horsicq/Nauz-File-Detector.git
 
