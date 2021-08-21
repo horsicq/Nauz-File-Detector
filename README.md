@@ -19,9 +19,9 @@ There are two versions of  program:
 How to run portable version on Linux
 =======
 
-- download an appImage file (NauzFileDetector-0.06-x86_64.AppImage)
+- download an appImage file (https://github.com/horsicq/Nauz-File-Detector/releases/download/0.06/NauzFileDetector-0.06-x86_64.AppImage)
 - make the file executable (chmod +x NauzFileDetector-0.06-x86_64.AppImage)
-- run it (./*.appImage)
+- run it (./NauzFileDetector-0.06-x86_64.AppImage)
 
 How to build on Docker
 =======
