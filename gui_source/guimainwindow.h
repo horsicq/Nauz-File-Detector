@@ -27,9 +27,9 @@
 #include <QDragEnterEvent>
 #include <QMimeData>
 #include "dialogstaticscanprocess.h"
+#include "dialogstaticscandirectory.h"
 #include "dialogabout.h"
 #include "dialogoptions.h"
-#include "dialogdirectoryscan.h"
 #include "xoptions.h"
 
 namespace Ui

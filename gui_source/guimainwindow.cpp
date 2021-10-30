@@ -101,7 +101,7 @@ void GuiMainWindow::_scan(QString sName)
     }
     else if(fi.isDir())
     {
-        DialogDirectoryScan dds(this,&xOptions,sName);
+        DialogStaticScanDirectory dds(this,sName);
         dds.exec();
 
         adjust();
@@ -198,7 +198,7 @@ void GuiMainWindow::adjust()
 
 void GuiMainWindow::on_pushButtonDirectoryScan_clicked()
 {
-    DialogDirectoryScan dds(this,&xOptions,"");
+    DialogStaticScanDirectory dds(this,QFileInfo(ui->lineEditFileName->text()).absolutePath());
 
     dds.exec();
 

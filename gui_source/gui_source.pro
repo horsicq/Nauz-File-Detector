@@ -13,20 +13,16 @@ SOURCES +=\
         guimainwindow.cpp \
     dialogabout.cpp \
     main_gui.cpp \
-    dialogoptions.cpp \
-    dialogdirectoryscan.cpp
+    dialogoptions.cpp
 
 HEADERS  += guimainwindow.h \
     ../global.h \
     dialogabout.h \
-    dialogoptions.h \
-    dialogdirectoryscan.h
+    dialogoptions.h
 
 FORMS    += guimainwindow.ui \
     dialogabout.ui \
-    dialogoptions.ui \
-    dialogdirectoryscan.ui
-
+    dialogoptions.ui
 
 !contains(XCONFIG, formresult) {
     XCONFIG += formresult
