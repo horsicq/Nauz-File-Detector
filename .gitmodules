@@ -40,3 +40,6 @@
 [submodule "XDynStructsWidget"]
 	path = XDynStructsWidget
 	url = https://github.com/horsicq/XDynStructsWidget
+[submodule "XCapstone"]
+	path = XCapstone
+	url = https://github.com/horsicq/XCapstone
