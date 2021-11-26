@@ -9,6 +9,8 @@ CONFIG += c++11
 
 include(../build.pri)
 
+XCONFIG += use_capstone_x86
+
 SOURCES +=\
         guimainwindow.cpp \
     dialogabout.cpp \

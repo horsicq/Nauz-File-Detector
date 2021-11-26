@@ -14,6 +14,8 @@ include(../build.pri)
 SOURCES += \
     main_console.cpp
 
+XCONFIG += use_capstone_x86
+
 !contains(XCONFIG, staticscan) {
     XCONFIG += staticscan
     include(../StaticScan/staticscan.pri)
