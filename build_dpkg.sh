@@ -19,14 +19,14 @@ if [ -z "$X_ERROR" ]; then
         create_deb_app_dir nfd
         
         #cp -f $X_SOURCE_PATH/LICENSE                                        $X_SOURCE_PATH/release/$X_BUILD_NAME/
-        cp -f $X_SOURCE_PATH/DEBIAN/control                                 $X_SOURCE_PATH/release/$X_BUILD_NAME/DEBIAN/
-        sed -i "s/#VERSION#/$X_RELEASE_VERSION/"                            $X_SOURCE_PATH/release/$X_BUILD_NAME/DEBIAN/control
-        sed -i "s/#ARCH#/$X_ARCHITECTURE/"                                  $X_SOURCE_PATH/release/$X_BUILD_NAME/DEBIAN/control
+        cp -f $X_SOURCE_PATH/LINUX/control                                  $X_SOURCE_PATH/release/$X_BUILD_NAME/LINUX/
+        sed -i "s/#VERSION#/$X_RELEASE_VERSION/"                            $X_SOURCE_PATH/release/$X_BUILD_NAME/LINUX/control
+        sed -i "s/#ARCH#/$X_ARCHITECTURE/"                                  $X_SOURCE_PATH/release/$X_BUILD_NAME/LINUX/control
         cp -f $X_SOURCE_PATH/build/release/nfd                              $X_SOURCE_PATH/release/$X_BUILD_NAME/usr/bin/
         cp -f $X_SOURCE_PATH/build/release/nfdc                             $X_SOURCE_PATH/release/$X_BUILD_NAME/usr/bin/
-        cp -f $X_SOURCE_PATH/DEBIAN/nfd.desktop                             $X_SOURCE_PATH/release/$X_BUILD_NAME/usr/share/applications/
+        cp -f $X_SOURCE_PATH/LINUX/nfd.desktop                              $X_SOURCE_PATH/release/$X_BUILD_NAME/usr/share/applications/
         sed -i "s/#VERSION#/$X_RELEASE_VERSION/"                            $X_SOURCE_PATH/release/$X_BUILD_NAME/usr/share/applications/nfd.desktop
-        cp -Rf $X_SOURCE_PATH/DEBIAN/hicolor/                               $X_SOURCE_PATH/release/$X_BUILD_NAME/usr/share/icons/
+        cp -Rf $X_SOURCE_PATH/LINUX/hicolor/                                $X_SOURCE_PATH/release/$X_BUILD_NAME/usr/share/icons/
 
         make_deb
         #mv $X_SOURCE_PATH/release/$X_BUILD_NAME.deb $X_SOURCE_PATH/release/nfd_${X_RELEASE_VERSION}-${X_REVISION}_${X_OS_VERSION}_${X_ARCHITECTURE}.deb
