@@ -1,23 +1,23 @@
-// Copyright (c) 2018-2021 hors<horsicq@gmail.com>
-//
-// Permission is hereby granted, free of charge, to any person obtaining a copy
-// of this software and associated documentation files (the "Software"), to deal
-// in the Software without restriction, including without limitation the rights
-// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-// copies of the Software, and to permit persons to whom the Software is
-// furnished to do so, subject to the following conditions:
-
-// The above copyright notice and this permission notice shall be included in all
-// copies or substantial portions of the Software.
-
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-// SOFTWARE.
-//
+/* Copyright (c) 2018-2021 hors<horsicq@gmail.com>
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
 #include "guimainwindow.h"
 #include "ui_guimainwindow.h"
 
@@ -31,7 +31,7 @@ GuiMainWindow::GuiMainWindow(QWidget *pParent) :
 
     setAcceptDrops(true);
 
-    xOptions.setName(X_OPTIONSFILE);
+    g_xOptions.setName(X_OPTIONSFILE);
 
     QList<XOptions::ID> listIDs;
 
@@ -43,8 +43,8 @@ GuiMainWindow::GuiMainWindow(QWidget *pParent) :
     listIDs.append(XOptions::ID_SAVELASTDIRECTORY);
     listIDs.append(XOptions::ID_STYLE);
 
-    xOptions.setValueIDs(listIDs);
-    xOptions.load();
+    g_xOptions.setValueIDs(listIDs);
+    g_xOptions.load();
 
     adjust();
 
@@ -56,7 +56,7 @@ GuiMainWindow::GuiMainWindow(QWidget *pParent) :
 
 GuiMainWindow::~GuiMainWindow()
 {
-    xOptions.save();
+    g_xOptions.save();
 
     delete ui;
 }
@@ -85,7 +85,7 @@ void GuiMainWindow::scanFile(QString sFileName)
 
         ui->widgetResult->setData(scanResult,sSaveDirectory);
 
-        xOptions.setLastDirectory(sFileName);
+        g_xOptions.setLastDirectory(sFileName);
     }
 }
 
@@ -115,7 +115,7 @@ void GuiMainWindow::on_pushButtonExit_clicked()
 
 void GuiMainWindow::on_pushButtonOpenFile_clicked()
 {
-    QString sDirectory=xOptions.getLastDirectory();
+    QString sDirectory=g_xOptions.getLastDirectory();
 
     QString sFileName=QFileDialog::getOpenFileName(this,tr("Open file")+QString("..."),sDirectory,tr("All files")+QString(" (*)"));
 
@@ -123,7 +123,7 @@ void GuiMainWindow::on_pushButtonOpenFile_clicked()
     {
         ui->lineEditFileName->setText(sFileName);
     
-        if(xOptions.isScanAfterOpen())
+        if(g_xOptions.isScanAfterOpen())
         {
             _scan(sFileName);
         }
@@ -144,19 +144,19 @@ void GuiMainWindow::on_pushButtonAbout_clicked()
     di.exec();
 }
 
-void GuiMainWindow::dragEnterEvent(QDragEnterEvent *event)
+void GuiMainWindow::dragEnterEvent(QDragEnterEvent *pEvent)
 {
-    event->acceptProposedAction();
+    pEvent->acceptProposedAction();
 }
 
-void GuiMainWindow::dragMoveEvent(QDragMoveEvent *event)
+void GuiMainWindow::dragMoveEvent(QDragMoveEvent *pEvent)
 {
-    event->acceptProposedAction();
+    pEvent->acceptProposedAction();
 }
 
-void GuiMainWindow::dropEvent(QDropEvent *event)
+void GuiMainWindow::dropEvent(QDropEvent *pEvent)
 {
-    const QMimeData* mimeData=event->mimeData();
+    const QMimeData* mimeData=pEvent->mimeData();
 
     if(mimeData->hasUrls())
     {
@@ -168,7 +168,7 @@ void GuiMainWindow::dropEvent(QDropEvent *event)
 
             sFileName=XBinary::convertFileName(sFileName);
 
-            if(xOptions.isScanAfterOpen())
+            if(g_xOptions.isScanAfterOpen())
             {
                 _scan(sFileName);
             }
@@ -178,7 +178,7 @@ void GuiMainWindow::dropEvent(QDropEvent *event)
 
 void GuiMainWindow::on_pushButtonOptions_clicked()
 {
-    DialogOptions dialogOptions(this,&xOptions);
+    DialogOptions dialogOptions(this,&g_xOptions);
 
     dialogOptions.exec();
 
@@ -187,11 +187,11 @@ void GuiMainWindow::on_pushButtonOptions_clicked()
 
 void GuiMainWindow::adjust()
 {
-    xOptions.adjustStayOnTop(this);
+    g_xOptions.adjustStayOnTop(this);
 
-    ui->checkBoxDeepScan->setChecked(xOptions.isDeepScan());
-    ui->checkBoxRecursiveScan->setChecked(xOptions.isRecursiveScan());
-    ui->checkBoxHeuristicScan->setChecked(xOptions.isHeuristicScan());
+    ui->checkBoxDeepScan->setChecked(g_xOptions.isDeepScan());
+    ui->checkBoxRecursiveScan->setChecked(g_xOptions.isRecursiveScan());
+    ui->checkBoxHeuristicScan->setChecked(g_xOptions.isHeuristicScan());
 
     show();
 }
