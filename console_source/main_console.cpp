@@ -21,7 +21,8 @@
 #include <QCoreApplication>
 #include <QCommandLineParser>
 #include <QCommandLineOption>
-#include "staticscanitemmodel.h"
+#include "staticscan.h"
+#include "scanitemmodel.h"
 #include "../global.h"
 
 void ScanFiles(QList<QString> *pListArgs,SpecAbstract::SCAN_OPTIONS *pScanOptions)
@@ -54,9 +55,19 @@ void ScanFiles(QList<QString> *pListArgs,SpecAbstract::SCAN_OPTIONS *pScanOption
         }
 
         SpecAbstract::SCAN_RESULT scanResult=StaticScan::processFile(sFileName,pScanOptions);
-        StaticScanItemModel model(&scanResult.listRecords);
 
-        printf("%s\n",model.toString(pScanOptions).toLatin1().data());
+        static QList<XBinary::SCANSTRUCT> _listRecords=SpecAbstract::convert(&(scanResult.listRecords));
+
+        ScanItemModel model(&_listRecords);
+
+        ScanItemModel::FORMATTYPE formatType=ScanItemModel::FORMATTYPE_TEXT;
+
+        if      (pScanOptions->bResultAsCSV)    formatType=ScanItemModel::FORMATTYPE_CSV;
+        else if (pScanOptions->bResultAsJSON)   formatType=ScanItemModel::FORMATTYPE_JSON;
+        else if (pScanOptions->bResultAsTSV)    formatType=ScanItemModel::FORMATTYPE_TSV;
+        else if (pScanOptions->bResultAsXML)    formatType=ScanItemModel::FORMATTYPE_XML;
+
+        printf("%s\n",model.toString(formatType).toLatin1().data());
     }
 }
 
