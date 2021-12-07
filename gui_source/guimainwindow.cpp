@@ -27,7 +27,7 @@ GuiMainWindow::GuiMainWindow(QWidget *pParent) :
 {
     ui->setupUi(this);
 
-    setWindowTitle(QString("%1 v%2").arg(X_APPLICATIONDISPLAYNAME,X_APPLICATIONVERSION));
+    setWindowTitle(XOptions::getTitle(X_APPLICATIONDISPLAYNAME,X_APPLICATIONVERSION));
 
     setAcceptDrops(true);
 
@@ -192,8 +192,6 @@ void GuiMainWindow::adjust()
     ui->checkBoxDeepScan->setChecked(g_xOptions.isDeepScan());
     ui->checkBoxRecursiveScan->setChecked(g_xOptions.isRecursiveScan());
     ui->checkBoxHeuristicScan->setChecked(g_xOptions.isHeuristicScan());
-
-    show();
 }
 
 void GuiMainWindow::on_pushButtonDirectoryScan_clicked()

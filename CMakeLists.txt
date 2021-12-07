@@ -13,7 +13,6 @@ if(APPLE)
     add_compile_options(-Wno-switch)
 endif()
 
-add_subdirectory(XCppfilt)
 add_subdirectory(XCapstone/x86)
 add_subdirectory(XArchive)
 add_subdirectory(gui_source)

@@ -18,8 +18,7 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ../release)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ../release)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ../release)
 
-find_package(QT NAMES Qt5 COMPONENTS Widgets REQUIRED)
-find_package(Qt5 COMPONENTS Widgets REQUIRED)
+find_package(QT NAMES Qt5 COMPONENTS Core  REQUIRED)
 find_package(Qt5 COMPONENTS Concurrent REQUIRED)
 
 add_definitions(-DUSE_DEX)
@@ -51,5 +50,10 @@ target_link_libraries(${PROJECT_NAME} lzma)
 target_link_libraries(${PROJECT_NAME} zlib)
 target_link_libraries(${PROJECT_NAME} capstone_x86)
 
-target_link_libraries(${PROJECT_NAME} Qt5::Widgets)
+target_link_libraries(${PROJECT_NAME} Qt5::Core)
 target_link_libraries(${PROJECT_NAME} Qt5::Concurrent)
+
+if(WIN32)
+    target_link_libraries(${PROJECT_NAME} Wintrust)
+    target_link_libraries(${PROJECT_NAME} Crypt32)
+endif()
