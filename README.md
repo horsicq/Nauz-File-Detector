@@ -6,7 +6,7 @@
 
 **Nauz File Detector** is a portable linker/compiler/packer identifier utility.
 
-The program works on OSX, Linux and Windows.
+The program works on macOS, Linux and Windows.
 
 ![alt text](https://github.com/horsicq/Nauz-File-Detector/blob/master/docs/1.png "1")
 ![alt text](https://github.com/horsicq/Nauz-File-Detector/blob/master/docs/2.png "2")
