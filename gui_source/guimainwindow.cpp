@@ -39,6 +39,7 @@ GuiMainWindow::GuiMainWindow(QWidget *pParent) :
     listIDs.append(XOptions::ID_RECURSIVESCAN);
     listIDs.append(XOptions::ID_DEEPSCAN);
     listIDs.append(XOptions::ID_HEURISTICSCAN);
+    listIDs.append(XOptions::ID_ALLTYPESSCAN);
     listIDs.append(XOptions::ID_STAYONTOP);
     listIDs.append(XOptions::ID_SAVELASTDIRECTORY);
     listIDs.append(XOptions::ID_STYLE);
@@ -72,6 +73,7 @@ void GuiMainWindow::scanFile(QString sFileName)
         options.bRecursiveScan=ui->checkBoxRecursiveScan->isChecked();
         options.bDeepScan=ui->checkBoxDeepScan->isChecked();
         options.bHeuristicScan=ui->checkBoxHeuristicScan->isChecked();
+        options.bAllTypesScan=ui->checkBoxAllTypesScan->isChecked();
 
 //#ifdef QT_DEBUG
 //        options.bIsTest=true;
@@ -192,6 +194,7 @@ void GuiMainWindow::adjust()
     ui->checkBoxDeepScan->setChecked(g_xOptions.isDeepScan());
     ui->checkBoxRecursiveScan->setChecked(g_xOptions.isRecursiveScan());
     ui->checkBoxHeuristicScan->setChecked(g_xOptions.isHeuristicScan());
+    ui->checkBoxAllTypesScan->setChecked(g_xOptions.isAllTypesScan());
 }
 
 void GuiMainWindow::on_pushButtonDirectoryScan_clicked()
