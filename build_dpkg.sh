@@ -18,10 +18,16 @@ if [ -z "$X_ERROR" ]; then
     if [ -z "$X_ERROR" ]; then
         create_deb_app_dir nfd
         
-        #cp -f $X_SOURCE_PATH/LICENSE                                        $X_SOURCE_PATH/release/$X_BUILD_NAME/
-        cp -f $X_SOURCE_PATH/LINUX/control                                  $X_SOURCE_PATH/release/$X_BUILD_NAME/LINUX/
-        sed -i "s/#VERSION#/$X_RELEASE_VERSION/"                            $X_SOURCE_PATH/release/$X_BUILD_NAME/LINUX/control
-        sed -i "s/#ARCH#/$X_ARCHITECTURE/"                                  $X_SOURCE_PATH/release/$X_BUILD_NAME/LINUX/control
+        X_CONTROL_FILE=$X_SOURCE_PATH/LINUX/control_${X_OS_VERSION}_${X_ARCHITECTURE};
+        
+        if test -f "$X_CONTROL_FILE"; then
+            cp -f X_CONTROL_FILE                                                $X_SOURCE_PATH/release/$X_BUILD_NAME/DEBIAN/control
+        else
+            cp -f $X_SOURCE_PATH/LINUX/control                                  $X_SOURCE_PATH/release/$X_BUILD_NAME/DEBIAN/control
+        fi
+        
+        sed -i "s/#VERSION#/$X_RELEASE_VERSION/"                            $X_SOURCE_PATH/release/$X_BUILD_NAME/DEBIAN/control
+        sed -i "s/#ARCH#/$X_ARCHITECTURE/"                                  $X_SOURCE_PATH/release/$X_BUILD_NAME/DEBIAN/control
         cp -f $X_SOURCE_PATH/build/release/nfd                              $X_SOURCE_PATH/release/$X_BUILD_NAME/usr/bin/
         cp -f $X_SOURCE_PATH/build/release/nfdc                             $X_SOURCE_PATH/release/$X_BUILD_NAME/usr/bin/
         cp -f $X_SOURCE_PATH/LINUX/nfd.desktop                              $X_SOURCE_PATH/release/$X_BUILD_NAME/usr/share/applications/
