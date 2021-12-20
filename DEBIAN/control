@@ -1,7 +1,0 @@
-Package: nauzfiledetector
-Version: #VERSION#
-Architecture: #ARCH#
-Maintainer: hors <horsicq@gmail.com>
-Depends: libqt5core5a, libqt5gui5, libqt5widgets5, libqt5dbus5
-Homepage: http://ntinfo.biz
-Description: Nauz File Detector is a linker/compiler/packer identifier utility
