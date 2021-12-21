@@ -50,3 +50,9 @@ macx {
 
 RESOURCES += \
     resources.qrc
+
+DISTFILES += \
+    ../LICENSE \
+    ../README.md \
+    ../changelog.txt \
+    ../release_version.txt

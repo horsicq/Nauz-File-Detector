@@ -33,18 +33,15 @@ GuiMainWindow::GuiMainWindow(QWidget *pParent) :
 
     g_xOptions.setName(X_OPTIONSFILE);
 
-    QList<XOptions::ID> listIDs;
+    g_xOptions.addID(XOptions::ID_SCANAFTEROPEN,true);
+    g_xOptions.addID(XOptions::ID_RECURSIVESCAN,true);
+    g_xOptions.addID(XOptions::ID_DEEPSCAN,true);
+    g_xOptions.addID(XOptions::ID_HEURISTICSCAN,false);
+    g_xOptions.addID(XOptions::ID_ALLTYPESSCAN,false);
+    g_xOptions.addID(XOptions::ID_STAYONTOP,false);
+    g_xOptions.addID(XOptions::ID_SAVELASTDIRECTORY,true);
+    g_xOptions.addID(XOptions::ID_STYLE,"Fusion");
 
-    listIDs.append(XOptions::ID_SCANAFTEROPEN);
-    listIDs.append(XOptions::ID_RECURSIVESCAN);
-    listIDs.append(XOptions::ID_DEEPSCAN);
-    listIDs.append(XOptions::ID_HEURISTICSCAN);
-    listIDs.append(XOptions::ID_ALLTYPESSCAN);
-    listIDs.append(XOptions::ID_STAYONTOP);
-    listIDs.append(XOptions::ID_SAVELASTDIRECTORY);
-    listIDs.append(XOptions::ID_STYLE);
-
-    g_xOptions.setValueIDs(listIDs);
     g_xOptions.load();
 
     adjust();

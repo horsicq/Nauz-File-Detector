@@ -1,12 +1,11 @@
 0.07
 -----------------------------------------------------------------------
+[+] Source code qt6 compatibility
 [+] CMAKE build system
 [+] New detects
-[+] New translations
-[+] Qt 6 compatibility
+[+] New "All types" mode.
 [+] Many bugs have been fixed.
 #######################################################################
-
 0.06
 -----------------------------------------------------------------------
 [+] Linux AppImage
