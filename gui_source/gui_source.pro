@@ -55,4 +55,5 @@ DISTFILES += \
     ../LICENSE \
     ../README.md \
     ../changelog.txt \
-    ../release_version.txt
+    ../release_version.txt \
+    CMakeLists.txt

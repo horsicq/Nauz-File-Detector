@@ -20,3 +20,6 @@ XCONFIG += use_capstone_x86
     XCONFIG += staticscan
     include(../StaticScan/staticscan.pri)
 }
+
+DISTFILES += \
+    CMakeLists.txt
