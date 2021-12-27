@@ -35,9 +35,9 @@ FORMS    += guimainwindow.ui \
     include(../StaticScan/formresult.pri)
 }
 
-!contains(XCONFIG, xoptions) {
-    XCONFIG += xoptions
-    include(../XOptions/xoptions.pri)
+!contains(XCONFIG, xoptionswidget) {
+    XCONFIG += xoptionswidget
+    include(../XOptions/xoptionswidget.pri)
 }
 
 win32 {

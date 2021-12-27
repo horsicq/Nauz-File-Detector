@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>310</width>
-    <height>323</height>
+    <width>394</width>
+    <height>386</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -109,6 +109,16 @@
     </widget>
    </item>
    <item>
+    <widget class="XOptionsWidget" name="widgetOptions" native="true">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+    </widget>
+   </item>
+   <item>
     <spacer name="verticalSpacer">
      <property name="orientation">
       <enum>Qt::Vertical</enum>
@@ -154,6 +164,14 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>XOptionsWidget</class>
+   <extends>QWidget</extends>
+   <header>xoptionswidget.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

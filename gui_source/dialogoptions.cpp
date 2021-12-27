@@ -29,19 +29,17 @@ DialogOptions::DialogOptions(QWidget *pParent, XOptions *pOptions) :
 
     this->g_pOptions=pOptions;
 
-    g_pOptions->setCheckBox(ui->checkBoxScanAfterOpen,XOptions::ID_SCANAFTEROPEN);
-    g_pOptions->setCheckBox(ui->checkBoxRecursiveScan,XOptions::ID_RECURSIVESCAN);
-    g_pOptions->setCheckBox(ui->checkBoxDeepScan,XOptions::ID_DEEPSCAN);
-    g_pOptions->setCheckBox(ui->checkBoxHeuristicScan,XOptions::ID_HEURISTICSCAN);
-    g_pOptions->setCheckBox(ui->checkBoxStayOnTop,XOptions::ID_STAYONTOP);
-    g_pOptions->setCheckBox(ui->checkBoxSaveLastDirectory,XOptions::ID_SAVELASTDIRECTORY);
-    g_pOptions->setComboBox(ui->comboBoxStyle,XOptions::ID_STYLE);
+//    g_pOptions->setCheckBox(ui->checkBoxScanAfterOpen,XOptions::ID_SCANAFTEROPEN);
+//    g_pOptions->setCheckBox(ui->checkBoxRecursiveScan,XOptions::ID_RECURSIVESCAN);
+//    g_pOptions->setCheckBox(ui->checkBoxDeepScan,XOptions::ID_DEEPSCAN);
+//    g_pOptions->setCheckBox(ui->checkBoxHeuristicScan,XOptions::ID_HEURISTICSCAN);
+//    g_pOptions->setCheckBox(ui->checkBoxStayOnTop,XOptions::ID_STAYONTOP);
+//    g_pOptions->setCheckBox(ui->checkBoxSaveLastDirectory,XOptions::ID_SAVELASTDIRECTORY);
+//    g_pOptions->setComboBox(ui->comboBoxStyle,XOptions::ID_STYLE);
 
-#ifdef WIN32
-    ui->checkBoxContext->setChecked(pOptions->checkContext(X_APPLICATIONDISPLAYNAME,"*"));
-#else
-    ui->checkBoxContext->hide();
-#endif
+    ui->widgetOptions->setOptions(pOptions,X_APPLICATIONDISPLAYNAME);
+
+    ui->widgetOptions->setCurrentPage(1);
 }
 
 DialogOptions::~DialogOptions()
@@ -51,27 +49,15 @@ DialogOptions::~DialogOptions()
 
 void DialogOptions::on_pushButtonOK_clicked()
 {
-    g_pOptions->getCheckBox(ui->checkBoxDeepScan,XOptions::ID_DEEPSCAN);
-    g_pOptions->getCheckBox(ui->checkBoxScanAfterOpen,XOptions::ID_SCANAFTEROPEN);
-    g_pOptions->getCheckBox(ui->checkBoxRecursiveScan,XOptions::ID_RECURSIVESCAN);
-    g_pOptions->getCheckBox(ui->checkBoxHeuristicScan,XOptions::ID_HEURISTICSCAN);
-    g_pOptions->getCheckBox(ui->checkBoxSaveLastDirectory,XOptions::ID_SAVELASTDIRECTORY);
-    g_pOptions->getCheckBox(ui->checkBoxStayOnTop,XOptions::ID_STAYONTOP);
-    g_pOptions->getComboBox(ui->comboBoxStyle,XOptions::ID_STYLE);
+//    g_pOptions->getCheckBox(ui->checkBoxDeepScan,XOptions::ID_DEEPSCAN);
+//    g_pOptions->getCheckBox(ui->checkBoxScanAfterOpen,XOptions::ID_SCANAFTEROPEN);
+//    g_pOptions->getCheckBox(ui->checkBoxRecursiveScan,XOptions::ID_RECURSIVESCAN);
+//    g_pOptions->getCheckBox(ui->checkBoxHeuristicScan,XOptions::ID_HEURISTICSCAN);
+//    g_pOptions->getCheckBox(ui->checkBoxSaveLastDirectory,XOptions::ID_SAVELASTDIRECTORY);
+//    g_pOptions->getCheckBox(ui->checkBoxStayOnTop,XOptions::ID_STAYONTOP);
+//    g_pOptions->getComboBox(ui->comboBoxStyle,XOptions::ID_STYLE);
 
-#ifdef WIN32
-    if(g_pOptions->checkContext(X_APPLICATIONDISPLAYNAME,"*")!=ui->checkBoxContext->isChecked())
-    {
-        if(ui->checkBoxContext->isChecked())
-        {
-            g_pOptions->registerContext(X_APPLICATIONDISPLAYNAME,"*",qApp->applicationFilePath());
-        }
-        else
-        {
-            g_pOptions->clearContext(X_APPLICATIONDISPLAYNAME,"*");
-        }
-    }
-#endif
+    ui->widgetOptions->save();
 
     if(g_pOptions->isRestartNeeded())
     {

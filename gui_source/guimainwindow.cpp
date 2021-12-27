@@ -38,9 +38,19 @@ GuiMainWindow::GuiMainWindow(QWidget *pParent) :
     g_xOptions.addID(XOptions::ID_DEEPSCAN,true);
     g_xOptions.addID(XOptions::ID_HEURISTICSCAN,false);
     g_xOptions.addID(XOptions::ID_ALLTYPESSCAN,false);
-    g_xOptions.addID(XOptions::ID_STAYONTOP,false);
-    g_xOptions.addID(XOptions::ID_SAVELASTDIRECTORY,true);
-    g_xOptions.addID(XOptions::ID_STYLE,"Fusion");
+
+//    g_xOptions.addID(XOptions::ID_SCANAFTEROPEN,true);
+//    g_xOptions.addID(XOptions::ID_RECURSIVESCAN,true);
+//    g_xOptions.addID(XOptions::ID_DEEPSCAN,true);
+//    g_xOptions.addID(XOptions::ID_HEURISTICSCAN,false);
+//    g_xOptions.addID(XOptions::ID_ALLTYPESSCAN,false);
+    g_xOptions.addID(XOptions::ID_VIEW_STAYONTOP,false);
+    g_xOptions.addID(XOptions::ID_VIEW_STYLE,"Fusion");
+    g_xOptions.addID(XOptions::ID_FILE_SAVELASTDIRECTORY,true);
+
+#ifdef Q_OS_WIN32
+    g_xOptions.addID(XOptions::ID_FILE_CONTEXT,"*");
+#endif
 
     g_xOptions.load();
 

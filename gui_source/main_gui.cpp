@@ -54,11 +54,7 @@ int main(int argc, char *argv[])
 
     xOptions.setName(X_OPTIONSFILE);
 
-    QList<XOptions::ID> listIDs;
-
-    listIDs.append(XOptions::ID_STYLE);
-
-    xOptions.setValueIDs(listIDs);
+    xOptions.addID(XOptions::ID_VIEW_STYLE,"fusion");
     xOptions.load();
 
     XOptions::adjustApplicationView(X_APPLICATIONNAME,&xOptions);
