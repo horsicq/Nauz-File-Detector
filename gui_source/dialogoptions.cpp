@@ -27,17 +27,14 @@ DialogOptions::DialogOptions(QWidget *pParent, XOptions *pOptions) :
 {
     ui->setupUi(this);
 
+    g_pStaticScanOptionsWidget=new StaticScanOptionsWidget(this);
+
     this->g_pOptions=pOptions;
 
-//    g_pOptions->setCheckBox(ui->checkBoxScanAfterOpen,XOptions::ID_SCANAFTEROPEN);
-//    g_pOptions->setCheckBox(ui->checkBoxRecursiveScan,XOptions::ID_RECURSIVESCAN);
-//    g_pOptions->setCheckBox(ui->checkBoxDeepScan,XOptions::ID_DEEPSCAN);
-//    g_pOptions->setCheckBox(ui->checkBoxHeuristicScan,XOptions::ID_HEURISTICSCAN);
-//    g_pOptions->setCheckBox(ui->checkBoxStayOnTop,XOptions::ID_STAYONTOP);
-//    g_pOptions->setCheckBox(ui->checkBoxSaveLastDirectory,XOptions::ID_SAVELASTDIRECTORY);
-//    g_pOptions->setComboBox(ui->comboBoxStyle,XOptions::ID_STYLE);
-
     ui->widgetOptions->setOptions(pOptions,X_APPLICATIONDISPLAYNAME);
+
+    ui->widgetOptions->addPage(g_pStaticScanOptionsWidget,tr("Scan"));
+    g_pStaticScanOptionsWidget->setOptions(pOptions);
 
     ui->widgetOptions->setCurrentPage(1);
 }
@@ -49,15 +46,8 @@ DialogOptions::~DialogOptions()
 
 void DialogOptions::on_pushButtonOK_clicked()
 {
-//    g_pOptions->getCheckBox(ui->checkBoxDeepScan,XOptions::ID_DEEPSCAN);
-//    g_pOptions->getCheckBox(ui->checkBoxScanAfterOpen,XOptions::ID_SCANAFTEROPEN);
-//    g_pOptions->getCheckBox(ui->checkBoxRecursiveScan,XOptions::ID_RECURSIVESCAN);
-//    g_pOptions->getCheckBox(ui->checkBoxHeuristicScan,XOptions::ID_HEURISTICSCAN);
-//    g_pOptions->getCheckBox(ui->checkBoxSaveLastDirectory,XOptions::ID_SAVELASTDIRECTORY);
-//    g_pOptions->getCheckBox(ui->checkBoxStayOnTop,XOptions::ID_STAYONTOP);
-//    g_pOptions->getComboBox(ui->comboBoxStyle,XOptions::ID_STYLE);
-
     ui->widgetOptions->save();
+    g_pStaticScanOptionsWidget->save();
 
     if(g_pOptions->isRestartNeeded())
     {

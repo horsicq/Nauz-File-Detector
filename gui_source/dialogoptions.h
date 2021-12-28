@@ -26,6 +26,7 @@
 #include <QDir>
 #include <QMessageBox>
 #include "xoptions.h"
+#include "staticscanoptionswidget.h"
 #include "../global.h"
 
 namespace Ui {
@@ -36,23 +37,9 @@ class DialogOptions : public QDialog
 {
     Q_OBJECT
 
-    enum OPTION_PAGES
-    {
-        OP_SCAN=0,
-        OP_APPEARANCE,
-        OP_CONTEXT
-    };
-
 public:
     explicit DialogOptions(QWidget *pParent,XOptions *pOptions);
     ~DialogOptions();
-
-#ifdef WIN32
-    static bool checkContext(QString sType);
-    static void clearContext(QString sType);
-    static void registerContext(QString sType);
-    static bool setContextState(QString sType,bool bState);
-#endif
 
 private slots:
     void on_pushButtonOK_clicked();
@@ -60,6 +47,7 @@ private slots:
 
 private:
     Ui::DialogOptions *ui;
+    StaticScanOptionsWidget *g_pStaticScanOptionsWidget;
     XOptions *g_pOptions;
 };
 
