@@ -60,12 +60,12 @@ void ScanFiles(QList<QString> *pListArgs,SpecAbstract::SCAN_OPTIONS *pScanOption
 
         ScanItemModel model(&_listRecords);
 
-        ScanItemModel::FORMATTYPE formatType=ScanItemModel::FORMATTYPE_TEXT;
+        XBinary::FORMATTYPE formatType=XBinary::FORMATTYPE_TEXT;
 
-        if      (pScanOptions->bResultAsCSV)    formatType=ScanItemModel::FORMATTYPE_CSV;
-        else if (pScanOptions->bResultAsJSON)   formatType=ScanItemModel::FORMATTYPE_JSON;
-        else if (pScanOptions->bResultAsTSV)    formatType=ScanItemModel::FORMATTYPE_TSV;
-        else if (pScanOptions->bResultAsXML)    formatType=ScanItemModel::FORMATTYPE_XML;
+        if      (pScanOptions->bResultAsCSV)    formatType=XBinary::FORMATTYPE_CSV;
+        else if (pScanOptions->bResultAsJSON)   formatType=XBinary::FORMATTYPE_JSON;
+        else if (pScanOptions->bResultAsTSV)    formatType=XBinary::FORMATTYPE_TSV;
+        else if (pScanOptions->bResultAsXML)    formatType=XBinary::FORMATTYPE_XML;
 
         printf("%s\n",model.toString(formatType).toLatin1().data());
     }
