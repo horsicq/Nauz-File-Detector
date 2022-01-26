@@ -53,7 +53,7 @@ private slots:
     void on_pushButtonOpenFile_clicked();
     void on_pushButtonAbout_clicked();
     void on_pushButtonOptions_clicked();
-    void adjust();
+    void adjustWindow();
     void on_pushButtonDirectoryScan_clicked();
 
 protected:
