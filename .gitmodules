@@ -52,3 +52,48 @@
 [submodule "XPDF"]
 	path = XPDF
 	url = https://github.com/horsicq/XPDF
+[submodule "XHashWidget"]
+	path = XHashWidget
+	url = https://github.com/horsicq/XHashWidget
+[submodule "XDisasm"]
+	path = XDisasm
+	url = https://github.com/horsicq/XDisasm
+[submodule "archive_widget"]
+	path = archive_widget
+	url = https://github.com/horsicq/archive_widget
+[submodule "Controls"]
+	path = Controls
+	url = https://github.com/horsicq/Controls
+[submodule "FormatWidgets"]
+	path = FormatWidgets
+	url = https://github.com/horsicq/FormatWidgets
+[submodule "QHexView"]
+	path = QHexView
+	url = https://github.com/horsicq/QHexView
+[submodule "XHexView"]
+	path = XHexView
+	url = https://github.com/horsicq/XHexView
+[submodule "XDisasmView"]
+	path = XDisasmView
+	url = https://github.com/horsicq/XDisasmView
+[submodule "XEntropyWidget"]
+	path = XEntropyWidget
+	url = https://github.com/horsicq/XEntropyWidget
+[submodule "XMemoryMapWidget"]
+	path = XMemoryMapWidget
+	url = https://github.com/horsicq/XMemoryMapWidget
+[submodule "XQwt"]
+	path = XQwt
+	url = https://github.com/horsicq/XQwt
+[submodule "signatures"]
+	path = signatures
+	url = https://github.com/horsicq/signatures
+[submodule "XDemangle"]
+	path = XDemangle
+	url = https://github.com/horsicq/XDemangle
+[submodule "XDemangleWidget"]
+	path = XDemangleWidget
+	url = https://github.com/horsicq/XDemangleWidget
+[submodule "XLLVMDemangler"]
+	path = XLLVMDemangler
+	url = https://github.com/horsicq/XLLVMDemangler
