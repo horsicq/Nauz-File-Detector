@@ -71,14 +71,14 @@ void ScanFiles(QList<QString> *pListArgs,SpecAbstract::SCAN_OPTIONS *pScanOption
     }
 }
 
-int main(int argc, char *argv[])
+int main(int argc,char *argv[])
 {
     QCoreApplication::setOrganizationName(X_ORGANIZATIONNAME);
     QCoreApplication::setOrganizationDomain(X_ORGANIZATIONDOMAIN);
     QCoreApplication::setApplicationName(X_APPLICATIONNAME);
     QCoreApplication::setApplicationVersion(X_APPLICATIONVERSION);
 
-    QCoreApplication app(argc, argv);
+    QCoreApplication app(argc,argv);
 
     QCommandLineParser parser;
     QString sDescription;
