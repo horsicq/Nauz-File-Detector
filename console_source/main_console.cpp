@@ -39,7 +39,7 @@ void ScanFiles(QList<QString> *pListArgs,SpecAbstract::SCAN_OPTIONS *pScanOption
         }
         else
         {
-            printf("Cannot find: %s\n",sFileName.toLatin1().data());
+            printf("Cannot find: %s\n",sFileName.toUtf8().data());
         }
     }
 
@@ -56,7 +56,7 @@ void ScanFiles(QList<QString> *pListArgs,SpecAbstract::SCAN_OPTIONS *pScanOption
 
         SpecAbstract::SCAN_RESULT scanResult=StaticScan::processFile(sFileName,pScanOptions);
 
-        static QList<XBinary::SCANSTRUCT> _listRecords=SpecAbstract::convert(&(scanResult.listRecords));
+        QList<XBinary::SCANSTRUCT> _listRecords=SpecAbstract::convert(&(scanResult.listRecords));
 
         ScanItemModel model(&_listRecords);
 
@@ -69,7 +69,7 @@ void ScanFiles(QList<QString> *pListArgs,SpecAbstract::SCAN_OPTIONS *pScanOption
 
         if(formatType!=XBinary::FORMATTYPE_TEXT)
         {
-            printf("%s\n",model.toString(formatType).toLatin1().data());
+            printf("%s\n",model.toString(formatType).toUtf8().data());
         }
         else
         {
