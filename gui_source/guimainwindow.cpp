@@ -35,6 +35,8 @@ GuiMainWindow::GuiMainWindow(QWidget *pParent) :
 
     g_xOptions.addID(XOptions::ID_VIEW_STAYONTOP,false);
     g_xOptions.addID(XOptions::ID_VIEW_STYLE,"Fusion");
+    g_xOptions.addID(XOptions::ID_VIEW_LANG,"System");
+    g_xOptions.addID(XOptions::ID_VIEW_FONT,font().toString());
     g_xOptions.addID(XOptions::ID_FILE_SAVELASTDIRECTORY,true);
 
 #ifdef Q_OS_WIN32
@@ -81,7 +83,7 @@ void GuiMainWindow::scanFile(QString sFileName)
         ds.setData(sFileName,&options,&scanResult);
         ds.exec();
 
-        QString sSaveDirectory=XBinary::getResultFileName(sFileName,"result.txt");
+        QString sSaveDirectory=XBinary::getResultFileName(sFileName,QString("%1.txt").arg(tr("Result")));
 
         ui->widgetResult->setData(scanResult,sSaveDirectory);
 
@@ -188,6 +190,7 @@ void GuiMainWindow::on_pushButtonOptions_clicked()
 void GuiMainWindow::adjustWindow()
 {
     g_xOptions.adjustStayOnTop(this);
+    g_xOptions.adjustFont(this);
 
     ui->checkBoxDeepScan->setChecked(g_xOptions.isDeepScan());
     ui->checkBoxRecursiveScan->setChecked(g_xOptions.isRecursiveScan());

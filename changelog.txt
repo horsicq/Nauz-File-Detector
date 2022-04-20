@@ -1,7 +1,9 @@
 0.08
 -----------------------------------------------------------------------
 [+] New detects
+[+] Bundle for Apple M1 processor
 [+] Colored output for console
+[+] New translations
 [+] Many bugs have been fixed.
 #######################################################################
 0.07
