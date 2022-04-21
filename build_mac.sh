@@ -13,23 +13,24 @@ if [ -z "$X_ERROR" ]; then
     make_init
     make_build "$X_SOURCE_PATH/NFD_source.pro"
 
-    check_file "$X_SOURCE_PATH/build/release/nfd.app/Contents/MacOS/nfd"
+    check_file "$X_SOURCE_PATH/build/release/NFD.app/Contents/MacOS/NFD"
     if [ -z "$X_ERROR" ]; then
-        cp -R "$X_SOURCE_PATH/build/release/nfd.app"    "$X_SOURCE_PATH/release/$X_BUILD_NAME"
+        cp -R "$X_SOURCE_PATH/build/release/NFD.app"    "$X_SOURCE_PATH/release/$X_BUILD_NAME"
 
-        mkdir -p $X_SOURCE_PATH/release/$X_BUILD_NAME/nfd.app/Contents/Resources/signatures
+        mkdir -p $X_SOURCE_PATH/release/$X_BUILD_NAME/NFD.app/Contents/Resources/signatures
+        cp -Rf $X_SOURCE_PATH/XStyles/qss                    $X_SOURCE_PATH/release/$X_BUILD_NAME/NFD.app/Contents/Resources/
 
-        fiximport "$X_SOURCE_PATH/build/release/nfd.app/Contents/MacOS/nfd"
+        fiximport "$X_SOURCE_PATH/build/release/NFD.app/Contents/MacOS/NFD"
 
-        deploy_qt_library QtWidgets nfd
-        deploy_qt_library QtGui nfd
-        deploy_qt_library QtCore nfd
-        deploy_qt_library QtDBus nfd
-        deploy_qt_library QtPrintSupport nfd
+        deploy_qt_library QtWidgets NFD
+        deploy_qt_library QtGui NFD
+        deploy_qt_library QtCore NFD
+        deploy_qt_library QtDBus NFD
+        deploy_qt_library QtPrintSupport NFD
 
-        deploy_qt_plugin platforms libqcocoa nfd
-        deploy_qt_plugin platforms libqminimal nfd
-        deploy_qt_plugin platforms libqoffscreen nfd
+        deploy_qt_plugin platforms libqcocoa NFD
+        deploy_qt_plugin platforms libqminimal NFD
+        deploy_qt_plugin platforms libqoffscreen NFD
 
         make_release
         make_clear

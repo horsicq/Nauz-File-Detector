@@ -1,6 +1,7 @@
 0.08
 -----------------------------------------------------------------------
 [+] New detects
+[+] Bundle for Ubuntu 22.04
 [+] Bundle for Apple M1 processor
 [+] Colored output for console
 [+] New translations
