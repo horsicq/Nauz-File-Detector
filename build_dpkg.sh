@@ -25,7 +25,7 @@ if [ -z "$X_ERROR" ]; then
         export X_MAINTAINER='hors <horsicq@gmail.com>'
         
         export X_HOMEPAGE='http://ntinfo.biz'
-        export X_DESCRIPTION=' Nauz File Detector is a linker/compiler/packer identifier utility.'
+        export X_DESCRIPTION='Nauz File Detector(NFD) is a linker/compiler/packer identifier utility.'
         
         if [ "$X_DEBIAN_VERSION" -ge "11" ]; then
             export X_DEPENDS='libqt5core5a, libqt5gui5, libqt5widgets5, libqt5dbus5'

@@ -16,7 +16,7 @@ Install packages:
 - sudo apt-get install --quiet --assume-yes qtbase5-dev
 - sudo apt-get install --quiet --assume-yes qttools5-dev-tools
 - sudo apt-get install --quiet --assume-yes qt5-default (Ubuntu 14.04-20.04)
-- sudo apt-get install --quiet --assume-yes qt5-qmake -y (Ubuntu 21.04-21.10)
+- sudo apt-get install --quiet --assume-yes qt5-qmake (Ubuntu 21.04-22.04)
 
 git clone --recursive https://github.com/horsicq/Nauz-File-Detector.git
 
