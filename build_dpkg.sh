@@ -43,7 +43,6 @@ if [ -z "$X_ERROR" ]; then
         cp -Rf $X_SOURCE_PATH/XStyles/qss/                                  $X_SOURCE_PATH/release/$X_BUILD_NAME/usr/lib/nfd/
         mkdir -p $X_SOURCE_PATH/release/$X_BUILD_NAME/usr/lib/nfd/lang/
         cp -f $X_SOURCE_PATH/gui_source/translation/*.qm                    $X_SOURCE_PATH/release/$X_BUILD_NAME/usr/lib/nfd/lang/
-        $X_SOURCE_PATH/release/$X_BUILD_NAME/usr/lib/nfd/signatures/
 
         make_deb
         #mv $X_SOURCE_PATH/release/$X_BUILD_NAME.deb $X_SOURCE_PATH/release/nfd_${X_RELEASE_VERSION}-${X_REVISION}_${X_OS_VERSION}_${X_ARCHITECTURE}.deb
