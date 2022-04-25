@@ -36,7 +36,8 @@ GuiMainWindow::GuiMainWindow(QWidget *pParent) :
     g_xOptions.addID(XOptions::ID_VIEW_STAYONTOP,false);
     g_xOptions.addID(XOptions::ID_VIEW_STYLE,"Fusion");
     g_xOptions.addID(XOptions::ID_VIEW_LANG,"System");
-    g_xOptions.addID(XOptions::ID_VIEW_FONT,font().toString());
+    g_xOptions.addID(XOptions::ID_VIEW_QSS,"");
+    g_xOptions.addID(XOptions::ID_VIEW_FONT,"");
     g_xOptions.addID(XOptions::ID_FILE_SAVELASTDIRECTORY,true);
 
 #ifdef Q_OS_WIN32
@@ -189,8 +190,7 @@ void GuiMainWindow::on_pushButtonOptions_clicked()
 
 void GuiMainWindow::adjustWindow()
 {
-    g_xOptions.adjustStayOnTop(this);
-    g_xOptions.adjustFont(this);
+    g_xOptions.adjustWindow(this);
 
     ui->checkBoxDeepScan->setChecked(g_xOptions.isDeepScan());
     ui->checkBoxRecursiveScan->setChecked(g_xOptions.isRecursiveScan());
