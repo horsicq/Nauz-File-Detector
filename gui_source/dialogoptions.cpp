@@ -43,21 +43,3 @@ DialogOptions::~DialogOptions()
 {
     delete ui;
 }
-
-void DialogOptions::on_pushButtonOK_clicked()
-{
-    ui->widgetOptions->save();
-    g_pStaticScanOptionsWidget->save();
-
-    if(g_pOptions->isRestartNeeded())
-    {
-        QMessageBox::information(this,tr("Information"),tr("Please restart the application"));
-    }
-
-    this->close();
-}
-
-void DialogOptions::on_pushButtonCancel_clicked()
-{
-    this->close();
-}
