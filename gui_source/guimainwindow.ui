@@ -6,12 +6,12 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>639</width>
+    <width>651</width>
     <height>339</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Nauz File Detector</string>
+   <string notr="true">Nauz File Detector</string>
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QVBoxLayout" name="verticalLayout_4">
@@ -114,7 +114,7 @@
             </font>
            </property>
            <property name="text">
-            <string>...</string>
+            <string notr="true">...</string>
            </property>
           </widget>
          </item>

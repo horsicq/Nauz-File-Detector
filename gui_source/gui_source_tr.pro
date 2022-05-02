@@ -17,7 +17,6 @@ TRANSLATIONS = \
         translation/nfd_vi.ts \
         translation/nfd_zh.ts \
         translation/nfd_zh_TW.ts
-        
 
 FORMS += \
     ../FormatDialogs/dialogdump.ui \
@@ -35,8 +34,10 @@ FORMS += \
     ../StaticScan/formstaticscan.ui \
     ../StaticScan/heurwidget.ui \
     ../StaticScan/staticscanoptionswidget.ui \
+    ../XInfoDB/dialogxinfodbtransferprocess.ui \
     ../XOptions/xoptionswidget.ui \
     ../XShortcuts/dialogshortcuts.ui \
+    ../XSymbolsWidget/xsymbolswidget.ui \
     dialogabout.ui \
     dialogoptions.ui \
     guimainwindow.ui
@@ -86,7 +87,9 @@ SOURCES += \
     ../XCapstone/xcapstone.cpp \
     ../XDEX/xandroidbinary.cpp \
     ../XDEX/xdex.cpp \
+    ../XInfoDB/dialogxinfodbtransferprocess.cpp \
     ../XInfoDB/xinfodb.cpp \
+    ../XInfoDB/xinfodbtransfer.cpp \
     ../XOptions/xoptions.cpp \
     ../XOptions/xoptionswidget.cpp \
     ../XPDF/xpdf.cpp \
@@ -95,9 +98,9 @@ SOURCES += \
     ../XShortcuts/xshortcutsdialog.cpp \
     ../XShortcuts/xshortcutstscrollarea.cpp \
     ../XShortcuts/xshortcutswidget.cpp \
+    ../XSymbolsWidget/xsymbolswidget.cpp \
     ../console_source/main_console.cpp \
     dialogabout.cpp \
     dialogoptions.cpp \
     guimainwindow.cpp \
-    main_gui.cpp \
-    ../winloader_source/winloader.cpp
+    main_gui.cpp
