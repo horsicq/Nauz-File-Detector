@@ -2,7 +2,7 @@
 [![GitHub tag (latest SemVer)](https://img.shields.io/github/tag/horsicq/Nauz-File-Detector.svg)](https://github.com/horsicq/Nauz-File-Detector/releases)
 [![GitHub All Releases](https://img.shields.io/github/downloads/horsicq/Nauz-File-Detector/total.svg)](https://github.com/horsicq/Nauz-File-Detector/releases)
 
-![alt text](https://github.com/horsicq/Nauz-File-Detector/blob/master/mascots/0.07.png "Version")
+![alt text](https://github.com/horsicq/Nauz-File-Detector/blob/master/mascots/mascot.png "Mascot")
 
 **Nauz File Detector** is a portable linker/compiler/packer identifier utility.
 
