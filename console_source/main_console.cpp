@@ -51,7 +51,7 @@ void ScanFiles(QList<QString> *pListArgs,SpecAbstract::SCAN_OPTIONS *pScanOption
 
         if(bShowFileName)
         {
-            printf("%s:\n",sFileName.toLatin1().data());
+            printf("%s:\n",sFileName.toUtf8().data());
         }
 
         SpecAbstract::SCAN_RESULT scanResult=StaticScan::processFile(sFileName,pScanOptions);
