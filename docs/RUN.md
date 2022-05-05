@@ -1,3 +1,4 @@
+There are two versions of  program.
 
 * **nfd** GUI version
 * **nfdc** console version
