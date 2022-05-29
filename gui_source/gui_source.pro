@@ -15,18 +15,20 @@ include(../build.pri)
 
 XCONFIG += use_capstone_x86
 
-SOURCES +=\
-        guimainwindow.cpp \
+SOURCES += \
+    guimainwindow.cpp \
     dialogabout.cpp \
     main_gui.cpp \
     dialogoptions.cpp
 
-HEADERS  += guimainwindow.h \
+HEADERS  += \
+    guimainwindow.h \
     ../global.h \
     dialogabout.h \
     dialogoptions.h
 
-FORMS    += guimainwindow.ui \
+FORMS    += \
+    guimainwindow.ui \
     dialogabout.ui \
     dialogoptions.ui
 
