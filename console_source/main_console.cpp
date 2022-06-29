@@ -100,7 +100,7 @@ int main(int argc,char *argv[])
 
     QCommandLineOption clRecursiveScan  (QStringList()<<    "r"<<   "recursivescan",    "Recursive scan.");
     QCommandLineOption clDeepScan       (QStringList()<<    "d"<<   "deepscan",         "Deep scan.");
-    QCommandLineOption clHeuristicScan  (QStringList()<<    "e"<<   "heuristicscan",    "Heuristic scan.");
+    QCommandLineOption clHeuristicScan  (QStringList()<<    "u"<<   "heuristicscan",    "Heuristic scan.");
     QCommandLineOption clAllTypesScan   (QStringList()<<    "a"<<   "alltypes",         "Scan all types.");
     QCommandLineOption clResultAsXml    (QStringList()<<    "x"<<   "xml",              "Result as XML.");
     QCommandLineOption clResultAsJson   (QStringList()<<    "j"<<   "json",             "Result as JSON.");
