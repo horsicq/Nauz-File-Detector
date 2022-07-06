@@ -105,6 +105,8 @@ void GuiMainWindow::_scan(QString sName)
     else if(fi.isDir())
     {
         DialogStaticScanDirectory dds(this,sName);
+        dds.setGlobal(nullptr,&g_xOptions);
+
         dds.exec();
 
         adjustWindow();
@@ -200,7 +202,14 @@ void GuiMainWindow::adjustWindow()
 
 void GuiMainWindow::on_pushButtonDirectoryScan_clicked()
 {
-    DialogStaticScanDirectory dds(this,QFileInfo(ui->lineEditFileName->text()).absolutePath());
+    QString sFolderPath=QFileInfo(ui->lineEditFileName->text()).absolutePath();
+
+    if(sFolderPath=="")
+    {
+        sFolderPath=g_xOptions.getLastDirectory();
+    }
+
+    DialogStaticScanDirectory dds(this,sFolderPath);
 
     dds.exec();
 
