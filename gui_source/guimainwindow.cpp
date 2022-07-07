@@ -74,6 +74,7 @@ void GuiMainWindow::scanFile(QString sFileName)
         options.bRecursiveScan=ui->checkBoxRecursiveScan->isChecked();
         options.bDeepScan=ui->checkBoxDeepScan->isChecked();
         options.bHeuristicScan=ui->checkBoxHeuristicScan->isChecked();
+        options.bVerbose=ui->checkBoxVerbose->isChecked();
         options.bAllTypesScan=ui->checkBoxAllTypesScan->isChecked();
 
 //#ifdef QT_DEBUG

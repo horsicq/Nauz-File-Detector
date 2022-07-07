@@ -101,6 +101,7 @@ int main(int argc,char *argv[])
     QCommandLineOption clRecursiveScan  (QStringList()<<    "r"<<   "recursivescan",    "Recursive scan.");
     QCommandLineOption clDeepScan       (QStringList()<<    "d"<<   "deepscan",         "Deep scan.");
     QCommandLineOption clHeuristicScan  (QStringList()<<    "u"<<   "heuristicscan",    "Heuristic scan.");
+    QCommandLineOption clVerbose        (QStringList()<<    "b"<<   "verbose",          "Verbose.");
     QCommandLineOption clAllTypesScan   (QStringList()<<    "a"<<   "alltypes",         "Scan all types.");
     QCommandLineOption clResultAsXml    (QStringList()<<    "x"<<   "xml",              "Result as XML.");
     QCommandLineOption clResultAsJson   (QStringList()<<    "j"<<   "json",             "Result as JSON.");
@@ -110,6 +111,7 @@ int main(int argc,char *argv[])
     parser.addOption(clRecursiveScan);
     parser.addOption(clDeepScan);
     parser.addOption(clHeuristicScan);
+    parser.addOption(clVerbose);
     parser.addOption(clAllTypesScan);
     parser.addOption(clResultAsXml);
     parser.addOption(clResultAsJson);
@@ -125,6 +127,7 @@ int main(int argc,char *argv[])
     scanOptions.bRecursiveScan=parser.isSet(clRecursiveScan);
     scanOptions.bDeepScan=parser.isSet(clDeepScan);
     scanOptions.bHeuristicScan=parser.isSet(clHeuristicScan);
+    scanOptions.bVerbose=parser.isSet(clVerbose);
     scanOptions.bAllTypesScan=parser.isSet(clAllTypesScan);
     scanOptions.bResultAsXML=parser.isSet(clResultAsXml);
     scanOptions.bResultAsJSON=parser.isSet(clResultAsJson);
