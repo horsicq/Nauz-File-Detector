@@ -21,7 +21,7 @@
 #include "dialogoptions.h"
 #include "ui_dialogoptions.h"
 
-DialogOptions::DialogOptions(QWidget *pParent,XOptions *pOptions) :
+DialogOptions::DialogOptions(QWidget *pParent,XOptions *pOptions,XOptions::GROUPID groupId) :
     QDialog(pParent),
     ui(new Ui::DialogOptions)
 {
@@ -36,7 +36,7 @@ DialogOptions::DialogOptions(QWidget *pParent,XOptions *pOptions) :
     ui->widgetOptions->addPage(g_pStaticScanOptionsWidget,tr("Scan"));
     g_pStaticScanOptionsWidget->setOptions(pOptions);
 
-    ui->widgetOptions->setCurrentPage(1);
+    ui->widgetOptions->setCurrentPage(groupId);
 }
 
 DialogOptions::~DialogOptions()

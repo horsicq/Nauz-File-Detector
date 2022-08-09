@@ -184,7 +184,7 @@ void GuiMainWindow::dropEvent(QDropEvent *pEvent)
 
 void GuiMainWindow::on_pushButtonOptions_clicked()
 {
-    DialogOptions dialogOptions(this,&g_xOptions);
+    DialogOptions dialogOptions(this,&g_xOptions,XOptions::GROUPID_FILE);
 
     dialogOptions.exec();
 
