@@ -17,3 +17,7 @@ The program works on macOS, Linux and Windows.
 * Changelog: https://github.com/horsicq/Nauz-File-Detector/blob/master/changelog.txt
 
 ![alt text](https://github.com/horsicq/Nauz-File-Detector/blob/master/mascots/nfd.png "Mascot")
+
+## Special Thanks
+
+- [PELock Software Protection & Reverse Engineering](https://www.pelock.com)
