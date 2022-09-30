@@ -64,3 +64,6 @@
 [submodule "XAboutWidget"]
 	path = XAboutWidget
 	url = https://github.com/horsicq/XAboutWidget
+[submodule "XExtractorWidget"]
+	path = XExtractorWidget
+	url = https://github.com/horsicq/XExtractorWidget
