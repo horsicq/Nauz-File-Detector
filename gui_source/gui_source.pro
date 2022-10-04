@@ -42,11 +42,16 @@ FORMS    += \
     include(../XOptions/xoptionswidget.pri)
 }
 
+!contains(XCONFIG, xaboutwidget) {
+    XCONFIG += xaboutwidget
+    include(../XAboutWidget/xaboutwidget.pri)
+}
+
 win32 {
     RC_ICONS = ../icons/main.ico
     CONFIG -= embed_manifest_exe
     QMAKE_MANIFEST = windows.manifest.xml
-    VERSION = 0.08.0.0
+    VERSION = 0.09.0.0
     QMAKE_TARGET_COMPANY = NTInfo
     QMAKE_TARGET_PRODUCT = Nauz File Detector
     QMAKE_TARGET_DESCRIPTION = Nauz File Detector(NFD) is a linker/compiler/packer identifier utility.

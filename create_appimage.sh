@@ -7,11 +7,12 @@ source build_tools/linux.sh
 
 create_image_app_dir nfd
 
-cp -f $X_SOURCE_PATH/build/release/nfd                            $X_SOURCE_PATH/release/appDir/usr/bin/
-cp -f $X_SOURCE_PATH/build/release/nfdc                           $X_SOURCE_PATH/release/appDir/usr/bin/
-cp -f $X_SOURCE_PATH/LINUX/nfd.desktop                           $X_SOURCE_PATH/release/appDir/usr/share/applications/
+cp -f $X_SOURCE_PATH/build/release/nfd                              $X_SOURCE_PATH/release/appDir/usr/bin/
+cp -f $X_SOURCE_PATH/build/release/nfdc                             $X_SOURCE_PATH/release/appDir/usr/bin/
+cp -f $X_SOURCE_PATH/LINUX/nfd.desktop                              $X_SOURCE_PATH/release/appDir/usr/share/applications/
 sed -i "s/#VERSION#/1.0/"                                           $X_SOURCE_PATH/release/appDir/usr/share/applications/nfd.desktop
-cp -Rf $X_SOURCE_PATH/LINUX/hicolor/                               $X_SOURCE_PATH/release/appDir/usr/share/icons/
+cp -Rf $X_SOURCE_PATH/LINUX/hicolor/                                $X_SOURCE_PATH/release/appDir/usr/share/icons/
+cp -Rf $X_SOURCE_PATH/images/                                       $X_SOURCE_PATH/release/appDir/usr/lib/nfd/
 
 cd $X_SOURCE_PATH/release
 

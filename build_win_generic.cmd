@@ -19,6 +19,7 @@ IF NOT [%X_ERROR%] == [] goto exit
 copy %X_SOURCE_PATH%\build\release\nfd.exe %X_SOURCE_PATH%\release\%X_BUILD_NAME%\
 copy %X_SOURCE_PATH%\build\release\nfdc.exe %X_SOURCE_PATH%\release\%X_BUILD_NAME%\
 xcopy %X_SOURCE_PATH%\XStyles\qss %X_SOURCE_PATH%\release\%X_BUILD_NAME%\qss /E /I
+xcopy %X_SOURCE_PATH%\images %X_SOURCE_PATH%\release\%X_BUILD_NAME%\images /E /I
 
 call %X_SOURCE_PATH%\build_tools\windows.cmd deploy_qt_library Qt5Widgets
 call %X_SOURCE_PATH%\build_tools\windows.cmd deploy_qt_library Qt5Gui

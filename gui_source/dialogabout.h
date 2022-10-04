@@ -22,7 +22,7 @@
 #define DIALOGABOUT_H
 
 #include <QDialog>
-#include <QDate>
+#include <QMessageBox>
 #include "xoptions.h"
 #include "../global.h"
 
