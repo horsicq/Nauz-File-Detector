@@ -70,13 +70,14 @@ package() {
 
   echo -e "${_prefix}Creating the package base"
   install -d "$pkgdir"/{opt/"${_pkgname}",usr/bin,usr/share/pixmaps}
-  install -d "$pkgdir/opt/${_pkgname}"/{images}
+  install -d "$pkgdir/opt/${_pkgname}"/{qss,images}
 
   echo -e "${_prefix}Copying the package binaries"
   install -Dm 755 build/release/nfd -t "$pkgdir"/opt/"${_pkgname}"
   install -Dm 755 build/release/nfdc -t "$pkgdir"/opt/"${_pkgname}"
   
   echo -e "${_prefix}Copying the package files"
+  install -Dm 644 XStyles/qss/* -t "$pkgdir"/opt/"${_pkgname}"/qss
   cp -r images/* -t "$pkgdir"/opt/"${_pkgname}"/images/
 
   echo -e "${_prefix}Setting up /usr/bin launchers"

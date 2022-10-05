@@ -12,6 +12,9 @@ check_file $QMAKE_PATH
 if [ -z "$X_ERROR" ]; then
     make_init
     make_build "$X_SOURCE_PATH/NFD_source.pro"
+    cd "$X_SOURCE_PATH/gui_source"
+    make_translate "gui_source_tr.pro" nfd
+    cd "$X_SOURCE_PATH"
 
     check_file "$X_SOURCE_PATH/build/release/NFD.app/Contents/MacOS/NFD"
     if [ -z "$X_ERROR" ]; then
@@ -19,20 +22,11 @@ if [ -z "$X_ERROR" ]; then
 
         mkdir -p $X_SOURCE_PATH/release/$X_BUILD_NAME/NFD.app/Contents/Resources/signatures
         cp -Rf $X_SOURCE_PATH/XStyles/qss                    $X_SOURCE_PATH/release/$X_BUILD_NAME/NFD.app/Contents/Resources/
+        cp -Rf $X_SOURCE_PATH/images                        $X_SOURCE_PATH/release/$X_BUILD_NAME/NFD.app/Contents/Resources/
 
-        fiximport "$X_SOURCE_PATH/build/release/NFD.app/Contents/MacOS/NFD"
+        deploy_qt NFD
 
-        deploy_qt_library QtWidgets NFD
-        deploy_qt_library QtGui NFD
-        deploy_qt_library QtCore NFD
-        deploy_qt_library QtDBus NFD
-        deploy_qt_library QtPrintSupport NFD
-
-        deploy_qt_plugin platforms libqcocoa NFD
-        deploy_qt_plugin platforms libqminimal NFD
-        deploy_qt_plugin platforms libqoffscreen NFD
-
-        make_release
+        make_release NFD
         make_clear
     fi
 fi
