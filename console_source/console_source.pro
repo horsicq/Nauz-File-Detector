@@ -22,7 +22,7 @@ XCONFIG += use_capstone_x86
 }
 
 win32 {
-    VERSION = 0.08.0.0
+    VERSION = 0.09.0.0
     QMAKE_TARGET_COMPANY = NTInfo
     QMAKE_TARGET_PRODUCT = Nauz File Detector
     QMAKE_TARGET_DESCRIPTION = Nauz File Detector(NFD) is a linker/compiler/packer identifier utility.

@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.10)
 
-project(nfd VERSION 0.08 LANGUAGES CXX)
+project(nfd VERSION 0.09 LANGUAGES CXX)
 
 include_guard(DIRECTORY)
 
@@ -28,10 +28,12 @@ add_definitions(-DUSE_ARCHIVE)
 
 include(${PROJECT_SOURCE_DIR}/../StaticScan/formresult.cmake)
 include(${PROJECT_SOURCE_DIR}/../XOptions/xoptions.cmake)
+include(${PROJECT_SOURCE_DIR}/../XAboutWidget/xaboutwidget.cmake)
 
 set(PROJECT_SOURCES
             ${FORMRESULT_SOURCES}
             ${XOPTIONS_SOURCES}
+            ${XABOUTWIDGET_SOURCES}
             dialogabout.cpp
             dialogabout.ui
             dialogoptions.cpp

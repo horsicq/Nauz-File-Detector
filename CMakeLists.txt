@@ -18,14 +18,27 @@ add_subdirectory(XArchive)
 add_subdirectory(gui_source)
 add_subdirectory(console_source)
 
+include(GNUInstallDirs)
+
 if(WIN32)
     install (TARGETS nfd)
     install (TARGETS nfdc)
-else()
+endif()
+
+if(LINUX)
     install (TARGETS nfd LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR})
     install (TARGETS nfdc LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR})
+    install (FILES LINUX/nfd.desktop DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/applications/)
+    install (DIRECTORY LINUX/hicolor DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/icons)
+    install (DIRECTORY XStyles/qss DESTINATION ${CMAKE_INSTALL_LIBDIR}/nfd)
+    install (DIRECTORY images DESTINATION ${CMAKE_INSTALL_LIBDIR}/nfd)
 endif()
-install (FILES LINUX/nfd.desktop DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/applications/)
-install (DIRECTORY LINUX/hicolor DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/icons)
-install (DIRECTORY XStyles/qss DESTINATION ${CMAKE_INSTALL_LIBDIR}/nfd)
-install (DIRECTORY images DESTINATION ${CMAKE_INSTALL_LIBDIR}/nfd)
+
+if(APPLE)
+    install (TARGETS nfd
+                BUNDLE DESTINATION .
+                LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR})
+    install (TARGETS nfdc)
+                BUNDLE DESTINATION .
+                LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR})
+endif()
