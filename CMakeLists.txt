@@ -38,7 +38,7 @@ if(APPLE)
     install (TARGETS nfd
                 BUNDLE DESTINATION .
                 LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR})
-    install (TARGETS nfdc)
+    install (TARGETS nfdc
                 BUNDLE DESTINATION .
                 LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR})
 endif()
