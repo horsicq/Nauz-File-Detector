@@ -14,8 +14,6 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: git
-      run: |
-      git clone --recursive https://github.com/horsicq/Nauz-File-Detector
-      cd Nauz-File-Detector
+      run: git clone --recursive https://github.com/horsicq/Nauz-File-Detector
     - name: cmake
-      run: cmake .
+      run: cmake horsicq/Nauz-File-Detector
