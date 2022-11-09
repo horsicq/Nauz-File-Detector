@@ -18,4 +18,7 @@ jobs:
     - name: git
       run: git clone --recursive https://github.com/horsicq/Nauz-File-Detector
     - name: cmake
-      run: cmake /home/runner/work/Nauz-File-Detector/Nauz-File-Detector/Nauz-File-Detector
+      run: |
+          cd Nauz-File-Detector
+          cmake .
+          make
