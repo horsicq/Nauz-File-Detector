@@ -25,6 +25,7 @@
 #include <QDir>
 #include <QMessageBox>
 #include <QSettings>
+
 #include "../global.h"
 #include "staticscanoptionswidget.h"
 #include "xoptions.h"
@@ -33,12 +34,11 @@ namespace Ui {
 class DialogOptions;
 }
 
-class DialogOptions : public QDialog
-{
+class DialogOptions : public QDialog {
     Q_OBJECT
 
 public:
-    explicit DialogOptions(QWidget *pParent,XOptions *pOptions,XOptions::GROUPID groupId);
+    explicit DialogOptions(QWidget *pParent, XOptions *pOptions, XOptions::GROUPID groupId);
     ~DialogOptions();
 
 private:
@@ -47,4 +47,4 @@ private:
     XOptions *g_pOptions;
 };
 
-#endif // DIALOGOPTIONS_H
+#endif  // DIALOGOPTIONS_H

@@ -19,29 +19,27 @@
  * SOFTWARE.
  */
 #include "guimainwindow.h"
+
 #include "ui_guimainwindow.h"
 
-GuiMainWindow::GuiMainWindow(QWidget *pParent) :
-    QMainWindow(pParent),
-    ui(new Ui::GuiMainWindow)
-{
+GuiMainWindow::GuiMainWindow(QWidget *pParent) : QMainWindow(pParent), ui(new Ui::GuiMainWindow) {
     ui->setupUi(this);
 
-    setWindowTitle(XOptions::getTitle(X_APPLICATIONDISPLAYNAME,X_APPLICATIONVERSION));
+    setWindowTitle(XOptions::getTitle(X_APPLICATIONDISPLAYNAME, X_APPLICATIONVERSION));
 
     setAcceptDrops(true);
 
     g_xOptions.setName(X_OPTIONSFILE);
 
-    g_xOptions.addID(XOptions::ID_VIEW_STAYONTOP,false);
-    g_xOptions.addID(XOptions::ID_VIEW_STYLE,"Fusion");
-    g_xOptions.addID(XOptions::ID_VIEW_LANG,"System");
-    g_xOptions.addID(XOptions::ID_VIEW_QSS,"");
-    g_xOptions.addID(XOptions::ID_VIEW_FONT,"");
-    g_xOptions.addID(XOptions::ID_FILE_SAVELASTDIRECTORY,true);
+    g_xOptions.addID(XOptions::ID_VIEW_STAYONTOP, false);
+    g_xOptions.addID(XOptions::ID_VIEW_STYLE, "Fusion");
+    g_xOptions.addID(XOptions::ID_VIEW_LANG, "System");
+    g_xOptions.addID(XOptions::ID_VIEW_QSS, "");
+    g_xOptions.addID(XOptions::ID_VIEW_FONT, "");
+    g_xOptions.addID(XOptions::ID_FILE_SAVELASTDIRECTORY, true);
 
 #ifdef Q_OS_WIN
-    g_xOptions.addID(XOptions::ID_FILE_CONTEXT,"*");
+    g_xOptions.addID(XOptions::ID_FILE_CONTEXT, "*");
 #endif
 
     StaticScanOptionsWidget::setDefaultValues(&g_xOptions);
@@ -50,63 +48,55 @@ GuiMainWindow::GuiMainWindow(QWidget *pParent) :
 
     adjustWindow();
 
-    if(QCoreApplication::arguments().count()>1)
-    {
+    if (QCoreApplication::arguments().count() > 1) {
         _scan(QCoreApplication::arguments().at(1));
     }
 }
 
-GuiMainWindow::~GuiMainWindow()
-{
+GuiMainWindow::~GuiMainWindow() {
     g_xOptions.save();
 
     delete ui;
 }
 
-void GuiMainWindow::scanFile(QString sFileName)
-{
-    if(sFileName!="")
-    {
-        SpecAbstract::SCAN_RESULT scanResult={0};
+void GuiMainWindow::scanFile(QString sFileName) {
+    if (sFileName != "") {
+        SpecAbstract::SCAN_RESULT scanResult = {0};
 
-        SpecAbstract::SCAN_OPTIONS options={0};
+        SpecAbstract::SCAN_OPTIONS options = {0};
 
-        options.bRecursiveScan=ui->checkBoxRecursiveScan->isChecked();
-        options.bDeepScan=ui->checkBoxDeepScan->isChecked();
-        options.bHeuristicScan=ui->checkBoxHeuristicScan->isChecked();
-        options.bVerbose=ui->checkBoxVerbose->isChecked();
-        options.bAllTypesScan=ui->checkBoxAllTypesScan->isChecked();
+        options.bRecursiveScan = ui->checkBoxRecursiveScan->isChecked();
+        options.bDeepScan = ui->checkBoxDeepScan->isChecked();
+        options.bHeuristicScan = ui->checkBoxHeuristicScan->isChecked();
+        options.bVerbose = ui->checkBoxVerbose->isChecked();
+        options.bAllTypesScan = ui->checkBoxAllTypesScan->isChecked();
 
-//#ifdef QT_DEBUG
-//        options.bIsTest=true;
-//#endif
+        //#ifdef QT_DEBUG
+        //        options.bIsTest=true;
+        //#endif
 
         DialogStaticScanProcess ds(this);
-        ds.setData(sFileName,&options,&scanResult);
+        ds.setData(sFileName, &options, &scanResult);
         ds.exec();
 
-        QString sSaveDirectory=XBinary::getResultFileName(sFileName,QString("%1.txt").arg(tr("Result")));
+        QString sSaveDirectory = XBinary::getResultFileName(sFileName, QString("%1.txt").arg(tr("Result")));
 
-        ui->widgetResult->setData(scanResult,sSaveDirectory);
+        ui->widgetResult->setData(scanResult, sSaveDirectory);
 
         g_xOptions.setLastDirectory(sFileName);
     }
 }
 
-void GuiMainWindow::_scan(QString sName)
-{
+void GuiMainWindow::_scan(QString sName) {
     QFileInfo fi(sName);
 
-    if(fi.isFile())
-    {
+    if (fi.isFile()) {
         ui->lineEditFileName->setText(sName);
-        
+
         scanFile(sName);
-    }
-    else if(fi.isDir())
-    {
-        DialogStaticScanDirectory dds(this,sName);
-        dds.setGlobal(nullptr,&g_xOptions);
+    } else if (fi.isDir()) {
+        DialogStaticScanDirectory dds(this, sName);
+        dds.setGlobal(nullptr, &g_xOptions);
 
         dds.exec();
 
@@ -114,85 +104,71 @@ void GuiMainWindow::_scan(QString sName)
     }
 }
 
-void GuiMainWindow::on_pushButtonExit_clicked()
-{
+void GuiMainWindow::on_pushButtonExit_clicked() {
     this->close();
 }
 
-void GuiMainWindow::on_pushButtonOpenFile_clicked()
-{
-    QString sDirectory=g_xOptions.getLastDirectory();
+void GuiMainWindow::on_pushButtonOpenFile_clicked() {
+    QString sDirectory = g_xOptions.getLastDirectory();
 
-    QString sFileName=QFileDialog::getOpenFileName(this,tr("Open file")+QString("..."),sDirectory,tr("All files")+QString(" (*)"));
+    QString sFileName = QFileDialog::getOpenFileName(this, tr("Open file") + QString("..."), sDirectory, tr("All files") + QString(" (*)"));
 
-    if(!sFileName.isEmpty())
-    {
+    if (!sFileName.isEmpty()) {
         ui->lineEditFileName->setText(sFileName);
-    
-        if(g_xOptions.isScanAfterOpen())
-        {
+
+        if (g_xOptions.isScanAfterOpen()) {
             _scan(sFileName);
         }
     }
 }
 
-void GuiMainWindow::on_pushButtonScan_clicked()
-{
-    QString sFileName=ui->lineEditFileName->text().trimmed();
+void GuiMainWindow::on_pushButtonScan_clicked() {
+    QString sFileName = ui->lineEditFileName->text().trimmed();
 
     _scan(sFileName);
 }
 
-void GuiMainWindow::on_pushButtonAbout_clicked()
-{
+void GuiMainWindow::on_pushButtonAbout_clicked() {
     DialogAbout di(this);
 
     di.exec();
 }
 
-void GuiMainWindow::dragEnterEvent(QDragEnterEvent *pEvent)
-{
+void GuiMainWindow::dragEnterEvent(QDragEnterEvent *pEvent) {
     pEvent->acceptProposedAction();
 }
 
-void GuiMainWindow::dragMoveEvent(QDragMoveEvent *pEvent)
-{
+void GuiMainWindow::dragMoveEvent(QDragMoveEvent *pEvent) {
     pEvent->acceptProposedAction();
 }
 
-void GuiMainWindow::dropEvent(QDropEvent *pEvent)
-{
-    const QMimeData* mimeData=pEvent->mimeData();
+void GuiMainWindow::dropEvent(QDropEvent *pEvent) {
+    const QMimeData *mimeData = pEvent->mimeData();
 
-    if(mimeData->hasUrls())
-    {
-        QList<QUrl> urlList=mimeData->urls();
+    if (mimeData->hasUrls()) {
+        QList<QUrl> urlList = mimeData->urls();
 
-        if(urlList.count())
-        {
-            QString sFileName=urlList.at(0).toLocalFile();
+        if (urlList.count()) {
+            QString sFileName = urlList.at(0).toLocalFile();
 
-            sFileName=XBinary::convertFileName(sFileName);
+            sFileName = XBinary::convertFileName(sFileName);
 
-            if(g_xOptions.isScanAfterOpen())
-            {
+            if (g_xOptions.isScanAfterOpen()) {
                 _scan(sFileName);
             }
         }
     }
 }
 
-void GuiMainWindow::on_pushButtonOptions_clicked()
-{
-    DialogOptions dialogOptions(this,&g_xOptions,XOptions::GROUPID_FILE);
+void GuiMainWindow::on_pushButtonOptions_clicked() {
+    DialogOptions dialogOptions(this, &g_xOptions, XOptions::GROUPID_FILE);
 
     dialogOptions.exec();
 
     adjustWindow();
 }
 
-void GuiMainWindow::adjustWindow()
-{
+void GuiMainWindow::adjustWindow() {
     g_xOptions.adjustWindow(this);
 
     ui->checkBoxDeepScan->setChecked(g_xOptions.isDeepScan());
@@ -201,16 +177,14 @@ void GuiMainWindow::adjustWindow()
     ui->checkBoxAllTypesScan->setChecked(g_xOptions.isAllTypesScan());
 }
 
-void GuiMainWindow::on_pushButtonDirectoryScan_clicked()
-{
-    QString sFolderPath=QFileInfo(ui->lineEditFileName->text()).absolutePath();
+void GuiMainWindow::on_pushButtonDirectoryScan_clicked() {
+    QString sFolderPath = QFileInfo(ui->lineEditFileName->text()).absolutePath();
 
-    if(sFolderPath=="")
-    {
-        sFolderPath=g_xOptions.getLastDirectory();
+    if (sFolderPath == "") {
+        sFolderPath = g_xOptions.getLastDirectory();
     }
 
-    DialogStaticScanDirectory dds(this,sFolderPath);
+    DialogStaticScanDirectory dds(this, sFolderPath);
 
     dds.exec();
 

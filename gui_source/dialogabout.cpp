@@ -19,56 +19,63 @@
  * SOFTWARE.
  */
 #include "dialogabout.h"
+
 #include "ui_dialogabout.h"
 
-DialogAbout::DialogAbout(QWidget *pParent) :
-    QDialog(pParent),
-    ui(new Ui::DialogAbout)
-{
+DialogAbout::DialogAbout(QWidget *pParent) : QDialog(pParent), ui(new Ui::DialogAbout) {
     ui->setupUi(this);
 
-    XAboutWidget::DATA _data={};
+    XAboutWidget::DATA _data = {};
 
-    _data.sInfo+=QString("<p align=\"center\"><span style=\" font-weight:600;\">%1</span></p>")
-            .arg(XOptions::getTitle(X_APPLICATIONDISPLAYNAME,X_APPLICATIONVERSION));
-    _data.sInfo+=QString("<p align=\"center\"><span style=\" font-weight:600;\">Copyright (C) 2017-2022 Hors</span></p>");
-    _data.sInfo+=QString("<p align=\"center\"><span style=\" font-weight:600;\">%1: </span><a href=\"mailto:horsicq@gmail.com\"><span style=\" text-decoration: underline; color:#ff0000;\">horsicq@gmail.com</span></a></p>")
-            .arg(tr("Bugreports"));
-    _data.sInfo+=QString("<p align=\"center\"><span style=\" font-weight:600;\">%1: </span><a href=\"http://ntinfo.biz\"><span style=\" text-decoration: underline; color:#ff0000;\">http://ntinfo.biz</span></a></p>")
-            .arg(tr("Website"));
-    _data.sInfo+=QString("<p align=\"center\"><span style=\" font-weight:600;\">%1(Paypal): </span><a href=\"ntinfo.re@gmail.com\"><span style=\" text-decoration: underline; color:#ff0000;\">ntinfo.re@gmail.com</span></a></p>")
-            .arg(tr("Donate"));
-    _data.sInfo+=QString("<p align=\"center\"><span style=\" font-weight:600;\">%1(BTC): </span><a href=\"3DqddVBX9PKqMvNPXZ3gPHBNNRtD9CnmJo\"><span style=\" text-decoration: underline; color:#ff0000;\">3DqddVBX9PKqMvNPXZ3gPHBNNRtD9CnmJo</span></a></p>")
-            .arg(tr("Donate"));
-    _data.sInfo+=QString("<p align=\"center\"><span style=\" font-weight:600;\">%1: </span><a href=\"https://github.com/horsicq/Nauz-File-Detector\"><span style=\" text-decoration: underline; color:#ff0000;\">https://github.com/horsicq/Nauz-File-Detector</span></a></p>")
-            .arg(tr("Source code"));
+    _data.sInfo += QString("<p align=\"center\"><span style=\" font-weight:600;\">%1</span></p>").arg(XOptions::getTitle(X_APPLICATIONDISPLAYNAME, X_APPLICATIONVERSION));
+    _data.sInfo += QString("<p align=\"center\"><span style=\" font-weight:600;\">Copyright (C) 2017-2022 Hors</span></p>");
+    _data.sInfo += QString(
+                       "<p align=\"center\"><span style=\" font-weight:600;\">%1: </span><a href=\"mailto:horsicq@gmail.com\"><span style=\" text-decoration: underline; "
+                       "color:#ff0000;\">horsicq@gmail.com</span></a></p>")
+                       .arg(tr("Bugreports"));
+    _data.sInfo += QString(
+                       "<p align=\"center\"><span style=\" font-weight:600;\">%1: </span><a href=\"http://ntinfo.biz\"><span style=\" text-decoration: underline; "
+                       "color:#ff0000;\">http://ntinfo.biz</span></a></p>")
+                       .arg(tr("Website"));
+    _data.sInfo += QString(
+                       "<p align=\"center\"><span style=\" font-weight:600;\">%1(Paypal): </span><a href=\"ntinfo.re@gmail.com\"><span style=\" text-decoration: underline; "
+                       "color:#ff0000;\">ntinfo.re@gmail.com</span></a></p>")
+                       .arg(tr("Donate"));
+    _data.sInfo += QString(
+                       "<p align=\"center\"><span style=\" font-weight:600;\">%1(BTC): </span><a href=\"3DqddVBX9PKqMvNPXZ3gPHBNNRtD9CnmJo\"><span style=\" text-decoration: "
+                       "underline; color:#ff0000;\">3DqddVBX9PKqMvNPXZ3gPHBNNRtD9CnmJo</span></a></p>")
+                       .arg(tr("Donate"));
+    _data.sInfo += QString(
+                       "<p align=\"center\"><span style=\" font-weight:600;\">%1: </span><a href=\"https://github.com/horsicq/Nauz-File-Detector\"><span style=\" text-decoration: "
+                       "underline; color:#ff0000;\">https://github.com/horsicq/Nauz-File-Detector</span></a></p>")
+                       .arg(tr("Source code"));
 
-    _data.sLibraries+=QString("<p align=\"center\"><span style=\" font-weight:600;\">QT Library %1 </span><a href=\"http://qt-project.org\"><span style=\" text-decoration: underline; color:#ff0000;\">http://qt-project.org</span></a></p>")
-            .arg(QT_VERSION_STR);
+    _data.sLibraries += QString(
+                            "<p align=\"center\"><span style=\" font-weight:600;\">QT Library %1 </span><a href=\"http://qt-project.org\"><span style=\" text-decoration: "
+                            "underline; color:#ff0000;\">http://qt-project.org</span></a></p>")
+                            .arg(QT_VERSION_STR);
 
-    _data.sLogoPath=":/images/main.png";
-    _data.sUpdatesLink="https://github.com/horsicq/Nauz-File-Detector/releases";
+    _data.sLogoPath = ":/images/main.png";
+    _data.sUpdatesLink = "https://github.com/horsicq/Nauz-File-Detector/releases";
 
 #ifndef QT_DEBUG
-    _data.sThanksPath=XOptions().getApplicationDataPath()+QDir::separator()+"images"+QDir::separator()+"thanks";
+    _data.sThanksPath = XOptions().getApplicationDataPath() + QDir::separator() + "images" + QDir::separator() + "thanks";
 #else
     QDir dir(XOptions().getApplicationDataPath());
 
     dir.cdUp();
     dir.cdUp();
 
-    _data.sThanksPath=dir.absolutePath()+QDir::separator()+"images"+QDir::separator()+"thanks";
+    _data.sThanksPath = dir.absolutePath() + QDir::separator() + "images" + QDir::separator() + "thanks";
 #endif
 
     ui->widgetAbout->setData(_data);
 }
 
-DialogAbout::~DialogAbout()
-{
+DialogAbout::~DialogAbout() {
     delete ui;
 }
 
-void DialogAbout::on_pushButtonOK_clicked()
-{
+void DialogAbout::on_pushButtonOK_clicked() {
     this->close();
 }

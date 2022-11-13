@@ -19,27 +19,24 @@
  * SOFTWARE.
  */
 #include "dialogoptions.h"
+
 #include "ui_dialogoptions.h"
 
-DialogOptions::DialogOptions(QWidget *pParent,XOptions *pOptions,XOptions::GROUPID groupId) :
-    QDialog(pParent),
-    ui(new Ui::DialogOptions)
-{
+DialogOptions::DialogOptions(QWidget *pParent, XOptions *pOptions, XOptions::GROUPID groupId) : QDialog(pParent), ui(new Ui::DialogOptions) {
     ui->setupUi(this);
 
-    g_pStaticScanOptionsWidget=new StaticScanOptionsWidget(this);
+    g_pStaticScanOptionsWidget = new StaticScanOptionsWidget(this);
 
-    this->g_pOptions=pOptions;
+    this->g_pOptions = pOptions;
 
-    ui->widgetOptions->setOptions(pOptions,X_APPLICATIONDISPLAYNAME);
+    ui->widgetOptions->setOptions(pOptions, X_APPLICATIONDISPLAYNAME);
 
-    ui->widgetOptions->addPage(g_pStaticScanOptionsWidget,tr("Scan"));
+    ui->widgetOptions->addPage(g_pStaticScanOptionsWidget, tr("Scan"));
     g_pStaticScanOptionsWidget->setOptions(pOptions);
 
     ui->widgetOptions->setCurrentPage(groupId);
 }
 
-DialogOptions::~DialogOptions()
-{
+DialogOptions::~DialogOptions() {
     delete ui;
 }

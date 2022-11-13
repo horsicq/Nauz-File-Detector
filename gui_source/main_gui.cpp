@@ -18,19 +18,19 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-#include "guimainwindow.h"
 #include <QApplication>
 #include <QStyleFactory>
 
-int main(int argc,char *argv[])
-{
-#if QT_VERSION >= QT_VERSION_CHECK(5,6,0)
+#include "guimainwindow.h"
+
+int main(int argc, char *argv[]) {
+#if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 #endif
 #ifdef Q_OS_MAC
 #ifndef QT_DEBUG
-	QString sLibraryPath=QString(argv[0]);
-    sLibraryPath=sLibraryPath.remove("MacOS/NFD")+"PlugIns";
+    QString sLibraryPath = QString(argv[0]);
+    sLibraryPath = sLibraryPath.remove("MacOS/NFD") + "PlugIns";
     QCoreApplication::setLibraryPaths(QStringList(sLibraryPath));
 #endif
 #endif
@@ -40,27 +40,26 @@ int main(int argc,char *argv[])
     QCoreApplication::setApplicationName(X_APPLICATIONNAME);
     QCoreApplication::setApplicationVersion(X_APPLICATIONVERSION);
 
-    if((argc==2)&&((QString(argv[1])=="--version")||(QString(argv[1])=="-v")))
-    {
-        QString sInfo=QString("%1 v%2").arg(X_APPLICATIONDISPLAYNAME,X_APPLICATIONVERSION);
-        printf("%s\n",sInfo.toUtf8().data());
+    if ((argc == 2) && ((QString(argv[1]) == "--version") || (QString(argv[1]) == "-v"))) {
+        QString sInfo = QString("%1 v%2").arg(X_APPLICATIONDISPLAYNAME, X_APPLICATIONVERSION);
+        printf("%s\n", sInfo.toUtf8().data());
 
         return 0;
     }
 
-    QApplication a(argc,argv);
+    QApplication a(argc, argv);
 
     XOptions xOptions;
 
     xOptions.setName(X_OPTIONSFILE);
 
-    xOptions.addID(XOptions::ID_VIEW_STYLE,"fusion");
-    xOptions.addID(XOptions::ID_VIEW_LANG,"System");
-    xOptions.addID(XOptions::ID_VIEW_QSS,"");
-    xOptions.addID(XOptions::ID_VIEW_FONT,"");
+    xOptions.addID(XOptions::ID_VIEW_STYLE, "fusion");
+    xOptions.addID(XOptions::ID_VIEW_LANG, "System");
+    xOptions.addID(XOptions::ID_VIEW_QSS, "");
+    xOptions.addID(XOptions::ID_VIEW_FONT, "");
     xOptions.load();
 
-    XOptions::adjustApplicationView(X_APPLICATIONNAME,&xOptions);
+    XOptions::adjustApplicationView(X_APPLICATIONNAME, &xOptions);
 
     GuiMainWindow w;
     w.show();
