@@ -22,7 +22,8 @@
 
 #include "ui_guimainwindow.h"
 
-GuiMainWindow::GuiMainWindow(QWidget *pParent) : QMainWindow(pParent), ui(new Ui::GuiMainWindow) {
+GuiMainWindow::GuiMainWindow(QWidget *pParent) : QMainWindow(pParent), ui(new Ui::GuiMainWindow)
+{
     ui->setupUi(this);
 
     setWindowTitle(XOptions::getTitle(X_APPLICATIONDISPLAYNAME, X_APPLICATIONVERSION));
@@ -53,13 +54,15 @@ GuiMainWindow::GuiMainWindow(QWidget *pParent) : QMainWindow(pParent), ui(new Ui
     }
 }
 
-GuiMainWindow::~GuiMainWindow() {
+GuiMainWindow::~GuiMainWindow()
+{
     g_xOptions.save();
 
     delete ui;
 }
 
-void GuiMainWindow::scanFile(QString sFileName) {
+void GuiMainWindow::scanFile(QString sFileName)
+{
     if (sFileName != "") {
         SpecAbstract::SCAN_RESULT scanResult = {0};
 
@@ -87,7 +90,8 @@ void GuiMainWindow::scanFile(QString sFileName) {
     }
 }
 
-void GuiMainWindow::_scan(QString sName) {
+void GuiMainWindow::_scan(QString sName)
+{
     QFileInfo fi(sName);
 
     if (fi.isFile()) {
@@ -104,11 +108,13 @@ void GuiMainWindow::_scan(QString sName) {
     }
 }
 
-void GuiMainWindow::on_pushButtonExit_clicked() {
+void GuiMainWindow::on_pushButtonExit_clicked()
+{
     this->close();
 }
 
-void GuiMainWindow::on_pushButtonOpenFile_clicked() {
+void GuiMainWindow::on_pushButtonOpenFile_clicked()
+{
     QString sDirectory = g_xOptions.getLastDirectory();
 
     QString sFileName = QFileDialog::getOpenFileName(this, tr("Open file") + QString("..."), sDirectory, tr("All files") + QString(" (*)"));
@@ -122,27 +128,32 @@ void GuiMainWindow::on_pushButtonOpenFile_clicked() {
     }
 }
 
-void GuiMainWindow::on_pushButtonScan_clicked() {
+void GuiMainWindow::on_pushButtonScan_clicked()
+{
     QString sFileName = ui->lineEditFileName->text().trimmed();
 
     _scan(sFileName);
 }
 
-void GuiMainWindow::on_pushButtonAbout_clicked() {
+void GuiMainWindow::on_pushButtonAbout_clicked()
+{
     DialogAbout di(this);
 
     di.exec();
 }
 
-void GuiMainWindow::dragEnterEvent(QDragEnterEvent *pEvent) {
+void GuiMainWindow::dragEnterEvent(QDragEnterEvent *pEvent)
+{
     pEvent->acceptProposedAction();
 }
 
-void GuiMainWindow::dragMoveEvent(QDragMoveEvent *pEvent) {
+void GuiMainWindow::dragMoveEvent(QDragMoveEvent *pEvent)
+{
     pEvent->acceptProposedAction();
 }
 
-void GuiMainWindow::dropEvent(QDropEvent *pEvent) {
+void GuiMainWindow::dropEvent(QDropEvent *pEvent)
+{
     const QMimeData *mimeData = pEvent->mimeData();
 
     if (mimeData->hasUrls()) {
@@ -160,7 +171,8 @@ void GuiMainWindow::dropEvent(QDropEvent *pEvent) {
     }
 }
 
-void GuiMainWindow::on_pushButtonOptions_clicked() {
+void GuiMainWindow::on_pushButtonOptions_clicked()
+{
     DialogOptions dialogOptions(this, &g_xOptions, XOptions::GROUPID_FILE);
 
     dialogOptions.exec();
@@ -168,7 +180,8 @@ void GuiMainWindow::on_pushButtonOptions_clicked() {
     adjustWindow();
 }
 
-void GuiMainWindow::adjustWindow() {
+void GuiMainWindow::adjustWindow()
+{
     g_xOptions.adjustWindow(this);
 
     ui->checkBoxDeepScan->setChecked(g_xOptions.isDeepScan());
@@ -177,7 +190,8 @@ void GuiMainWindow::adjustWindow() {
     ui->checkBoxAllTypesScan->setChecked(g_xOptions.isAllTypesScan());
 }
 
-void GuiMainWindow::on_pushButtonDirectoryScan_clicked() {
+void GuiMainWindow::on_pushButtonDirectoryScan_clicked()
+{
     QString sFolderPath = QFileInfo(ui->lineEditFileName->text()).absolutePath();
 
     if (sFolderPath == "") {
