@@ -54,6 +54,7 @@ private slots:
     void on_pushButtonOptions_clicked();
     void adjustWindow();
     void on_pushButtonDirectoryScan_clicked();
+    void on_toolButtonRecentFiles_clicked();
 
 protected:
     void dragEnterEvent(QDragEnterEvent *pEvent) override;
@@ -63,6 +64,7 @@ protected:
 private:
     Ui::GuiMainWindow *ui;
     XOptions g_xOptions;
+    QMenu *g_pRecentFilesMenu;
 };
 
 #endif  // GUIMAINWINDOW_H

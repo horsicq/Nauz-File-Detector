@@ -39,6 +39,7 @@ GuiMainWindow::GuiMainWindow(QWidget *pParent)
     g_xOptions.addID(XOptions::ID_VIEW_QSS, "");
     g_xOptions.addID(XOptions::ID_VIEW_FONT, "");
     g_xOptions.addID(XOptions::ID_FILE_SAVELASTDIRECTORY, true);
+    g_xOptions.addID(XOptions::ID_FILE_SAVERECENTFILES, true);
 
 #ifdef Q_OS_WIN
     g_xOptions.addID(XOptions::ID_FILE_CONTEXT, "*");
@@ -47,6 +48,12 @@ GuiMainWindow::GuiMainWindow(QWidget *pParent)
     StaticScanOptionsWidget::setDefaultValues(&g_xOptions);
 
     g_xOptions.load();
+
+    connect(&g_xOptions, SIGNAL(openFile(QString)), this, SLOT(_scan(QString)));
+
+    g_pRecentFilesMenu = g_xOptions.createRecentFilesMenu(this);
+
+    ui->toolButtonRecentFiles->setEnabled(g_xOptions.getRecentFiles().count());
 
     adjustWindow();
 
@@ -87,7 +94,9 @@ void GuiMainWindow::scanFile(QString sFileName)
 
         ui->widgetResult->setData(scanResult, sSaveDirectory);
 
-        g_xOptions.setLastDirectory(sFileName);
+        g_xOptions.setLastFileName(sFileName);
+
+        ui->toolButtonRecentFiles->setEnabled(g_xOptions.getRecentFiles().count());
     }
 }
 
@@ -204,4 +213,11 @@ void GuiMainWindow::on_pushButtonDirectoryScan_clicked()
     dds.exec();
 
     adjustWindow();
+}
+
+void GuiMainWindow::on_toolButtonRecentFiles_clicked()
+{
+    g_pRecentFilesMenu->exec(QCursor::pos());
+
+    ui->toolButtonRecentFiles->setEnabled(g_xOptions.getRecentFiles().count());
 }
