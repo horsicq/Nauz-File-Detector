@@ -46,10 +46,11 @@ DialogAbout::DialogAbout(QWidget *pParent) : QDialog(pParent), ui(new Ui::Dialog
                        "<p align=\"center\"><span style=\" font-weight:600;\">%1(BTC): </span><a href=\"3DqddVBX9PKqMvNPXZ3gPHBNNRtD9CnmJo\"><span style=\" text-decoration: "
                        "underline; color:#ff0000;\">3DqddVBX9PKqMvNPXZ3gPHBNNRtD9CnmJo</span></a></p>")
                        .arg(tr("Donate"));
-    _data.sInfo += QString(
-                       "<p align=\"center\"><span style=\" font-weight:600;\">%1: </span><a href=\"https://github.com/horsicq/Nauz-File-Detector\"><span style=\" text-decoration: "
-                       "underline; color:#ff0000;\">https://github.com/horsicq/Nauz-File-Detector</span></a></p>")
-                       .arg(tr("Source code"));
+    _data.sInfo +=
+        QString(
+            "<p align=\"center\"><span style=\" font-weight:600;\">%1: </span><a href=\"https://github.com/horsicq/Nauz-File-Detector\"><span style=\" text-decoration: "
+            "underline; color:#ff0000;\">https://github.com/horsicq/Nauz-File-Detector</span></a></p>")
+            .arg(tr("Source code"));
 
     _data.sLibraries += QString(
                             "<p align=\"center\"><span style=\" font-weight:600;\">QT Library %1 </span><a href=\"http://qt-project.org\"><span style=\" text-decoration: "
