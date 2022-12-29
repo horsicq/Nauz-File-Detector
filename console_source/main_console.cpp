@@ -26,6 +26,7 @@
 #include "scanitemmodel.h"
 #include "staticscan.h"
 
+// TODO XOptions::CR
 void ScanFiles(QList<QString> *pListArgs, SpecAbstract::SCAN_OPTIONS *pScanOptions)
 {
     QList<QString> listFileNames;
