@@ -104,7 +104,7 @@ void GuiMainWindow::_scan(QString sName)
     QFileInfo fi(sName);
 
     if (fi.isFile()) {
-        ui->lineEditFileName->setText(sName);
+        ui->lineEditFileName->setText(QDir().toNativeSeparators(sName));
 
         scanFile(sName);
     } else if (fi.isDir()) {
