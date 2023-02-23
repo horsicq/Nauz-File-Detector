@@ -81,9 +81,9 @@ void GuiMainWindow::scanFile(QString sFileName)
         options.bVerbose = ui->checkBoxVerbose->isChecked();
         options.bAllTypesScan = ui->checkBoxAllTypesScan->isChecked();
 
-        //#ifdef QT_DEBUG
-        //        options.bIsTest=true;
-        //#endif
+        // #ifdef QT_DEBUG
+        //         options.bIsTest=true;
+        // #endif
 
         DialogStaticScanProcess ds(this);
         ds.setData(sFileName, &options, &scanResult);
