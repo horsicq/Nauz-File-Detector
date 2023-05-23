@@ -18,7 +18,7 @@ XCONFIG += use_capstone_x86
 
 !contains(XCONFIG, staticscan) {
     XCONFIG += staticscan
-    include(../StaticScan/staticscan.pri)
+    include(../SpecAbstract/staticscan.pri)
 }
 
 win32 {

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>832</width>
-    <height>410</height>
+    <width>818</width>
+    <height>435</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -157,21 +157,34 @@
      </widget>
     </item>
     <item>
-     <widget class="FormResult" name="widgetResult" native="true">
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
+     <widget class="QTreeView" name="treeViewResult">
+      <property name="editTriggers">
+       <set>QAbstractItemView::NoEditTriggers</set>
       </property>
+      <property name="selectionMode">
+       <enum>QAbstractItemView::SingleSelection</enum>
+      </property>
+      <property name="selectionBehavior">
+       <enum>QAbstractItemView::SelectItems</enum>
+      </property>
+      <attribute name="headerVisible">
+       <bool>false</bool>
+      </attribute>
      </widget>
     </item>
     <item>
      <layout class="QHBoxLayout" name="horizontalLayout_3">
       <item>
-       <widget class="QPushButton" name="pushButtonOptions">
+       <widget class="QPushButton" name="pushButtonClear">
         <property name="text">
-         <string>Options</string>
+         <string>Clear</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushButtonSave">
+        <property name="text">
+         <string>Save</string>
         </property>
        </widget>
       </item>
@@ -189,6 +202,19 @@
        </spacer>
       </item>
       <item>
+       <widget class="QPushButton" name="pushButtonExtra">
+        <property name="maximumSize">
+         <size>
+          <width>24</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="text">
+         <string notr="true">&gt;</string>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QLabel" name="labelTime">
         <property name="minimumSize">
          <size>
@@ -198,6 +224,13 @@
         </property>
         <property name="text">
          <string/>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushButtonOptions">
+        <property name="text">
+         <string>Options</string>
         </property>
        </widget>
       </item>
@@ -221,14 +254,6 @@
   </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <customwidgets>
-  <customwidget>
-   <class>FormResult</class>
-   <extends>QWidget</extends>
-   <header>formresult.h</header>
-   <container>1</container>
-  </customwidget>
- </customwidgets>
  <resources/>
  <connections/>
 </ui>

@@ -26,6 +26,8 @@ GuiMainWindow::GuiMainWindow(QWidget *pParent) : QMainWindow(pParent), ui(new Ui
 {
     ui->setupUi(this);
 
+    g_pModel = nullptr;
+
     setWindowTitle(XOptions::getTitle(X_APPLICATIONDISPLAYNAME, X_APPLICATIONVERSION));
 
     setAcceptDrops(true);
@@ -44,7 +46,7 @@ GuiMainWindow::GuiMainWindow(QWidget *pParent) : QMainWindow(pParent), ui(new Ui
     g_xOptions.addID(XOptions::ID_FILE_CONTEXT, "*");
 #endif
 
-    StaticScanOptionsWidget::setDefaultValues(&g_xOptions);
+    NFDOptionsWidget::setDefaultValues(&g_xOptions);
 
     g_xOptions.load();
 
@@ -85,13 +87,25 @@ void GuiMainWindow::scanFile(QString sFileName)
         //         options.bIsTest=true;
         // #endif
 
-        DialogStaticScanProcess ds(this);
+        DialogNFDScanProcess ds(this);
         ds.setData(sFileName, &options, &scanResult);
         ds.exec();
 
-        QString sSaveDirectory = XBinary::getResultFileName(sFileName, QString("%1.txt").arg(tr("Result")));
 
-        ui->widgetResult->setData(scanResult, sSaveDirectory);
+
+        ui->labelTime->clear();
+
+        QAbstractItemModel *pOldModel = ui->treeViewResult->model();
+
+        QList<XBinary::SCANSTRUCT> _listRecords = SpecAbstract::convert(&(scanResult.listRecords));
+
+        g_pModel = new ScanItemModel(&(_listRecords), 1);
+        ui->treeViewResult->setModel(g_pModel);
+        ui->treeViewResult->expandAll();
+
+        delete pOldModel;  // TODO Thread
+
+        ui->labelTime->setText(QString("%1 %2").arg(QString::number(scanResult.nScanTime), tr("msec")));
 
         g_xOptions.setLastFileName(sFileName);
 
@@ -108,7 +122,7 @@ void GuiMainWindow::_scan(QString sName)
 
         scanFile(sName);
     } else if (fi.isDir()) {
-        DialogStaticScanDirectory dds(this, sName);
+        DialogNFDScanDirectory dds(this, sName);
         dds.setGlobal(nullptr, &g_xOptions);
 
         dds.exec();
@@ -207,7 +221,7 @@ void GuiMainWindow::on_pushButtonDirectoryScan_clicked()
         sFolderPath = g_xOptions.getLastDirectory();
     }
 
-    DialogStaticScanDirectory dds(this, sFolderPath);
+    DialogNFDScanDirectory dds(this, sFolderPath);
 
     dds.exec();
 
@@ -220,3 +234,38 @@ void GuiMainWindow::on_toolButtonRecentFiles_clicked()
 
     ui->toolButtonRecentFiles->setEnabled(g_xOptions.getRecentFiles().count());
 }
+
+void GuiMainWindow::on_pushButtonClear_clicked()
+{
+    QAbstractItemModel *pOldModel = ui->treeViewResult->model();
+
+    ui->treeViewResult->setModel(nullptr);
+
+    delete pOldModel;  // TODO Thread
+
+    ui->labelTime->clear();
+}
+
+void GuiMainWindow::on_pushButtonSave_clicked()
+{
+    QAbstractItemModel *pModel = ui->treeViewResult->model();
+
+    if (pModel) {
+        QString sSaveDirectory = XBinary::getResultFileName(ui->lineEditFileName->text(), QString("%1.txt").arg(tr("Result")));
+        DialogNFDScanProcess::saveResult(this, (ScanItemModel *)pModel, sSaveDirectory);
+    }
+}
+
+void GuiMainWindow::on_pushButtonExtra_clicked()
+{
+    if (g_pModel) {
+        DialogTextInfo dialogTextInfo(this);
+
+        QString sText = ((ScanItemModel *)g_pModel)->toFormattedString();
+
+        dialogTextInfo.setText(sText);
+
+        dialogTextInfo.exec();
+    }
+}
+

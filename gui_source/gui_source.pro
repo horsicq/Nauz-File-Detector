@@ -32,9 +32,9 @@ FORMS    += \
     dialogabout.ui \
     dialogoptions.ui
 
-!contains(XCONFIG, formresult) {
-    XCONFIG += formresult
-    include(../StaticScan/formresult.pri)
+!contains(XCONFIG, nfd_widget) {
+    XCONFIG += nfd_widget
+    include(../nfd_widget/nfd_widget.pri)
 }
 
 !contains(XCONFIG, xoptionswidget) {

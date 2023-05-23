@@ -26,13 +26,13 @@ add_definitions(-DUSE_DEX)
 add_definitions(-DUSE_PDF)
 add_definitions(-DUSE_ARCHIVE)
 
-include(${PROJECT_SOURCE_DIR}/../StaticScan/formresult.cmake)
-include(${PROJECT_SOURCE_DIR}/../XOptions/xoptions.cmake)
+include(${PROJECT_SOURCE_DIR}/../nfd_widget/nfd_widget.cmake)
+include(${PROJECT_SOURCE_DIR}/../XOptions/xoptionswidget.cmake)
 include(${PROJECT_SOURCE_DIR}/../XAboutWidget/xaboutwidget.cmake)
 
 set(PROJECT_SOURCES
-            ${FORMRESULT_SOURCES}
-            ${XOPTIONS_SOURCES}
+            ${NFD_WIDGET_SOURCES}
+            ${XOPTIONSWIDGET_SOURCES}
             ${XABOUTWIDGET_SOURCES}
             dialogabout.cpp
             dialogabout.ui

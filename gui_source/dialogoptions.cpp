@@ -26,14 +26,14 @@ DialogOptions::DialogOptions(QWidget *pParent, XOptions *pOptions, XOptions::GRO
 {
     ui->setupUi(this);
 
-    g_pStaticScanOptionsWidget = new StaticScanOptionsWidget(this);
+    g_pNFDOptionsWidget = new NFDOptionsWidget(this);
 
     this->g_pOptions = pOptions;
 
     ui->widgetOptions->setOptions(pOptions, X_APPLICATIONDISPLAYNAME);
 
-    ui->widgetOptions->addPage(g_pStaticScanOptionsWidget, tr("Scan"));
-    g_pStaticScanOptionsWidget->setOptions(pOptions);
+    ui->widgetOptions->addPage(g_pNFDOptionsWidget, tr("Scan"));
+    g_pNFDOptionsWidget->setOptions(pOptions);
 
     ui->widgetOptions->setCurrentPage(groupId);
 }

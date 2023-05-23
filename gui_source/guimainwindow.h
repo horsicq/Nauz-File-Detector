@@ -29,8 +29,8 @@
 #include "../global.h"
 #include "dialogabout.h"
 #include "dialogoptions.h"
-#include "dialogstaticscandirectory.h"
-#include "dialogstaticscanprocess.h"
+#include "dialognfdscandirectory.h"
+#include "dialognfdscanprocess.h"
 #include "xoptions.h"
 
 namespace Ui {
@@ -55,6 +55,9 @@ private slots:
     void adjustWindow();
     void on_pushButtonDirectoryScan_clicked();
     void on_toolButtonRecentFiles_clicked();
+    void on_pushButtonClear_clicked();
+    void on_pushButtonSave_clicked();
+    void on_pushButtonExtra_clicked();
 
 protected:
     void dragEnterEvent(QDragEnterEvent *pEvent) override;
@@ -65,6 +68,7 @@ private:
     Ui::GuiMainWindow *ui;
     XOptions g_xOptions;
     QMenu *g_pRecentFilesMenu;
+    QAbstractItemModel *g_pModel;
 };
 
 #endif  // GUIMAINWINDOW_H

@@ -27,7 +27,7 @@
 #include <QSettings>
 
 #include "../global.h"
-#include "staticscanoptionswidget.h"
+#include "nfdoptionswidget.h"
 #include "xoptions.h"
 
 namespace Ui {
@@ -43,7 +43,7 @@ public:
 
 private:
     Ui::DialogOptions *ui;
-    StaticScanOptionsWidget *g_pStaticScanOptionsWidget;
+    NFDOptionsWidget *g_pNFDOptionsWidget;
     XOptions *g_pOptions;
 };
 
