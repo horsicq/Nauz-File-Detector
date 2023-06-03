@@ -91,8 +91,6 @@ void GuiMainWindow::scanFile(QString sFileName)
         ds.setData(sFileName, &options, &scanResult);
         ds.exec();
 
-
-
         ui->labelTime->clear();
 
         QAbstractItemModel *pOldModel = ui->treeViewResult->model();
@@ -268,4 +266,3 @@ void GuiMainWindow::on_pushButtonExtra_clicked()
         dialogTextInfo.exec();
     }
 }
-
