@@ -51,6 +51,7 @@ GuiMainWindow::GuiMainWindow(QWidget *pParent) : QMainWindow(pParent), ui(new Ui
     g_xOptions.load();
 
     connect(&g_xOptions, SIGNAL(openFile(QString)), this, SLOT(_scan(QString)));
+    connect(&g_xOptions, SIGNAL(errorMessage(QString)), this, SLOT(errorMessageSlot(QString)));
 
     g_pRecentFilesMenu = g_xOptions.createRecentFilesMenu(this);
 
@@ -70,7 +71,7 @@ GuiMainWindow::~GuiMainWindow()
     delete ui;
 }
 
-void GuiMainWindow::scanFile(QString sFileName)
+void GuiMainWindow::scanFile(const QString &sFileName)
 {
     if (sFileName != "") {
         SpecAbstract::SCAN_RESULT scanResult = {0};
@@ -111,7 +112,7 @@ void GuiMainWindow::scanFile(QString sFileName)
     }
 }
 
-void GuiMainWindow::_scan(QString sName)
+void GuiMainWindow::_scan(const QString &sName)
 {
     QFileInfo fi(sName);
 
@@ -127,6 +128,11 @@ void GuiMainWindow::_scan(QString sName)
 
         adjustWindow();
     }
+}
+
+void GuiMainWindow::errorMessageSlot(const QString &sText)
+{
+    QMessageBox::critical(this, tr("Error"), sText);
 }
 
 void GuiMainWindow::on_pushButtonExit_clicked()

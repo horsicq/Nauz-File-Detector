@@ -45,8 +45,9 @@ public:
     ~GuiMainWindow() override;
 
 private slots:
-    void scanFile(QString sFileName);
-    void _scan(QString sName);
+    void scanFile(const QString &sFileName);
+    void _scan(const QString &sName);
+    void errorMessageSlot(const QString &sText);
     void on_pushButtonScan_clicked();
     void on_pushButtonExit_clicked();
     void on_pushButtonOpenFile_clicked();
