@@ -78,10 +78,10 @@ void GuiMainWindow::scanFile(const QString &sFileName)
 
         SpecAbstract::SCAN_OPTIONS options = {0};
 
-        options.bRecursiveScan = ui->checkBoxRecursiveScan->isChecked();
-        options.bDeepScan = ui->checkBoxDeepScan->isChecked();
-        options.bHeuristicScan = ui->checkBoxHeuristicScan->isChecked();
-        options.bVerbose = ui->checkBoxVerbose->isChecked();
+        options.bIsRecursiveScan = ui->checkBoxRecursiveScan->isChecked();
+        options.bIsDeepScan = ui->checkBoxDeepScan->isChecked();
+        options.bIsHeuristicScan = ui->checkBoxHeuristicScan->isChecked();
+        options.bIsVerbose = ui->checkBoxVerbose->isChecked();
         options.bAllTypesScan = ui->checkBoxAllTypesScan->isChecked();
 
         // #ifdef QT_DEBUG

@@ -135,10 +135,10 @@ int main(int argc, char *argv[])
 
     SpecAbstract::SCAN_OPTIONS scanOptions = {0};
 
-    scanOptions.bRecursiveScan = parser.isSet(clRecursiveScan);
-    scanOptions.bDeepScan = parser.isSet(clDeepScan);
-    scanOptions.bHeuristicScan = parser.isSet(clHeuristicScan);
-    scanOptions.bVerbose = parser.isSet(clVerbose);
+    scanOptions.bIsRecursiveScan = parser.isSet(clRecursiveScan);
+    scanOptions.bIsDeepScan = parser.isSet(clDeepScan);
+    scanOptions.bIsHeuristicScan = parser.isSet(clHeuristicScan);
+    scanOptions.bIsVerbose = parser.isSet(clVerbose);
     scanOptions.bAllTypesScan = parser.isSet(clAllTypesScan);
     scanOptions.bResultAsXML = parser.isSet(clResultAsXml);
     scanOptions.bResultAsJSON = parser.isSet(clResultAsJson);
