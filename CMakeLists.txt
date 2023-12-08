@@ -25,7 +25,7 @@ if(WIN32)
     install (TARGETS nfdc)
 endif()
 
-if(LINUX)
+if(CMAKE_SYSTEM_NAME MATCHES "Linux")
     install (TARGETS nfd LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR})
     install (TARGETS nfdc LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR})
     install (FILES LINUX/nfd.desktop DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/applications/)
