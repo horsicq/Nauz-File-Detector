@@ -21,6 +21,11 @@ XCONFIG += use_capstone_x86
     include(../SpecAbstract/staticscan.pri)
 }
 
+!contains(XCONFIG, xoptions) {
+    XCONFIG += xoptions
+    include(../XOptions/xoptions.pri)
+}
+
 win32 {
     VERSION = 0.09.0.0
     QMAKE_TARGET_COMPANY = NTInfo

@@ -78,6 +78,7 @@ void GuiMainWindow::scanFile(const QString &sFileName)
 
         SpecAbstract::SCAN_OPTIONS options = {0};
 
+        options.fileType = (XBinary::FT)(ui->comboBoxType->currentData().toInt());
         options.bIsRecursiveScan = ui->checkBoxRecursiveScan->isChecked();
         options.bIsDeepScan = ui->checkBoxDeepScan->isChecked();
         options.bIsHeuristicScan = ui->checkBoxHeuristicScan->isChecked();
@@ -118,6 +119,8 @@ void GuiMainWindow::_scan(const QString &sName)
 
     if (fi.isFile()) {
         ui->lineEditFileName->setText(QDir().toNativeSeparators(sName));
+
+        XFormats::setFileTypeComboBox(XBinary::FT_UNKNOWN, sName, ui->comboBoxType);
 
         scanFile(sName);
     } else if (fi.isDir()) {

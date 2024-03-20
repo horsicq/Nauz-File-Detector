@@ -25,10 +25,12 @@
 #include "../global.h"
 #include "scanitemmodel.h"
 #include "staticscan.h"
+#include "xoptions.h"
 
-// TODO XOptions::CR
-void ScanFiles(QList<QString> *pListArgs, SpecAbstract::SCAN_OPTIONS *pScanOptions)
+XOptions::CR ScanFiles(QList<QString> *pListArgs, SpecAbstract::SCAN_OPTIONS *pScanOptions)
 {
+    XOptions::CR result = XOptions::CR_SUCCESS;
+
     QList<QString> listFileNames;
 
     for (qint32 i = 0; i < pListArgs->count(); i++) {
@@ -38,6 +40,8 @@ void ScanFiles(QList<QString> *pListArgs, SpecAbstract::SCAN_OPTIONS *pScanOptio
             XBinary::findFiles(sFileName, &listFileNames);
         } else {
             printf("Cannot find: %s\n", sFileName.toUtf8().data());
+
+            result = XOptions::CR_CANNOTFINDFILE;
         }
     }
 
@@ -70,10 +74,14 @@ void ScanFiles(QList<QString> *pListArgs, SpecAbstract::SCAN_OPTIONS *pScanOptio
             model.coloredOutput();
         }
     }
+
+    return result;
 }
 
 int main(int argc, char *argv[])
 {
+    qint32 nResult = XOptions::CR_SUCCESS;
+
     QCoreApplication::setOrganizationName(X_ORGANIZATIONNAME);
     QCoreApplication::setOrganizationDomain(X_ORGANIZATIONDOMAIN);
     QCoreApplication::setApplicationName(X_APPLICATIONNAME);
@@ -84,40 +92,22 @@ int main(int argc, char *argv[])
     QCommandLineParser parser;
     QString sDescription;
     sDescription.append(QString("%1 v%2\n").arg(X_APPLICATIONDISPLAYNAME, X_APPLICATIONVERSION));
-    sDescription.append(QString("%1\n").arg("Copyright(C) 2017-2023 hors<horsicq@gmail.com> Web: http://ntinfo.biz"));
+    sDescription.append(QString("%1\n").arg("Copyright(C) 2017-2024 hors<horsicq@gmail.com> Web: http://ntinfo.biz"));
     parser.setApplicationDescription(sDescription);
     parser.addHelpOption();
     parser.addVersionOption();
 
     parser.addPositionalArgument("target", "The file or directory to open.");
 
-    QCommandLineOption clRecursiveScan(QStringList() << "r"
-                                                     << "recursivescan",
-                                       "Recursive scan.");
-    QCommandLineOption clDeepScan(QStringList() << "d"
-                                                << "deepscan",
-                                  "Deep scan.");
-    QCommandLineOption clHeuristicScan(QStringList() << "u"
-                                                     << "heuristicscan",
-                                       "Heuristic scan.");
-    QCommandLineOption clVerbose(QStringList() << "b"
-                                               << "verbose",
-                                 "Verbose.");
-    QCommandLineOption clAllTypesScan(QStringList() << "a"
-                                                    << "alltypes",
-                                      "Scan all types.");
-    QCommandLineOption clResultAsXml(QStringList() << "x"
-                                                   << "xml",
-                                     "Result as XML.");
-    QCommandLineOption clResultAsJson(QStringList() << "j"
-                                                    << "json",
-                                      "Result as JSON.");
-    QCommandLineOption clResultAsCSV(QStringList() << "c"
-                                                   << "csv",
-                                     "Result as CSV.");
-    QCommandLineOption clResultAsTSV(QStringList() << "t"
-                                                   << "tsv",
-                                     "Result as TSV.");
+    QCommandLineOption clRecursiveScan(QStringList() << "r" << "recursivescan", "Recursive scan.");
+    QCommandLineOption clDeepScan(QStringList() << "d" << "deepscan", "Deep scan.");
+    QCommandLineOption clHeuristicScan(QStringList() << "u" << "heuristicscan", "Heuristic scan.");
+    QCommandLineOption clVerbose(QStringList() << "b" << "verbose", "Verbose.");
+    QCommandLineOption clAllTypesScan(QStringList() << "a" << "alltypes", "Scan all types.");
+    QCommandLineOption clResultAsXml(QStringList() << "x" << "xml", "Result as XML.");
+    QCommandLineOption clResultAsJson(QStringList() << "j" << "json", "Result as JSON.");
+    QCommandLineOption clResultAsCSV(QStringList() << "c" << "csv", "Result as CSV.");
+    QCommandLineOption clResultAsTSV(QStringList() << "t" << "tsv", "Result as TSV.");
 
     parser.addOption(clRecursiveScan);
     parser.addOption(clDeepScan);
@@ -146,11 +136,11 @@ int main(int argc, char *argv[])
     scanOptions.bResultAsTSV = parser.isSet(clResultAsTSV);
 
     if (listArgs.count()) {
-        ScanFiles(&listArgs, &scanOptions);
+        nResult = ScanFiles(&listArgs, &scanOptions);
     } else {
         parser.showHelp();
         Q_UNREACHABLE();
     }
 
-    return 0;
+    return nResult;
 }
