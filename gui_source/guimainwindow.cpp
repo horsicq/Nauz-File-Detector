@@ -99,7 +99,7 @@ void GuiMainWindow::scanFile(const QString &sFileName)
 
         QList<XBinary::SCANSTRUCT> _listRecords = SpecAbstract::convert(&(scanResult.listRecords));
 
-        g_pModel = new ScanItemModel(&(_listRecords), 1);
+        g_pModel = new ScanItemModel(&(_listRecords), 1, g_xOptions.getValue(XOptions::ID_SCAN_HIGHLIGHT).toBool());
         ui->treeViewResult->setModel(g_pModel);
         ui->treeViewResult->expandAll();
 

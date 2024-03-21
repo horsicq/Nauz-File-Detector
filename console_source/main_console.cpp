@@ -58,7 +58,7 @@ XOptions::CR ScanFiles(QList<QString> *pListArgs, SpecAbstract::SCAN_OPTIONS *pS
 
         QList<XBinary::SCANSTRUCT> _listRecords = SpecAbstract::convert(&(scanResult.listRecords));
 
-        ScanItemModel model(&_listRecords);
+        ScanItemModel model(&_listRecords, 1, true);
 
         XBinary::FORMATTYPE formatType = XBinary::FORMATTYPE_TEXT;
 
@@ -66,6 +66,7 @@ XOptions::CR ScanFiles(QList<QString> *pListArgs, SpecAbstract::SCAN_OPTIONS *pS
         else if (pScanOptions->bResultAsJSON) formatType = XBinary::FORMATTYPE_JSON;
         else if (pScanOptions->bResultAsTSV) formatType = XBinary::FORMATTYPE_TSV;
         else if (pScanOptions->bResultAsXML) formatType = XBinary::FORMATTYPE_XML;
+        else if (pScanOptions->bResultAsPlainText) formatType = XBinary::FORMATTYPE_PLAINTEXT;
 
         if (formatType != XBinary::FORMATTYPE_TEXT) {
             printf("%s\n", model.toString(formatType).toUtf8().data());
@@ -108,6 +109,7 @@ int main(int argc, char *argv[])
     QCommandLineOption clResultAsJson(QStringList() << "j" << "json", "Result as JSON.");
     QCommandLineOption clResultAsCSV(QStringList() << "c" << "csv", "Result as CSV.");
     QCommandLineOption clResultAsTSV(QStringList() << "t" << "tsv", "Result as TSV.");
+    QCommandLineOption clResultAsPlainText(QStringList() << "p" << "plaintext", "Result as Plain Text.");
 
     parser.addOption(clRecursiveScan);
     parser.addOption(clDeepScan);
@@ -118,6 +120,7 @@ int main(int argc, char *argv[])
     parser.addOption(clResultAsJson);
     parser.addOption(clResultAsCSV);
     parser.addOption(clResultAsTSV);
+    parser.addOption(clResultAsPlainText);
 
     parser.process(app);
 
@@ -134,6 +137,7 @@ int main(int argc, char *argv[])
     scanOptions.bResultAsJSON = parser.isSet(clResultAsJson);
     scanOptions.bResultAsCSV = parser.isSet(clResultAsCSV);
     scanOptions.bResultAsTSV = parser.isSet(clResultAsTSV);
+    scanOptions.bResultAsPlainText = parser.isSet(clResultAsPlainText);
 
     if (listArgs.count()) {
         nResult = ScanFiles(&listArgs, &scanOptions);
