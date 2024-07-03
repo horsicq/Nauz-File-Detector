@@ -1,53 +1,5 @@
 <p><table>
 <tr>
-    <td><img src="https://github.com/horsicq/Nauz-File-Detector/blob/master/images/thanks/AdamHenault.png" /></td>
-    <td>
-      <p>
-        <big><b>Adam Henault</b></big>
-      </p>
-      <p>
-        Website: <a href="http://adamhlt.com/">http://adamhlt.com/</a>
-      </p>
-      <p>
-        GitHub: <a href="https://github.com/adamhlt">adamhlt</a>
-      </p>
-    </td>
-</tr>
-<tr>
-    <td><img src="https://github.com/horsicq/Nauz-File-Detector/blob/master/images/thanks/AdricNet.png" /></td>
-    <td>
-      <p>
-        <big><b>Adric Net</b></big>
-      </p>
-      <p>
-        Website: <a href="http://dfirnotes.net">http://dfirnotes.net</a>
-      </p>
-      <p>
-        GitHub: <a href="https://github.com/adricnet">adricnet</a>
-      </p>
-      <p>
-        Twitter: <a href="https://twitter.com/dfirnotes">dfirnotes</a>
-      </p>
-    </td>
-</tr>
-<tr>
-    <td><img src="https://github.com/horsicq/Nauz-File-Detector/blob/master/images/thanks/AliHadi.png" /></td>
-    <td>
-      <p>
-        <big><b>Ali Hadi</b></big>
-      </p>
-      <p>
-        Website: <a href="https://www.ashemery.com">https://www.ashemery.com</a>
-      </p>
-      <p>
-        GitHub: <a href="https://github.com/ashemery">ashemery</a>
-      </p>
-      <p>
-        Twitter: <a href="https://twitter.com/binaryz0ne">binaryz0ne</a>
-      </p>
-    </td>
-</tr>
-<tr>
     <td><img src="https://github.com/horsicq/Nauz-File-Detector/blob/master/images/thanks/AndersonLeite.png" /></td>
     <td>
       <p>
@@ -61,65 +13,6 @@
       </p>
       <p>
         Twitter: <a href="https://twitter.com/buzz3r_">buzz3r_</a>
-      </p>
-    </td>
-</tr>
-<tr>
-    <td><img src="https://github.com/horsicq/Nauz-File-Detector/blob/master/images/thanks/Bartosz.png" /></td>
-    <td>
-      <p>
-        <big><b>Bartosz Wójcik</b></big>
-      </p>
-      <p>
-        Website: <a href="https://www.pelock.com">https://www.pelock.com</a>
-      </p>
-      <p>
-        GitHub: <a href="https://github.com/PELock">PELock</a>
-      </p>
-      <p>
-        Twitter: <a href="https://twitter.com/PELock">PELock</a>
-      </p>
-    </td>
-</tr>
-<tr>
-    <td><img src="https://github.com/horsicq/Nauz-File-Detector/blob/master/images/thanks/clayne.png" /></td>
-    <td>
-      <p>
-        <big><b>Christopher Layne</b></big>
-      </p>
-      <p>
-        GitHub: <a href="https://github.com/clayne">clayne</a>
-      </p>
-    </td>
-</tr>
-<tr>
-    <td><img src="https://github.com/horsicq/Nauz-File-Detector/blob/master/images/thanks/DavClark.png" /></td>
-    <td>
-      <p>
-        <big><b>Dav Clark</b></big>
-      </p>
-      <p>
-        Website: <a href="https://www.linkedin.com/in/davclark">https://www.linkedin.com/in/davclark</a>
-      </p>
-      <p>
-        GitHub: <a href="https://github.com/davclark">davclark</a>
-      </p>
-      <p>
-        Twitter: <a href="https://twitter.com/davclark">davclark</a>
-      </p>
-    </td>
-</tr>
-<tr>
-    <td><img src="https://github.com/horsicq/Nauz-File-Detector/blob/master/images/thanks/DavidZimmer.png" /></td>
-    <td>
-      <p>
-        <big><b>David Zimmer</b></big>
-      </p>
-      <p>
-        Website: <a href="http://sandsprite.com">http://sandsprite.com</a>
-      </p>
-      <p>
-        GitHub: <a href="https://github.com/dzzie">dzzie</a>
       </p>
     </td>
 </tr>
@@ -141,6 +34,20 @@
     </td>
 </tr>
 <tr>
+    <td><img src="https://github.com/horsicq/Nauz-File-Detector/blob/master/images/thanks/LeandroFroes.png" /></td>
+    <td>
+      <p>
+        <big><b>Leandro Fróes</b></big>
+      </p>
+      <p>
+        GitHub: <a href="https://github.com/leandrofroes">leandrofroes</a>
+      </p>
+      <p>
+        Twitter: <a href="https://twitter.com/leandrofr0es">leandrofr0es</a>
+      </p>
+    </td>
+</tr>
+<tr>
     <td><img src="https://github.com/horsicq/Nauz-File-Detector/blob/master/images/thanks/FernandoMerces.png" /></td>
     <td>
       <p>
@@ -154,45 +61,6 @@
       </p>
       <p>
         Twitter: <a href="https://twitter.com/mer0x36">mer0x36</a>
-      </p>
-    </td>
-</tr>
-<tr>
-    <td><img src="https://github.com/horsicq/Nauz-File-Detector/blob/master/images/thanks/FilipNavara.png" /></td>
-    <td>
-      <p>
-        <big><b>Filip Navara</b></big>
-      </p>
-      <p>
-        GitHub: <a href="https://github.com/filipnavara">filipnavara</a>
-      </p>
-      <p>
-        Twitter: <a href="https://twitter.com/filipnavara">filipnavara</a>
-      </p>
-    </td>
-</tr>
-<tr>
-    <td><img src="https://github.com/horsicq/Nauz-File-Detector/blob/master/images/thanks/fr0zenbag.png" /></td>
-    <td>
-      <p>
-        <big><b>fr0zenbag</b></big>
-      </p>
-      <p>
-        GitHub: <a href="https://github.com/fr0zenbag">fr0zenbag</a>
-      </p>
-    </td>
-</tr>
-<tr>
-    <td><img src="https://github.com/horsicq/Nauz-File-Detector/blob/master/images/thanks/FrenchYeti.png" /></td>
-    <td>
-      <p>
-        <big><b>FrenchYeti</b></big>
-      </p>
-      <p>
-        GitHub: <a href="https://github.com/FrenchYeti">FrenchYeti</a>
-      </p>
-      <p>
-        Twitter: <a href="https://twitter.com/frenchyeti">frenchyeti</a>
       </p>
     </td>
 </tr>
@@ -211,6 +79,71 @@
     </td>
 </tr>
 <tr>
+    <td><img src="https://github.com/horsicq/Nauz-File-Detector/blob/master/images/thanks/DavidZimmer.png" /></td>
+    <td>
+      <p>
+        <big><b>David Zimmer</b></big>
+      </p>
+      <p>
+        Website: <a href="http://sandsprite.com">http://sandsprite.com</a>
+      </p>
+      <p>
+        GitHub: <a href="https://github.com/dzzie">dzzie</a>
+      </p>
+    </td>
+</tr>
+<tr>
+    <td><img src="https://github.com/horsicq/Nauz-File-Detector/blob/master/images/thanks/Bartosz.png" /></td>
+    <td>
+      <p>
+        <big><b>Bartosz Wójcik</b></big>
+      </p>
+      <p>
+        Website: <a href="https://www.pelock.com">https://www.pelock.com</a>
+      </p>
+      <p>
+        GitHub: <a href="https://github.com/PELock">PELock</a>
+      </p>
+      <p>
+        Twitter: <a href="https://twitter.com/PELock">PELock</a>
+      </p>
+    </td>
+</tr>
+<tr>
+    <td><img src="https://github.com/horsicq/Nauz-File-Detector/blob/master/images/thanks/AliHadi.png" /></td>
+    <td>
+      <p>
+        <big><b>Ali Hadi</b></big>
+      </p>
+      <p>
+        Website: <a href="https://www.ashemery.com">https://www.ashemery.com</a>
+      </p>
+      <p>
+        GitHub: <a href="https://github.com/ashemery">ashemery</a>
+      </p>
+      <p>
+        Twitter: <a href="https://twitter.com/binaryz0ne">binaryz0ne</a>
+      </p>
+    </td>
+</tr>
+<tr>
+    <td><img src="https://github.com/horsicq/Nauz-File-Detector/blob/master/images/thanks/DavClark.png" /></td>
+    <td>
+      <p>
+        <big><b>Dav Clark</b></big>
+      </p>
+      <p>
+        Website: <a href="https://www.linkedin.com/in/davclark">https://www.linkedin.com/in/davclark</a>
+      </p>
+      <p>
+        GitHub: <a href="https://github.com/davclark">davclark</a>
+      </p>
+      <p>
+        Twitter: <a href="https://twitter.com/davclark">davclark</a>
+      </p>
+    </td>
+</tr>
+<tr>
     <td><img src="https://github.com/horsicq/Nauz-File-Detector/blob/master/images/thanks/IntegralTech.png" /></td>
     <td>
       <p>
@@ -225,13 +158,55 @@
     </td>
 </tr>
 <tr>
-    <td><img src="https://github.com/horsicq/Nauz-File-Detector/blob/master/images/thanks/JasonJackTan.png" /></td>
+    <td><img src="https://github.com/horsicq/Nauz-File-Detector/blob/master/images/thanks/FrenchYeti.png" /></td>
     <td>
       <p>
-        <big><b>Jason Jack Tan</b></big>
+        <big><b>FrenchYeti</b></big>
       </p>
       <p>
-        GitHub: <a href="https://github.com/Perthys">Perthys</a>
+        GitHub: <a href="https://github.com/FrenchYeti">FrenchYeti</a>
+      </p>
+      <p>
+        Twitter: <a href="https://twitter.com/frenchyeti">frenchyeti</a>
+      </p>
+    </td>
+</tr>
+<tr>
+    <td><img src="https://github.com/horsicq/Nauz-File-Detector/blob/master/images/thanks/fr0zenbag.png" /></td>
+    <td>
+      <p>
+        <big><b>fr0zenbag</b></big>
+      </p>
+      <p>
+        GitHub: <a href="https://github.com/fr0zenbag">fr0zenbag</a>
+      </p>
+    </td>
+</tr>
+<tr>
+    <td><img src="https://github.com/horsicq/Nauz-File-Detector/blob/master/images/thanks/AdricNet.png" /></td>
+    <td>
+      <p>
+        <big><b>Adric Net</b></big>
+      </p>
+      <p>
+        Website: <a href="http://dfirnotes.net">http://dfirnotes.net</a>
+      </p>
+      <p>
+        GitHub: <a href="https://github.com/adricnet">adricnet</a>
+      </p>
+      <p>
+        Twitter: <a href="https://twitter.com/dfirnotes">dfirnotes</a>
+      </p>
+    </td>
+</tr>
+<tr>
+    <td><img src="https://github.com/horsicq/Nauz-File-Detector/blob/master/images/thanks/SpriteOvO.png" /></td>
+    <td>
+      <p>
+        <big><b>SpriteOvO</b></big>
+      </p>
+      <p>
+        GitHub: <a href="https://github.com/SpriteOvO">SpriteOvO</a>
       </p>
     </td>
 </tr>
@@ -250,27 +225,44 @@
     </td>
 </tr>
 <tr>
-    <td><img src="https://github.com/horsicq/Nauz-File-Detector/blob/master/images/thanks/LeandroFroes.png" /></td>
+    <td><img src="https://github.com/horsicq/Nauz-File-Detector/blob/master/images/thanks/Dan0xE.png" /></td>
     <td>
       <p>
-        <big><b>Leandro Fróes</b></big>
+        <big><b>Dan0xE</b></big>
       </p>
       <p>
-        GitHub: <a href="https://github.com/leandrofroes">leandrofroes</a>
+        Website: <a href="https://dev.to/ubervisor">https://dev.to/ubervisor</a>
       </p>
       <p>
-        Twitter: <a href="https://twitter.com/leandrofr0es">leandrofr0es</a>
+        GitHub: <a href="https://github.com/Dan0xE">Dan0xE</a>
+      </p>
+      <p>
+        Twitter: <a href="https://twitter.com/dan0xe">dan0xe</a>
       </p>
     </td>
 </tr>
 <tr>
-    <td><img src="https://github.com/horsicq/Nauz-File-Detector/blob/master/images/thanks/misonothx.png" /></td>
+    <td><img src="https://github.com/horsicq/Nauz-File-Detector/blob/master/images/thanks/clayne.png" /></td>
     <td>
       <p>
-        <big><b>misonothx</b></big>
+        <big><b>Christopher Layne</b></big>
       </p>
       <p>
-        GitHub: <a href="https://github.com/miso-xyz">miso-xyz</a>
+        GitHub: <a href="https://github.com/clayne">clayne</a>
+      </p>
+    </td>
+</tr>
+<tr>
+    <td><img src="https://github.com/horsicq/Nauz-File-Detector/blob/master/images/thanks/AdamHenault.png" /></td>
+    <td>
+      <p>
+        <big><b>Adam Henault</b></big>
+      </p>
+      <p>
+        Website: <a href="http://adamhlt.com/">http://adamhlt.com/</a>
+      </p>
+      <p>
+        GitHub: <a href="https://github.com/adamhlt">adamhlt</a>
       </p>
     </td>
 </tr>
@@ -286,6 +278,20 @@
     </td>
 </tr>
 <tr>
+    <td><img src="https://github.com/horsicq/Nauz-File-Detector/blob/master/images/thanks/hmstk.png" /></td>
+    <td>
+      <p>
+        <big><b>Derick Estrada</b></big>
+      </p>
+      <p>
+        Website: <a href="hamsteri.co">hamsteri.co</a>
+      </p>
+      <p>
+        GitHub: <a href="https://github.com/hmstk">hmstk</a>
+      </p>
+    </td>
+</tr>
+<tr>
     <td><img src="https://github.com/horsicq/Nauz-File-Detector/blob/master/images/thanks/phithon.png" /></td>
     <td>
       <p>
@@ -296,6 +302,42 @@
       </p>
       <p>
         GitHub: <a href="https://github.com/phith0n">phith0n</a>
+      </p>
+    </td>
+</tr>
+<tr>
+    <td><img src="https://github.com/horsicq/Nauz-File-Detector/blob/master/images/thanks/JasonJackTan.png" /></td>
+    <td>
+      <p>
+        <big><b>Jason Jack Tan</b></big>
+      </p>
+      <p>
+        GitHub: <a href="https://github.com/Perthys">Perthys</a>
+      </p>
+    </td>
+</tr>
+<tr>
+    <td><img src="https://github.com/horsicq/Nauz-File-Detector/blob/master/images/thanks/misonothx.png" /></td>
+    <td>
+      <p>
+        <big><b>misonothx</b></big>
+      </p>
+      <p>
+        GitHub: <a href="https://github.com/miso-xyz">miso-xyz</a>
+      </p>
+    </td>
+</tr>
+<tr>
+    <td><img src="https://github.com/horsicq/Nauz-File-Detector/blob/master/images/thanks/FilipNavara.png" /></td>
+    <td>
+      <p>
+        <big><b>Filip Navara</b></big>
+      </p>
+      <p>
+        GitHub: <a href="https://github.com/filipnavara">filipnavara</a>
+      </p>
+      <p>
+        Twitter: <a href="https://twitter.com/filipnavara">filipnavara</a>
       </p>
     </td>
 </tr>
