@@ -38,7 +38,10 @@ GuiMainWindow::GuiMainWindow(QWidget *pParent) : QMainWindow(pParent), ui(new Ui
     g_xOptions.addID(XOptions::ID_VIEW_STYLE, "Fusion");
     g_xOptions.addID(XOptions::ID_VIEW_LANG, "System");
     g_xOptions.addID(XOptions::ID_VIEW_QSS, "");
-    g_xOptions.addID(XOptions::ID_VIEW_FONT, "");
+    g_xOptions.addID(XOptions::ID_VIEW_FONT_CONTROLS, XOptions::getDefaultFont().toString());
+    g_xOptions.addID(XOptions::ID_VIEW_FONT_TABLEVIEWS, XOptions::getMonoFont().toString());
+    g_xOptions.addID(XOptions::ID_VIEW_FONT_TREEVIEWS, XOptions::getDefaultFont().toString());
+    g_xOptions.addID(XOptions::ID_VIEW_FONT_TEXTEDITS, XOptions::getMonoFont().toString());
     g_xOptions.addID(XOptions::ID_FILE_SAVELASTDIRECTORY, true);
     g_xOptions.addID(XOptions::ID_FILE_SAVERECENTFILES, true);
 
@@ -57,7 +60,7 @@ GuiMainWindow::GuiMainWindow(QWidget *pParent) : QMainWindow(pParent), ui(new Ui
 
     ui->toolButtonRecentFiles->setEnabled(g_xOptions.getRecentFiles().count());
 
-    adjustWindow();
+    adjustView();
 
     if (QCoreApplication::arguments().count() > 1) {
         _scan(QCoreApplication::arguments().at(1));
@@ -99,7 +102,9 @@ void GuiMainWindow::scanFile(const QString &sFileName)
 
         QList<XBinary::SCANSTRUCT> _listRecords = SpecAbstract::convert(&(scanResult.listRecords));
 
-        g_pModel = new ScanItemModel(&(_listRecords), 1, g_xOptions.getValue(XOptions::ID_SCAN_HIGHLIGHT).toBool());
+        bool bHighlight = g_xOptions.getValue(XOptions::ID_SCAN_HIGHLIGHT).toBool();
+
+        g_pModel = new ScanItemModel(&(_listRecords), 1, bHighlight);
         ui->treeViewResult->setModel(g_pModel);
         ui->treeViewResult->expandAll();
 
@@ -129,7 +134,7 @@ void GuiMainWindow::_scan(const QString &sName)
 
         dds.exec();
 
-        adjustWindow();
+        adjustView();
     }
 }
 
@@ -207,10 +212,10 @@ void GuiMainWindow::on_pushButtonOptions_clicked()
 
     dialogOptions.exec();
 
-    adjustWindow();
+    adjustView();
 }
 
-void GuiMainWindow::adjustWindow()
+void GuiMainWindow::adjustView()
 {
     g_xOptions.adjustWindow(this);
 
@@ -232,7 +237,7 @@ void GuiMainWindow::on_pushButtonDirectoryScan_clicked()
 
     dds.exec();
 
-    adjustWindow();
+    adjustView();
 }
 
 void GuiMainWindow::on_toolButtonRecentFiles_clicked()
