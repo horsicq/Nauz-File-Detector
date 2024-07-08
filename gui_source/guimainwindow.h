@@ -68,6 +68,7 @@ protected:
 private:
     Ui::GuiMainWindow *ui;
     XOptions g_xOptions;
+    XShortcuts g_xShortcuts;
     QMenu *g_pRecentFilesMenu;
     QAbstractItemModel *g_pModel;
 };

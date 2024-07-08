@@ -1,4 +1,4 @@
-/* Copyright (c) 2018-2023 hors<horsicq@gmail.com>
+/* Copyright (c) 2018-2024 hors<horsicq@gmail.com>
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -29,5 +29,6 @@
 #define X_ORGANIZATIONNAME "NTInfo"
 #define X_ORGANIZATIONDOMAIN "ntinfo.biz"
 #define X_OPTIONSFILE "nfd.ini"
+#define X_SHORTCUTSFILE "shortcuts.ini"
 
 #endif  // _GLOBAL_H

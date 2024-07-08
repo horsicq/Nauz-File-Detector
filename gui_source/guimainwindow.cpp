@@ -53,6 +53,11 @@ GuiMainWindow::GuiMainWindow(QWidget *pParent) : QMainWindow(pParent), ui(new Ui
 
     g_xOptions.load();
 
+    g_xShortcuts.setName(X_SHORTCUTSFILE);
+    g_xShortcuts.setNative(g_xOptions.isNative());
+
+    g_xShortcuts.load();
+
     connect(&g_xOptions, SIGNAL(openFile(QString)), this, SLOT(_scan(QString)));
     connect(&g_xOptions, SIGNAL(errorMessage(QString)), this, SLOT(errorMessageSlot(QString)));
 
@@ -93,6 +98,7 @@ void GuiMainWindow::scanFile(const QString &sFileName)
         // #endif
 
         DialogNFDScanProcess ds(this);
+        ds.setGlobal(&g_xShortcuts, &g_xOptions);
         ds.setData(sFileName, &options, &scanResult);
         ds.exec();
 
