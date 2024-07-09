@@ -82,16 +82,17 @@ GuiMainWindow::~GuiMainWindow()
 void GuiMainWindow::scanFile(const QString &sFileName)
 {
     if (sFileName != "") {
-        SpecAbstract::SCAN_RESULT scanResult = {0};
+        XBinary::SCAN_RESULT scanResult = {0};
 
-        SpecAbstract::SCAN_OPTIONS options = {0};
+        XBinary::SCAN_OPTIONS scanOptions = {0};
 
-        options.fileType = (XBinary::FT)(ui->comboBoxType->currentData().toInt());
-        options.bIsRecursiveScan = ui->checkBoxRecursiveScan->isChecked();
-        options.bIsDeepScan = ui->checkBoxDeepScan->isChecked();
-        options.bIsHeuristicScan = ui->checkBoxHeuristicScan->isChecked();
-        options.bIsVerbose = ui->checkBoxVerbose->isChecked();
-        options.bAllTypesScan = ui->checkBoxAllTypesScan->isChecked();
+        scanOptions.fileType = (XBinary::FT)(ui->comboBoxType->currentData().toInt());
+        scanOptions.bIsRecursiveScan = ui->checkBoxRecursiveScan->isChecked();
+        scanOptions.bIsDeepScan = ui->checkBoxDeepScan->isChecked();
+        scanOptions.bIsHeuristicScan = ui->checkBoxHeuristicScan->isChecked();
+        scanOptions.bIsVerbose = ui->checkBoxVerbose->isChecked();
+        scanOptions.bAllTypesScan = ui->checkBoxAllTypesScan->isChecked();
+        scanOptions.nBufferSize = g_xOptions.getValue(XOptions::ID_SCAN_BUFFERSIZE).toULongLong();
 
         // #ifdef QT_DEBUG
         //         options.bIsTest=true;
@@ -99,18 +100,16 @@ void GuiMainWindow::scanFile(const QString &sFileName)
 
         DialogNFDScanProcess ds(this);
         ds.setGlobal(&g_xShortcuts, &g_xOptions);
-        ds.setData(sFileName, &options, &scanResult);
+        ds.setData(sFileName, &scanOptions, &scanResult);
         ds.exec();
 
         ui->labelTime->clear();
 
         QAbstractItemModel *pOldModel = ui->treeViewResult->model();
 
-        QList<XBinary::SCANSTRUCT> _listRecords = SpecAbstract::convert(&(scanResult.listRecords));
-
         bool bHighlight = g_xOptions.getValue(XOptions::ID_SCAN_HIGHLIGHT).toBool();
 
-        g_pModel = new ScanItemModel(&(_listRecords), 1, bHighlight);
+        g_pModel = new ScanItemModel(&(scanResult.listRecords), 1, bHighlight);
         ui->treeViewResult->setModel(g_pModel);
         ui->treeViewResult->expandAll();
 

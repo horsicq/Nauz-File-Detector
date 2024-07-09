@@ -27,7 +27,7 @@
 #include "staticscan.h"
 #include "xoptions.h"
 
-XOptions::CR ScanFiles(QList<QString> *pListArgs, SpecAbstract::SCAN_OPTIONS *pScanOptions)
+XOptions::CR ScanFiles(QList<QString> *pListArgs, XBinary::SCAN_OPTIONS *pScanOptions)
 {
     XOptions::CR result = XOptions::CR_SUCCESS;
 
@@ -54,11 +54,9 @@ XOptions::CR ScanFiles(QList<QString> *pListArgs, SpecAbstract::SCAN_OPTIONS *pS
             printf("%s:\n", sFileName.toUtf8().data());
         }
 
-        SpecAbstract::SCAN_RESULT scanResult = StaticScan::processFile(sFileName, pScanOptions);
+        XBinary::SCAN_RESULT scanResult = StaticScan::processFile(sFileName, pScanOptions);
 
-        QList<XBinary::SCANSTRUCT> _listRecords = SpecAbstract::convert(&(scanResult.listRecords));
-
-        ScanItemModel model(&_listRecords, 1, true);
+        ScanItemModel model(&(scanResult.listRecords), 1, true);
 
         XBinary::FORMATTYPE formatType = XBinary::FORMATTYPE_TEXT;
 
@@ -146,7 +144,7 @@ int main(int argc, char *argv[])
 
     QList<QString> listArgs = parser.positionalArguments();
 
-    SpecAbstract::SCAN_OPTIONS scanOptions = {0};
+    XBinary::SCAN_OPTIONS scanOptions = {0};
 
     scanOptions.bIsRecursiveScan = parser.isSet(clRecursiveScan);
     scanOptions.bIsDeepScan = parser.isSet(clDeepScan);
@@ -158,6 +156,7 @@ int main(int argc, char *argv[])
     scanOptions.bResultAsCSV = parser.isSet(clResultAsCSV);
     scanOptions.bResultAsTSV = parser.isSet(clResultAsTSV);
     scanOptions.bResultAsPlainText = parser.isSet(clResultAsPlainText);
+    scanOptions.nBufferSize = 2 * 1024 * 1024;  // TODO Check
 
     if (listArgs.count()) {
         nResult = ScanFiles(&listArgs, &scanOptions);
