@@ -27,7 +27,7 @@
 #include "staticscan.h"
 #include "xoptions.h"
 
-XOptions::CR ScanFiles(QList<QString> *pListArgs, XBinary::SCAN_OPTIONS *pScanOptions)
+XOptions::CR ScanFiles(QList<QString> *pListArgs, XScanEngine::SCAN_OPTIONS *pScanOptions)
 {
     XOptions::CR result = XOptions::CR_SUCCESS;
 
@@ -54,7 +54,7 @@ XOptions::CR ScanFiles(QList<QString> *pListArgs, XBinary::SCAN_OPTIONS *pScanOp
             printf("%s:\n", sFileName.toUtf8().data());
         }
 
-        XBinary::SCAN_RESULT scanResult = StaticScan::processFile(sFileName, pScanOptions);
+        XScanEngine::SCAN_RESULT scanResult = StaticScan::processFile(sFileName, pScanOptions);
 
         ScanItemModel model(&(scanResult.listRecords), 1, true);
 
@@ -144,7 +144,7 @@ int main(int argc, char *argv[])
 
     QList<QString> listArgs = parser.positionalArguments();
 
-    XBinary::SCAN_OPTIONS scanOptions = {0};
+    XScanEngine::SCAN_OPTIONS scanOptions = {0};
 
     scanOptions.bIsRecursiveScan = parser.isSet(clRecursiveScan);
     scanOptions.bIsDeepScan = parser.isSet(clDeepScan);

@@ -82,9 +82,9 @@ GuiMainWindow::~GuiMainWindow()
 void GuiMainWindow::scanFile(const QString &sFileName)
 {
     if (sFileName != "") {
-        XBinary::SCAN_RESULT scanResult = {0};
+        XScanEngine::SCAN_RESULT scanResult = {0};
 
-        XBinary::SCAN_OPTIONS scanOptions = {0};
+        XScanEngine::SCAN_OPTIONS scanOptions = {0};
 
         scanOptions.fileType = (XBinary::FT)(ui->comboBoxType->currentData().toInt());
         scanOptions.bIsRecursiveScan = ui->checkBoxRecursiveScan->isChecked();
