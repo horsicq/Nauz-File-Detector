@@ -22,7 +22,7 @@
 
 #include "ui_dialogoptions.h"
 
-DialogOptions::DialogOptions(QWidget *pParent, XOptions *pOptions, XOptions::GROUPID groupId) : QDialog(pParent), ui(new Ui::DialogOptions)
+DialogOptions::DialogOptions(QWidget *pParent, XOptions *pOptions, XOptions::GROUPID groupId) : XShortcutsDialog(pParent), ui(new Ui::DialogOptions)
 {
     ui->setupUi(this);
 
@@ -34,6 +34,7 @@ DialogOptions::DialogOptions(QWidget *pParent, XOptions *pOptions, XOptions::GRO
 
     ui->widgetOptions->addPage(g_pNFDOptionsWidget, tr("Scan"));
     g_pNFDOptionsWidget->setOptions(pOptions);
+    g_pNFDOptionsWidget->setGlobal(getShortcuts(), getGlobalOptions());
 
     ui->widgetOptions->setCurrentPage(groupId);
 }
