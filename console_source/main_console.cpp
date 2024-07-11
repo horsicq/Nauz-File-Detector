@@ -24,7 +24,7 @@
 
 #include "../global.h"
 #include "scanitemmodel.h"
-#include "staticscan.h"
+#include "specabstract.h"
 #include "xoptions.h"
 
 XOptions::CR ScanFiles(QList<QString> *pListArgs, XScanEngine::SCAN_OPTIONS *pScanOptions)
@@ -54,7 +54,7 @@ XOptions::CR ScanFiles(QList<QString> *pListArgs, XScanEngine::SCAN_OPTIONS *pSc
             printf("%s:\n", sFileName.toUtf8().data());
         }
 
-        XScanEngine::SCAN_RESULT scanResult = StaticScan::processFile(sFileName, pScanOptions);
+        XScanEngine::SCAN_RESULT scanResult = SpecAbstract().scanFile(sFileName, pScanOptions);
 
         ScanItemModel model(&(scanResult.listRecords), 1, true);
 

@@ -239,7 +239,7 @@ void GuiMainWindow::on_pushButtonDirectoryScan_clicked()
     }
 
     DialogNFDScanDirectory dds(this, sFolderPath);
-
+    dds.setGlobal(nullptr, &g_xOptions);
     dds.exec();
 
     adjustView();

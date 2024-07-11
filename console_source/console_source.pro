@@ -16,9 +16,9 @@ SOURCES += \
 
 XCONFIG += use_capstone_x86
 
-!contains(XCONFIG, staticscan) {
-    XCONFIG += staticscan
-    include(../SpecAbstract/staticscan.pri)
+!contains(XCONFIG, specabstract) {
+    XCONFIG += specabstract
+    include(../../_mylibs/SpecAbstract/specabstract.pri)
 }
 
 !contains(XCONFIG, xoptions) {

@@ -25,10 +25,10 @@ add_definitions(-DUSE_DEX)
 add_definitions(-DUSE_PDF)
 add_definitions(-DUSE_ARCHIVE)
 
-include(${PROJECT_SOURCE_DIR}/../StaticScan/staticscan.cmake)
+include(${PROJECT_SOURCE_DIR}/../SpecAbstract/specabstract.cmake)
 
 set(PROJECT_SOURCES
-            ${STATICSCAN_SOURCES}
+            ${SPECABSTRACT_SOURCES}
             main_console.cpp
 )
 
