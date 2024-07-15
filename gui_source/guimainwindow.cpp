@@ -128,19 +128,27 @@ void GuiMainWindow::_scan(const QString &sName)
     QFileInfo fi(sName);
 
     if (fi.isFile()) {
+        bool bBlock1 = ui->lineEditFileName->blockSignals(true);
         ui->lineEditFileName->setText(QDir().toNativeSeparators(sName));
+        ui->lineEditFileName->blockSignals(bBlock1);
 
         XFormats::setFileTypeComboBox(XBinary::FT_UNKNOWN, sName, ui->comboBoxType);
 
-        scanFile(sName);
+        process();
     } else if (fi.isDir()) {
         DialogNFDScanDirectory dds(this, sName);
-        dds.setGlobal(nullptr, &g_xOptions);
+        dds.setGlobal(&g_xShortcuts, &g_xOptions);
 
         dds.exec();
 
         adjustView();
     }
+}
+
+void GuiMainWindow::process()
+{
+    QString sFileName = ui->lineEditFileName->text().trimmed();
+    scanFile(sFileName);
 }
 
 void GuiMainWindow::errorMessageSlot(const QString &sText)
@@ -170,9 +178,7 @@ void GuiMainWindow::on_pushButtonOpenFile_clicked()
 
 void GuiMainWindow::on_pushButtonScan_clicked()
 {
-    QString sFileName = ui->lineEditFileName->text().trimmed();
-
-    _scan(sFileName);
+    process();
 }
 
 void GuiMainWindow::on_pushButtonAbout_clicked()
@@ -214,6 +220,7 @@ void GuiMainWindow::dropEvent(QDropEvent *pEvent)
 void GuiMainWindow::on_pushButtonOptions_clicked()
 {
     DialogOptions dialogOptions(this, &g_xOptions, XOptions::GROUPID_FILE);
+    dialogOptions.setGlobal(&g_xShortcuts, &g_xOptions);
 
     dialogOptions.exec();
 
@@ -222,7 +229,12 @@ void GuiMainWindow::on_pushButtonOptions_clicked()
 
 void GuiMainWindow::adjustView()
 {
-    g_xOptions.adjustWindow(this);
+    if (g_xOptions.isIDPresent(XOptions::ID_VIEW_STAYONTOP)) {
+        g_xOptions.adjustStayOnTop(this);
+    }
+
+    g_xOptions.adjustWidget(this, XOptions::ID_VIEW_FONT_CONTROLS);
+    g_xOptions.adjustTreeView(ui->treeViewResult, XOptions::ID_VIEW_FONT_TREEVIEWS);
 
     ui->checkBoxDeepScan->setChecked(g_xOptions.isDeepScan());
     ui->checkBoxRecursiveScan->setChecked(g_xOptions.isRecursiveScan());
@@ -239,7 +251,7 @@ void GuiMainWindow::on_pushButtonDirectoryScan_clicked()
     }
 
     DialogNFDScanDirectory dds(this, sFolderPath);
-    dds.setGlobal(nullptr, &g_xOptions);
+    dds.setGlobal(&g_xShortcuts, &g_xOptions);
     dds.exec();
 
     adjustView();
@@ -284,4 +296,16 @@ void GuiMainWindow::on_pushButtonExtra_clicked()
 
         dialogTextInfo.exec();
     }
+}
+
+void GuiMainWindow::on_comboBoxType_currentIndexChanged(int nIndex)
+{
+    Q_UNUSED(nIndex)
+
+    process();
+}
+
+void GuiMainWindow::on_lineEditFileName_textChanged(const QString &sString)
+{
+    XFormats::setFileTypeComboBox(XBinary::FT_UNKNOWN, sString, ui->comboBoxType);
 }

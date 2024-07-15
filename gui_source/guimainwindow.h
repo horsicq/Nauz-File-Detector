@@ -47,6 +47,7 @@ public:
 private slots:
     void scanFile(const QString &sFileName);
     void _scan(const QString &sName);
+    void process();
     void errorMessageSlot(const QString &sText);
     void on_pushButtonScan_clicked();
     void on_pushButtonExit_clicked();
@@ -59,6 +60,8 @@ private slots:
     void on_pushButtonClear_clicked();
     void on_pushButtonSave_clicked();
     void on_pushButtonExtra_clicked();
+    void on_comboBoxType_currentIndexChanged(int nIndex);
+    void on_lineEditFileName_textChanged(const QString &sString);
 
 protected:
     void dragEnterEvent(QDragEnterEvent *pEvent) override;
