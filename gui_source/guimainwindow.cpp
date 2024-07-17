@@ -93,6 +93,7 @@ void GuiMainWindow::scanFile(const QString &sFileName)
         scanOptions.bIsVerbose = ui->checkBoxVerbose->isChecked();
         scanOptions.bAllTypesScan = ui->checkBoxAllTypesScan->isChecked();
         scanOptions.nBufferSize = g_xOptions.getValue(XOptions::ID_SCAN_BUFFERSIZE).toULongLong();
+        scanOptions.bIsHighlight = g_xOptions.getValue(XOptions::ID_SCAN_HIGHLIGHT).toBool();
 
         // #ifdef QT_DEBUG
         //         options.bIsTest=true;
@@ -107,9 +108,7 @@ void GuiMainWindow::scanFile(const QString &sFileName)
 
         QAbstractItemModel *pOldModel = ui->treeViewResult->model();
 
-        bool bHighlight = g_xOptions.getValue(XOptions::ID_SCAN_HIGHLIGHT).toBool();
-
-        g_pModel = new ScanItemModel(&(scanResult.listRecords), 1, bHighlight);
+        g_pModel = new ScanItemModel(&scanOptions, &(scanResult.listRecords), 1);
         ui->treeViewResult->setModel(g_pModel);
         ui->treeViewResult->expandAll();
 

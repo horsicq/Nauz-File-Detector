@@ -56,7 +56,7 @@ XOptions::CR ScanFiles(QList<QString> *pListArgs, XScanEngine::SCAN_OPTIONS *pSc
 
         XScanEngine::SCAN_RESULT scanResult = SpecAbstract().scanFile(sFileName, pScanOptions);
 
-        ScanItemModel model(&(scanResult.listRecords), 1, true);
+        ScanItemModel model(pScanOptions, &(scanResult.listRecords), 1);
 
         XBinary::FORMATTYPE formatType = XBinary::FORMATTYPE_TEXT;
 
@@ -157,6 +157,7 @@ int main(int argc, char *argv[])
     scanOptions.bResultAsTSV = parser.isSet(clResultAsTSV);
     scanOptions.bResultAsPlainText = parser.isSet(clResultAsPlainText);
     scanOptions.nBufferSize = 2 * 1024 * 1024;  // TODO Check
+    scanOptions.bIsHighlight =true;
 
     if (listArgs.count()) {
         nResult = ScanFiles(&listArgs, &scanOptions);
