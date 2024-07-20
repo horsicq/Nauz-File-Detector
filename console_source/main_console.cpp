@@ -157,7 +157,7 @@ int main(int argc, char *argv[])
     scanOptions.bResultAsTSV = parser.isSet(clResultAsTSV);
     scanOptions.bResultAsPlainText = parser.isSet(clResultAsPlainText);
     scanOptions.nBufferSize = 2 * 1024 * 1024;  // TODO Check
-    scanOptions.bIsHighlight =true;
+    scanOptions.bIsHighlight = true;
 
     if (listArgs.count()) {
         nResult = ScanFiles(&listArgs, &scanOptions);
