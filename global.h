@@ -25,7 +25,7 @@
 
 #define X_APPLICATIONDISPLAYNAME "Nauz File Detector"
 #define X_APPLICATIONNAME "nfd"
-#define X_APPLICATIONVERSION "0.09"
+#define X_APPLICATIONVERSION "0.10"
 #define X_ORGANIZATIONNAME "NTInfo"
 #define X_ORGANIZATIONDOMAIN "ntinfo.biz"
 #define X_OPTIONSFILE "nfd.ini"
