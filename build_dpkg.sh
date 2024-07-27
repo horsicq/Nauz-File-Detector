@@ -20,19 +20,19 @@ if [ -z "$X_ERROR" ]; then
     check_file "$X_SOURCE_PATH/build/release/nfdc"
     if [ -z "$X_ERROR" ]; then
         create_deb_app_dir nfd
-        
+
         export X_PACKAGENAME='nfd'
         export X_MAINTAINER='hors <horsicq@gmail.com>'
-        
+
         export X_HOMEPAGE='http://ntinfo.biz'
         export X_DESCRIPTION='Nauz File Detector(NFD) is a linker/compiler/packer identifier utility.'
-        
+
         if [ "$X_DEBIAN_VERSION" -ge "11" ]; then
             export X_DEPENDS='libqt5core5a, libqt5gui5, libqt5widgets5, libqt5dbus5'
         else
             export X_DEPENDS='qt5-default, libqt5core5a, libqt5gui5, libqt5widgets5, libqt5dbus5'
         fi
-        
+
         create_deb_control $X_SOURCE_PATH/release/$X_BUILD_NAME/DEBIAN/control
 
         cp -f $X_SOURCE_PATH/build/release/nfd                              $X_SOURCE_PATH/release/$X_BUILD_NAME/usr/bin/

@@ -13,7 +13,7 @@ cd $SOURCE_PATH
 function makeproject
 {
     cd $SOURCE_PATH/$1
-    
+
     $QT_PATH/bin/qmake $1.pro -spec linux-g++
     make -f Makefile clean
     make -f Makefile
@@ -21,7 +21,7 @@ function makeproject
     rm -rf Makefile
     rm -rf Makefile.Release
     rm -rf Makefile.Debug
-    rm -rf object_script.*     
+    rm -rf object_script.*
 
     cd $SOURCE_PATH
 }
