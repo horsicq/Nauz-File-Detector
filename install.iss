@@ -1,5 +1,5 @@
 #define MyAppName "NFD"
-#define MyAppVersion "0.09"
+#define MyAppVersion "0.10"
 #define MyAppPublisher "NTInfo"
 #define MyAppURL "ntinfo.biz"
 #define MyAppExeName "nfd.exe"

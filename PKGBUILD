@@ -1,5 +1,5 @@
 pkgname=nauz-file-detector
-pkgver=0.09
+pkgver=0.10
 pkgrel=1
 pkgdesc='Nauz File Detector(NFD) is a linker/compiler/packer identifier utility'
 arch=('x86_64')
