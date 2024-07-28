@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.10)
 
-project(nfd VERSION 0.09 LANGUAGES CXX)
+project(nfd VERSION 0.10 LANGUAGES CXX)
 
 include_guard(DIRECTORY)
 
