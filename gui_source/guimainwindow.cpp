@@ -86,12 +86,15 @@ void GuiMainWindow::scanFile(const QString &sFileName)
 
         XScanEngine::SCAN_OPTIONS scanOptions = {0};
 
+        scanOptions.bShowType = true;
+        scanOptions.bShowInfo = true;
+        scanOptions.bShowVersion = true;
         scanOptions.fileType = (XBinary::FT)(ui->comboBoxType->currentData().toInt());
         scanOptions.bIsRecursiveScan = ui->checkBoxRecursiveScan->isChecked();
         scanOptions.bIsDeepScan = ui->checkBoxDeepScan->isChecked();
         scanOptions.bIsHeuristicScan = ui->checkBoxHeuristicScan->isChecked();
         scanOptions.bIsVerbose = ui->checkBoxVerbose->isChecked();
-        scanOptions.bAllTypesScan = ui->checkBoxAllTypesScan->isChecked();
+        scanOptions.bIsAllTypesScan = ui->checkBoxAllTypesScan->isChecked();
         scanOptions.nBufferSize = g_xOptions.getValue(XOptions::ID_SCAN_BUFFERSIZE).toULongLong();
         scanOptions.bIsHighlight = g_xOptions.getValue(XOptions::ID_SCAN_HIGHLIGHT).toBool();
 

@@ -146,11 +146,14 @@ int main(int argc, char *argv[])
 
     XScanEngine::SCAN_OPTIONS scanOptions = {0};
 
+    scanOptions.bShowType = true;
+    scanOptions.bShowInfo = true;
+    scanOptions.bShowVersion = true;
     scanOptions.bIsRecursiveScan = parser.isSet(clRecursiveScan);
     scanOptions.bIsDeepScan = parser.isSet(clDeepScan);
     scanOptions.bIsHeuristicScan = parser.isSet(clHeuristicScan);
     scanOptions.bIsVerbose = parser.isSet(clVerbose);
-    scanOptions.bAllTypesScan = parser.isSet(clAllTypesScan);
+    scanOptions.bIsAllTypesScan = parser.isSet(clAllTypesScan);
     scanOptions.bResultAsXML = parser.isSet(clResultAsXml);
     scanOptions.bResultAsJSON = parser.isSet(clResultAsJson);
     scanOptions.bResultAsCSV = parser.isSet(clResultAsCSV);
