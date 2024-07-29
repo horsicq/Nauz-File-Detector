@@ -79,3 +79,6 @@
 [submodule "XScanEngine"]
 	path = XScanEngine
 	url = https://github.com/horsicq/XScanEngine
+[submodule "Controls"]
+	path = Controls
+	url = https://github.com/horsicq/Controls
