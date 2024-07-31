@@ -43,3 +43,8 @@ DialogOptions::~DialogOptions()
 {
     delete ui;
 }
+
+void DialogOptions::adjustView()
+{
+
+}

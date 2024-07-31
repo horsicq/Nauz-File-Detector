@@ -65,6 +65,8 @@ GuiMainWindow::GuiMainWindow(QWidget *pParent) : QMainWindow(pParent), ui(new Ui
 
     ui->toolButtonRecentFiles->setEnabled(g_xOptions.getRecentFiles().count());
 
+    ui->comboBoxFlags->setData(XScanEngine::getScanFlags(), XComboBoxEx::CBTYPE_FLAGS, 0, tr("Flags"));
+
     adjustView();
 
     if (QCoreApplication::arguments().count() > 1) {
@@ -90,13 +92,13 @@ void GuiMainWindow::scanFile(const QString &sFileName)
         scanOptions.bShowInfo = true;
         scanOptions.bShowVersion = true;
         scanOptions.fileType = (XBinary::FT)(ui->comboBoxType->currentData().toInt());
-        scanOptions.bIsRecursiveScan = ui->checkBoxRecursiveScan->isChecked();
-        scanOptions.bIsDeepScan = ui->checkBoxDeepScan->isChecked();
-        scanOptions.bIsHeuristicScan = ui->checkBoxHeuristicScan->isChecked();
-        scanOptions.bIsVerbose = ui->checkBoxVerbose->isChecked();
-        scanOptions.bIsAllTypesScan = ui->checkBoxAllTypesScan->isChecked();
         scanOptions.nBufferSize = g_xOptions.getValue(XOptions::ID_SCAN_BUFFERSIZE).toULongLong();
         scanOptions.bIsHighlight = g_xOptions.getValue(XOptions::ID_SCAN_HIGHLIGHT).toBool();
+
+        quint64 nFlags=ui->comboBoxFlags->getValue().toULongLong();
+        XScanEngine::setScanFlags(&scanOptions, nFlags);
+
+        XScanEngine::setScanFlagsToGlobalOptions(&g_xOptions, nFlags);
 
         // #ifdef QT_DEBUG
         //         options.bIsTest=true;
@@ -238,10 +240,8 @@ void GuiMainWindow::adjustView()
     g_xOptions.adjustWidget(this, XOptions::ID_VIEW_FONT_CONTROLS);
     g_xOptions.adjustTreeView(ui->treeViewResult, XOptions::ID_VIEW_FONT_TREEVIEWS);
 
-    ui->checkBoxDeepScan->setChecked(g_xOptions.isDeepScan());
-    ui->checkBoxRecursiveScan->setChecked(g_xOptions.isRecursiveScan());
-    ui->checkBoxHeuristicScan->setChecked(g_xOptions.isHeuristicScan());
-    ui->checkBoxAllTypesScan->setChecked(g_xOptions.isAllTypesScan());
+    quint64 nFlags = XScanEngine::getScanFlagsFromGlobalOptions(&g_xOptions);
+    ui->comboBoxFlags->setValue(nFlags);
 }
 
 void GuiMainWindow::on_pushButtonDirectoryScan_clicked()
