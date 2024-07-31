@@ -95,7 +95,7 @@ void GuiMainWindow::scanFile(const QString &sFileName)
         scanOptions.nBufferSize = g_xOptions.getValue(XOptions::ID_SCAN_BUFFERSIZE).toULongLong();
         scanOptions.bIsHighlight = g_xOptions.getValue(XOptions::ID_SCAN_HIGHLIGHT).toBool();
 
-        quint64 nFlags=ui->comboBoxFlags->getValue().toULongLong();
+        quint64 nFlags = ui->comboBoxFlags->getValue().toULongLong();
         XScanEngine::setScanFlags(&scanOptions, nFlags);
 
         XScanEngine::setScanFlagsToGlobalOptions(&g_xOptions, nFlags);

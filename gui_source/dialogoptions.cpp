@@ -46,5 +46,4 @@ DialogOptions::~DialogOptions()
 
 void DialogOptions::adjustView()
 {
-
 }
