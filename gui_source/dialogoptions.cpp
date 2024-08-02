@@ -47,3 +47,8 @@ DialogOptions::~DialogOptions()
 void DialogOptions::adjustView()
 {
 }
+
+void DialogOptions::registerShortcuts(bool bState)
+{
+    Q_UNUSED(bState)
+}
