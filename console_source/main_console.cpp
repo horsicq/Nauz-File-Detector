@@ -98,17 +98,39 @@ int main(int argc, char *argv[])
 
     parser.addPositionalArgument("target", "The file or directory to open.");
 
-    QCommandLineOption clRecursiveScan(QStringList() << "r" << "recursivescan", "Recursive scan.");
-    QCommandLineOption clDeepScan(QStringList() << "d" << "deepscan", "Deep scan.");
-    QCommandLineOption clHeuristicScan(QStringList() << "u" << "heuristicscan", "Heuristic scan.");
-    QCommandLineOption clAggresiveScan(QStringList() << "g" << "aggressivecscan", "Aggressive scan.");
-    QCommandLineOption clVerbose(QStringList() << "b" << "verbose", "Verbose.");
-    QCommandLineOption clAllTypesScan(QStringList() << "a" << "alltypes", "Scan all types.");
-    QCommandLineOption clResultAsXml(QStringList() << "x" << "xml", "Result as XML.");
-    QCommandLineOption clResultAsJson(QStringList() << "j" << "json", "Result as JSON.");
-    QCommandLineOption clResultAsCSV(QStringList() << "c" << "csv", "Result as CSV.");
-    QCommandLineOption clResultAsTSV(QStringList() << "t" << "tsv", "Result as TSV.");
-    QCommandLineOption clResultAsPlainText(QStringList() << "p" << "plaintext", "Result as Plain Text.");
+    QCommandLineOption clRecursiveScan(QStringList() << "r"
+                                                     << "recursivescan",
+                                       "Recursive scan.");
+    QCommandLineOption clDeepScan(QStringList() << "d"
+                                                << "deepscan",
+                                  "Deep scan.");
+    QCommandLineOption clHeuristicScan(QStringList() << "u"
+                                                     << "heuristicscan",
+                                       "Heuristic scan.");
+    QCommandLineOption clAggresiveScan(QStringList() << "g"
+                                                     << "aggressivecscan",
+                                       "Aggressive scan.");
+    QCommandLineOption clVerbose(QStringList() << "b"
+                                               << "verbose",
+                                 "Verbose.");
+    QCommandLineOption clAllTypesScan(QStringList() << "a"
+                                                    << "alltypes",
+                                      "Scan all types.");
+    QCommandLineOption clResultAsXml(QStringList() << "x"
+                                                   << "xml",
+                                     "Result as XML.");
+    QCommandLineOption clResultAsJson(QStringList() << "j"
+                                                    << "json",
+                                      "Result as JSON.");
+    QCommandLineOption clResultAsCSV(QStringList() << "c"
+                                                   << "csv",
+                                     "Result as CSV.");
+    QCommandLineOption clResultAsTSV(QStringList() << "t"
+                                                   << "tsv",
+                                     "Result as TSV.");
+    QCommandLineOption clResultAsPlainText(QStringList() << "p"
+                                                         << "plaintext",
+                                           "Result as Plain Text.");
 
     parser.addOption(clRecursiveScan);
     parser.addOption(clDeepScan);
