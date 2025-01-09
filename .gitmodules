@@ -82,3 +82,6 @@
 [submodule "Controls"]
 	path = Controls
 	url = https://github.com/horsicq/Controls
+[submodule "XDisasmCore"]
+	path = XDisasmCore
+	url = https://github.com/horsicq/XDisasmCore.git
