@@ -1,60 +1,64 @@
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.16)
 
-project(nfdc VERSION 0.08 LANGUAGES CXX)
+include(GNUInstallDirs)
 
-include_guard(DIRECTORY)
-
-set(CMAKE_INCLUDE_CURRENT_DIR ON)
+project(nfdc VERSION ${X_PROJECT_VERSION} LANGUAGES CXX)
 
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 
-set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-file(MAKE_DIRECTORY ../release)
-set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ../release)
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ../release)
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ../release)
-
-find_package(QT NAMES Qt5 COMPONENTS Core  REQUIRED)
-find_package(Qt5 COMPONENTS Concurrent REQUIRED)
+if(WIN32)
+    set(CMAKE_EXE_LINKER_FLAGS    "${CMAKE_EXE_LINKER_FLAGS} /MANIFEST:NO")
+    set(CMAKE_MODULE_LINKER_FLAGS "${CMAKE_MODULE_LINKER_FLAGS} /MANIFEST:NO")
+    set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} /MANIFEST:NO")
+endif()
 
 add_definitions(-DUSE_DEX)
 add_definitions(-DUSE_PDF)
 add_definitions(-DUSE_ARCHIVE)
 
-include(${PROJECT_SOURCE_DIR}/../SpecAbstract/specabstract.cmake)
+if(WIN32)
+    add_definitions(-DNOMINMAX)
+endif()
+
+include(${PROJECT_SOURCE_DIR}/../../../_mylibs/SpecAbstract/specabstract.cmake)
 
 set(PROJECT_SOURCES
             ${SPECABSTRACT_SOURCES}
             main_console.cpp
 )
 
-if(APPLE)
-    add_library(${PROJECT_NAME} MODULE ${PROJECT_SOURCES})
-    set_target_properties(${PROJECT_NAME} PROPERTIES
-            MACOSX_BUNDLE_GUI_IDENTIFIER ntinfo.nfd
-            MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
-            MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
-            BUNDLE TRUE)
-    set(MACOSX_BUNDLE_ICON_FILE ../icons/main.icns)
-else()
-    add_executable(${PROJECT_NAME} WIN32
+if(WIN32)
+    add_executable(nfdc WIN32
         ${PROJECT_SOURCES}
+        ${QM_FILES}
+        ../../res/resource.rc
+    )
+else()
+    add_executable(nfdc
+        ${PROJECT_SOURCES}
+        ${QM_FILES}
     )
 endif()
 
-target_link_libraries(${PROJECT_NAME} bzip2)
-target_link_libraries(${PROJECT_NAME} lzma)
-target_link_libraries(${PROJECT_NAME} zlib)
-target_link_libraries(${PROJECT_NAME} capstone_x86)
+target_link_libraries(nfdc PRIVATE bzip2)
+target_link_libraries(nfdc PRIVATE lzma)
+target_link_libraries(nfdc PRIVATE zlib)
+target_link_libraries(nfdc PRIVATE capstone)
 
-target_link_libraries(${PROJECT_NAME} Qt5::Core)
-target_link_libraries(${PROJECT_NAME} Qt5::Concurrent)
+target_link_libraries(nfdc PRIVATE Qt${QT_VERSION_MAJOR}::Core)
+target_link_libraries(nfdc PRIVATE Qt${QT_VERSION_MAJOR}::Concurrent)
+
+find_package(Threads REQUIRED)
+target_link_libraries(nfdc PRIVATE Threads::Threads)
 
 if(WIN32)
-    target_link_libraries(${PROJECT_NAME} Wintrust)
-    target_link_libraries(${PROJECT_NAME} Crypt32)
+    install (TARGETS nfdc DESTINATION "./")
+elseif(APPLE)
+else()
+    install (TARGETS nfdc DESTINATION ${CMAKE_INSTALL_BINDIR})
 endif()
