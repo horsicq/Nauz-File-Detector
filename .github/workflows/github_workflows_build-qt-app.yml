@@ -1,0 +1,113 @@
+name: Build Qt Application
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  build:
+    name: ${{ matrix.config.name }}
+    runs-on: ${{ matrix.config.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+          - {
+            name: "Windows Latest MSVC",
+            os: windows-latest,
+            artifact: "windows-msvc.7z",
+            qt_version: "6.5.0",
+            qt_arch: "win64_msvc2019_64",
+            environment_script: "C:/Program Files/Microsoft Visual Studio/2022/Enterprise/VC/Auxiliary/Build/vcvars64.bat"
+          }
+          - {
+            name: "Ubuntu Latest GCC",
+            os: ubuntu-latest,
+            artifact: "linux.7z",
+            qt_version: "6.5.0",
+            qt_arch: "gcc_64"
+          }
+          - {
+            name: "macOS Latest Clang",
+            os: macos-latest,
+            artifact: "macos.7z",
+            qt_version: "6.5.0",
+            qt_arch: "clang_64"
+          }
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          submodules: recursive
+
+      - name: Install Qt
+        uses: jurplel/install-qt-action@v3
+        with:
+          version: ${{ matrix.config.qt_version }}
+          arch: ${{ matrix.config.qt_arch }}
+          cache: true
+
+      - name: Install dependencies (Ubuntu)
+        if: matrix.config.os == 'ubuntu-latest'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libgl1-mesa-dev libxkbcommon-x11-0 libxcb-icccm4 libxcb-image0 libxcb-keysyms1 libxcb-render-util0 libxcb-xinerama0
+
+      - name: Configure (Windows)
+        if: matrix.config.os == 'windows-latest'
+        shell: cmd
+        run: |
+          call "${{ matrix.config.environment_script }}"
+          cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
+
+      - name: Configure (Unix)
+        if: matrix.config.os != 'windows-latest'
+        run: |
+          cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
+
+      - name: Build
+        run: |
+          cmake --build build --config Release --parallel 4
+
+      - name: Create artifacts directory
+        run: |
+          mkdir artifacts
+
+      - name: Windows deploy
+        if: matrix.config.os == 'windows-latest'
+        shell: cmd
+        run: |
+          cd build
+          windeployqt Release --no-translations --no-system-d3d-compiler --no-opengl-sw
+          # Update the following line with your executable name
+          copy Release\YourApp.exe ..\artifacts\
+          xcopy /E /I Release\*.* ..\artifacts
+
+      - name: Linux deploy
+        if: matrix.config.os == 'ubuntu-latest'
+        run: |
+          # Update the following line with your executable name
+          cp build/YourApp artifacts/
+          # Copy dependencies
+          cd build
+          # Optionally use linuxdeployqt if needed
+          # wget -c -nv "https://github.com/probonopd/linuxdeployqt/releases/download/continuous/linuxdeployqt-continuous-x86_64.AppImage"
+          # chmod a+x linuxdeployqt-continuous-x86_64.AppImage
+
+      - name: macOS deploy
+        if: matrix.config.os == 'macos-latest'
+        run: |
+          cd build
+          # Update the following line with your app name
+          macdeployqt YourApp.app -dmg
+          cp YourApp.dmg ../artifacts/
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{ matrix.config.artifact }}
+          path: artifacts/
+```
