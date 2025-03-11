@@ -1,0 +1,69 @@
+[submodule "dep/build_tools"]
+	path = dep/build_tools
+	url = https://github.com/horsicq/build_tools
+[submodule "dep/Controls"]
+	path = dep/Controls
+	url = https://github.com/horsicq/Controls
+[submodule "dep/FormatDialogs"]
+	path = dep/FormatDialogs
+	url = https://github.com/horsicq/FormatDialogs
+[submodule "dep/Formats"]
+	path = dep/Formats
+	url = https://github.com/horsicq/Formats
+[submodule "dep/SpecAbstract"]
+	path = dep/SpecAbstract
+	url = https://github.com/horsicq/SpecAbstract
+[submodule "dep/StaticScan"]
+	path = dep/StaticScan
+	url = https://github.com/horsicq/StaticScan
+[submodule "dep/XArchive"]
+	path = dep/XArchive
+	url = https://github.com/horsicq/XArchive
+[submodule "dep/XCapstone"]
+	path = dep/XCapstone
+	url = https://github.com/horsicq/XCapstone
+[submodule "dep/XDEX"]
+	path = dep/XDEX
+	url = https://github.com/horsicq/XDEX
+[submodule "dep/XInfoDB"]
+	path = dep/XInfoDB
+	url = https://github.com/horsicq/XInfoDB
+[submodule "dep/XOptions"]
+	path = dep/XOptions
+	url = https://github.com/horsicq/XOptions
+[submodule "dep/XPDF"]
+	path = dep/XPDF
+	url = https://github.com/horsicq/XPDF
+[submodule "dep/XShortcuts"]
+	path = dep/XShortcuts
+	url = https://github.com/horsicq/XShortcuts
+[submodule "dep/XStyles"]
+	path = dep/XStyles
+	url = https://github.com/horsicq/XStyles
+[submodule "dep/XTranslation"]
+	path = dep/XTranslation
+	url = https://github.com/horsicq/XTranslation
+[submodule "dep/XSymbolsWidget"]
+	path = dep/XSymbolsWidget
+	url = https://github.com/horsicq/XSymbolsWidget
+[submodule "dep/XOnlineTools"]
+	path = dep/XOnlineTools
+	url = https://github.com/horsicq/XOnlineTools
+[submodule "dep/XAboutWidget"]
+	path = dep/XAboutWidget
+	url = https://github.com/horsicq/XAboutWidget
+[submodule "dep/XUpdate"]
+	path = dep/XUpdate
+	url = https://github.com/horsicq/XUpdate
+[submodule "dep/XGithub"]
+	path = dep/XGithub
+	url = https://github.com/horsicq/XGithub
+[submodule "dep/nfd_widget"]
+	path = dep/nfd_widget
+	url = https://github.com/horsicq/nfd_widget
+[submodule "dep/XScanEngine"]
+	path = dep/XScanEngine
+	url = https://github.com/horsicq/XScanEngine
+[submodule "dep/XDisasmCore"]
+	path = dep/XDisasmCore
+	url = https://github.com/horsicq/XDisasmCore
