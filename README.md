@@ -18,7 +18,7 @@ The program works on macOS, Linux and Windows.
 
 You can help with translation: https://github.com/horsicq/XTranslation
 
-![alt text](https://github.com/horsicq/Nauz-File-Detector/blob/master/mascots/nfd.png "Mascot")
+![alt text](https://github.com/horsicq/Nauz-File-Detector/blob/master/doc/mascots/nfd.png "Mascot")
 
 ## Special Thanks
 
