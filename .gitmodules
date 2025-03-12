@@ -67,3 +67,6 @@
 [submodule "dep/XDisasmCore"]
 	path = dep/XDisasmCore
 	url = https://github.com/horsicq/XDisasmCore
+[submodule "dep/XExtractor"]
+	path = dep/XExtractor
+	url = https://github.com/horsicq/XExtractor
