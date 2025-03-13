@@ -1,21 +1,8 @@
 cmake_minimum_required(VERSION 3.16)
 
-include(GNUInstallDirs)
-
 project(nfd VERSION ${X_PROJECT_VERSION} LANGUAGES CXX)
 
-set(CMAKE_AUTOUIC ON)
-set(CMAKE_AUTOMOC ON)
-set(CMAKE_AUTORCC ON)
-
-set(CMAKE_CXX_STANDARD 14)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
-
-if(WIN32)
-    set(CMAKE_EXE_LINKER_FLAGS    "${CMAKE_EXE_LINKER_FLAGS} /MANIFEST:NO")
-    set(CMAKE_MODULE_LINKER_FLAGS "${CMAKE_MODULE_LINKER_FLAGS} /MANIFEST:NO")
-    set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} /MANIFEST:NO")
-endif()
+include(../../dep/build_tools/cmake/cpp_standart_setup.cmake)
 
 add_definitions(-DUSE_DEX)
 add_definitions(-DUSE_PDF)
@@ -52,19 +39,19 @@ include(../../dep/build_tools/cmake/create_translation.cmake)
 endif()
 
 if(WIN32)
-    add_executable(nfd WIN32
+    add_executable(${PROJECT_NAME} WIN32
         ${PROJECT_SOURCES}
         ${QM_FILES}
-        ../../res/resource.rc
+        ../../res/resource_icon.rc
     )
 else()
-    add_executable(nfd
+    add_executable(${PROJECT_NAME}
         ${PROJECT_SOURCES}
         ${QM_FILES}
     )
 endif()
 
-set_target_properties(nfd PROPERTIES
+set_target_properties(${PROJECT_NAME} PROPERTIES
     ${BUNDLE_ID_OPTION}
     MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
     MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
@@ -72,37 +59,40 @@ set_target_properties(nfd PROPERTIES
     WIN32_EXECUTABLE TRUE
 )
 
-target_link_libraries(nfd PRIVATE bzip2)
-target_link_libraries(nfd PRIVATE lzma)
-target_link_libraries(nfd PRIVATE zlib)
-target_link_libraries(nfd PRIVATE capstone)
+target_link_libraries(${PROJECT_NAME} PRIVATE bzip2)
+target_link_libraries(${PROJECT_NAME} PRIVATE lzma)
+target_link_libraries(${PROJECT_NAME} PRIVATE zlib)
+target_link_libraries(${PROJECT_NAME} PRIVATE capstone)
 
-target_link_libraries(nfd PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
-target_link_libraries(nfd PRIVATE Qt${QT_VERSION_MAJOR}::Concurrent)
-target_link_libraries(nfd PRIVATE Qt${QT_VERSION_MAJOR}::PrintSupport)
-target_link_libraries(nfd PRIVATE Qt${QT_VERSION_MAJOR}::OpenGL)
-target_link_libraries(nfd PRIVATE Qt${QT_VERSION_MAJOR}::Svg)
+target_link_libraries(${PROJECT_NAME} PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
+target_link_libraries(${PROJECT_NAME} PRIVATE Qt${QT_VERSION_MAJOR}::Concurrent)
+target_link_libraries(${PROJECT_NAME} PRIVATE Qt${QT_VERSION_MAJOR}::PrintSupport)
+target_link_libraries(${PROJECT_NAME} PRIVATE Qt${QT_VERSION_MAJOR}::OpenGL)
+target_link_libraries(${PROJECT_NAME} PRIVATE Qt${QT_VERSION_MAJOR}::Svg)
 
 find_package(Threads REQUIRED)
-target_link_libraries(nfd PRIVATE Threads::Threads)
+target_link_libraries(${PROJECT_NAME} PRIVATE Threads::Threads)
 
 if(WIN32)
-    install (TARGETS nfd DESTINATION "./")
+    install (TARGETS ${PROJECT_NAME} DESTINATION "./")
     install (DIRECTORY ../../dep/XStyles/qss DESTINATION "./" OPTIONAL)
     install (FILES ${QM_FILES} DESTINATION "./lang" OPTIONAL)
     include(../../dep/build_tools/cmake/deploy_qt_windows.cmake)
     include(../../dep/build_tools/cmake/deploy_msvc.cmake)
     include(../../dep/build_tools/cmake/deploy_openssl.cmake)
 elseif(APPLE)
-    install(TARGETS nfd
+    install(TARGETS ${PROJECT_NAME}
         BUNDLE DESTINATION .
         LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
         RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
     )
+
+    install (DIRECTORY ../../dep/XStyles/qss DESTINATION "${PROJECT_NAME}.app/Contents/Resources/Lang" OPTIONAL)
+    install (FILES ${QM_FILES} DESTINATION DESTINATION "${PROJECT_NAME}.app/Contents/Resources/Lang" OPTIONAL)
 else()
-    install (TARGETS nfd DESTINATION ${CMAKE_INSTALL_BINDIR})
-    install (DIRECTORY ../../dep/XStyles/qss DESTINATION ${CMAKE_INSTALL_LIBDIR}/nfd OPTIONAL)
-    install (FILES ${QM_FILES} DESTINATION ${CMAKE_INSTALL_LIBDIR}/nfd/lang OPTIONAL)
+    install (TARGETS ${PROJECT_NAME} DESTINATION ${CMAKE_INSTALL_BINDIR})
+    install (DIRECTORY ../../dep/XStyles/qss DESTINATION ${CMAKE_INSTALL_LIBDIR}/${PROJECT_NAME} OPTIONAL)
+    install (FILES ${QM_FILES} DESTINATION ${CMAKE_INSTALL_LIBDIR}/${PROJECT_NAME}/lang OPTIONAL)
 endif()
 
 # if(${QT_VERSION_MAJOR} EQUAL 6)
