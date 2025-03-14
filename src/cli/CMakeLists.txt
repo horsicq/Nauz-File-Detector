@@ -15,8 +15,8 @@ endif()
 include(${PROJECT_SOURCE_DIR}/../../dep/SpecAbstract/specabstract.cmake)
 
 set(PROJECT_SOURCES
-            ${SPECABSTRACT_SOURCES}
-            main_console.cpp
+    ${SPECABSTRACT_SOURCES}
+    main_console.cpp
 )
 
 if(WIN32)
@@ -45,6 +45,8 @@ target_link_libraries(${PROJECT_NAME} PRIVATE Threads::Threads)
 
 if(WIN32)
     install (TARGETS ${PROJECT_NAME} DESTINATION "./")
+    include(../../dep/build_tools/cmake/deploy_qt_windows.cmake)
+    include(../../dep/build_tools/cmake/deploy_msvc.cmake)
 elseif(APPLE)
 else()
     install (TARGETS ${PROJECT_NAME} DESTINATION ${CMAKE_INSTALL_BINDIR})

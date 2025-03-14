@@ -21,17 +21,17 @@ include(${PROJECT_SOURCE_DIR}/../../dep/XOptions/xoptionswidget.cmake)
 include(${PROJECT_SOURCE_DIR}/../../dep/XAboutWidget/xaboutwidget.cmake)
 
 set(PROJECT_SOURCES
-            ${NFD_WIDGET_SOURCES}
-            ${XOPTIONSWIDGET_SOURCES}
-            ${XABOUTWIDGET_SOURCES}
-            dialogabout.cpp
-            dialogabout.ui
-            dialogoptions.cpp
-            dialogoptions.ui
-            guimainwindow.cpp
-            guimainwindow.ui
-            main_gui.cpp
-            resources.qrc
+    ${NFD_WIDGET_SOURCES}
+    ${XOPTIONSWIDGET_SOURCES}
+    ${XABOUTWIDGET_SOURCES}
+    dialogabout.cpp
+    dialogabout.ui
+    dialogoptions.cpp
+    dialogoptions.ui
+    guimainwindow.cpp
+    guimainwindow.ui
+    main_gui.cpp
+    resources.qrc
 )
 
 if(CMAKE_BUILD_TYPE STREQUAL "Release" OR CMAKE_BUILD_TYPE STREQUAL "MinSizeRel")
@@ -43,6 +43,12 @@ if(WIN32)
         ${PROJECT_SOURCES}
         ${QM_FILES}
         ../../res/resource_icon.rc
+    )
+elseif(APPLE)
+    add_executable(${PROJECT_NAME}
+        MACOSX_BUNDLE
+        ${PROJECT_SOURCES}
+        ${QM_FILES}
     )
 else()
     add_executable(${PROJECT_NAME}
@@ -59,6 +65,10 @@ set_target_properties(${PROJECT_NAME} PROPERTIES
     WIN32_EXECUTABLE TRUE
 )
 
+if(APPLE)
+    include(../../dep/build_tools/cmake/macdeployqt.cmake)
+endif()
+
 target_link_libraries(${PROJECT_NAME} PRIVATE bzip2)
 target_link_libraries(${PROJECT_NAME} PRIVATE lzma)
 target_link_libraries(${PROJECT_NAME} PRIVATE zlib)
@@ -72,6 +82,11 @@ target_link_libraries(${PROJECT_NAME} PRIVATE Qt${QT_VERSION_MAJOR}::Svg)
 
 find_package(Threads REQUIRED)
 target_link_libraries(${PROJECT_NAME} PRIVATE Threads::Threads)
+
+message(STATUS "CMAKE_PREFIX_PATH: ${CMAKE_PREFIX_PATH}")
+message(STATUS "CMAKE_INSTALL_PREFIX: ${CMAKE_INSTALL_PREFIX}")
+message(STATUS "CMAKE_INSTALL_BINDIR: ${CMAKE_INSTALL_BINDIR}")
+message(STATUS "CMAKE_INSTALL_LIBDIR: ${CMAKE_INSTALL_LIBDIR}")
 
 if(WIN32)
     install (TARGETS ${PROJECT_NAME} DESTINATION "./")
@@ -87,14 +102,10 @@ elseif(APPLE)
         RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
     )
 
-    install (DIRECTORY ../../dep/XStyles/qss DESTINATION "${PROJECT_NAME}.app/Contents/Resources/Lang" OPTIONAL)
+    install (DIRECTORY ../../dep/XStyles/qss DESTINATION "${PROJECT_NAME}.app/Contents/Resources" OPTIONAL)
     install (FILES ${QM_FILES} DESTINATION DESTINATION "${PROJECT_NAME}.app/Contents/Resources/Lang" OPTIONAL)
 else()
     install (TARGETS ${PROJECT_NAME} DESTINATION ${CMAKE_INSTALL_BINDIR})
     install (DIRECTORY ../../dep/XStyles/qss DESTINATION ${CMAKE_INSTALL_LIBDIR}/${PROJECT_NAME} OPTIONAL)
     install (FILES ${QM_FILES} DESTINATION ${CMAKE_INSTALL_LIBDIR}/${PROJECT_NAME}/lang OPTIONAL)
 endif()
-
-# if(${QT_VERSION_MAJOR} EQUAL 6)
-#     qt_finalize_executable(xbinaryviewer)
-# endif()
