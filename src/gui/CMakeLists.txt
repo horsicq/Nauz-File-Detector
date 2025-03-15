@@ -1,8 +1,10 @@
 cmake_minimum_required(VERSION 3.16)
 
-project(nfd VERSION ${X_PROJECT_VERSION} LANGUAGES CXX)
+project(NauzFileDetector VERSION ${X_PROJECT_VERSION} LANGUAGES CXX)
 
 include(../../dep/build_tools/cmake/cpp_standart_setup.cmake)
+
+set(X_RESOURCES ${CMAKE_INSTALL_LIBDIR}/${PROJECT_NAME})
 
 add_definitions(-DUSE_DEX)
 add_definitions(-DUSE_PDF)
@@ -19,6 +21,7 @@ endif()
 include(${PROJECT_SOURCE_DIR}/../../dep/nfd_widget/nfd_widget.cmake)
 include(${PROJECT_SOURCE_DIR}/../../dep/XOptions/xoptionswidget.cmake)
 include(${PROJECT_SOURCE_DIR}/../../dep/XAboutWidget/xaboutwidget.cmake)
+include(${PROJECT_SOURCE_DIR}/../../dep/XStyles/xstyles.cmake)
 
 set(PROJECT_SOURCES
     ${NFD_WIDGET_SOURCES}
@@ -90,8 +93,6 @@ message(STATUS "CMAKE_INSTALL_LIBDIR: ${CMAKE_INSTALL_LIBDIR}")
 
 if(WIN32)
     install (TARGETS ${PROJECT_NAME} DESTINATION "./")
-    install (DIRECTORY ../../dep/XStyles/qss DESTINATION "./" OPTIONAL)
-    install (FILES ${QM_FILES} DESTINATION "./lang" OPTIONAL)
     include(../../dep/build_tools/cmake/deploy_qt_windows.cmake)
     include(../../dep/build_tools/cmake/deploy_msvc.cmake)
     include(../../dep/build_tools/cmake/deploy_openssl.cmake)
@@ -101,11 +102,6 @@ elseif(APPLE)
         LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
         RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
     )
-
-    install (DIRECTORY ../../dep/XStyles/qss DESTINATION "${PROJECT_NAME}.app/Contents/Resources" OPTIONAL)
-    install (FILES ${QM_FILES} DESTINATION DESTINATION "${PROJECT_NAME}.app/Contents/Resources/Lang" OPTIONAL)
 else()
     install (TARGETS ${PROJECT_NAME} DESTINATION ${CMAKE_INSTALL_BINDIR})
-    install (DIRECTORY ../../dep/XStyles/qss DESTINATION ${CMAKE_INSTALL_LIBDIR}/${PROJECT_NAME} OPTIONAL)
-    install (FILES ${QM_FILES} DESTINATION ${CMAKE_INSTALL_LIBDIR}/${PROJECT_NAME}/lang OPTIONAL)
 endif()
