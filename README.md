@@ -12,8 +12,8 @@ The program works on macOS, Linux and Windows.
 ![alt text](https://github.com/horsicq/Nauz-File-Detector/blob/master/doc/2.png "2")
 
 * Download: https://github.com/horsicq/Nauz-File-Detector/releases
-* How to run: https://github.com/horsicq/Nauz-File-Detector/blob/master/docs/RUN.md
-* How to build: https://github.com/horsicq/Nauz-File-Detector/blob/master/docs/BUILD.md
+* How to run: https://github.com/horsicq/Nauz-File-Detector/blob/master/doc/RUN.md
+* How to build: https://github.com/horsicq/Nauz-File-Detector/blob/master/doc/BUILD.md
 * Changelog: https://github.com/horsicq/Nauz-File-Detector/blob/master/changelog.txt
 
 You can help with translation: https://github.com/horsicq/XTranslation
