@@ -47,7 +47,7 @@ cd Nauz-File-Detector
 
 Run: *nfd [FileName]* or *nfdc [FileName]*
 
-How to build on OSX
+How to build on macOS
 =======
 
 Install Qt 5.15.2: https://github.com/horsicq/build_tools
@@ -56,9 +56,9 @@ Clone project: git clone --recursive https://github.com/horsicq/Nauz-File-Detect
 
 cd Nauz-File-Detector
 
-Edit build_mac.bat ( check QT_PATH variable)
+Edit build_mac.sh ( check QT_PATH variable)
 
-Run build_mac.bat
+Run build_mac.sh
 
 How to build on Windows(XP)
 =======
