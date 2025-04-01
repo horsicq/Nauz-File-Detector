@@ -22,7 +22,7 @@ jobs:
     - name: Install Qt (Ubuntu)
       run: |
         sudo apt-get update
-        sudo apt-get install cmake qtbase5-dev qtscript5-dev qttools5-dev-tools libqt5svg5-dev qtchooser qt5-qmake build-essential -y
+        sudo apt-get install cmake qtbase5-dev qtscript5-dev qttools5-dev qttools5-dev-tools libqt5svg5-dev qtchooser qt5-qmake build-essential -y
 
     - name: Build
       working-directory: ${{ env.SRC_PATH }}
