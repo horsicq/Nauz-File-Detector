@@ -30,7 +30,7 @@ jobs:
         qtchooser -print-env
         mkdir tmp_build
         cd tmp_build
-        cmake -DCMAKE_BUILD_TYPE=MinSizeRel ..
+        cmake -DCMAKE_BUILD_TYPE=MinSizeRel -DCMAKE_PREFIX_PATH="/usr/lib/qt5" ..
         make
         cpack -G DEB
 
