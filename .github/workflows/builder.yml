@@ -29,7 +29,7 @@ jobs:
       run: |
         mkdir tmp_build
         cd tmp_build
-        cmake -DCMAKE_BUILD_TYPE=MinSizeRel
+        cmake -DCMAKE_BUILD_TYPE=MinSizeRel ..
         nmake
         cpack -G DEB
 
