@@ -27,8 +27,6 @@ jobs:
     - name: Build
       working-directory: ${{ env.SRC_PATH }}
       run: |
-        qtchooser -print-env
-        find /usr -name "Qt5Config.cmake"
         mkdir tmp_build
         cd tmp_build
         cmake -DCMAKE_BUILD_TYPE=MinSizeRel -DCMAKE_PREFIX_PATH="/usr/lib/x86_64-linux-gnu/cmake/Qt5" ..
