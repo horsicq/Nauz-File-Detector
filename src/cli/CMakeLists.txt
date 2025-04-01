@@ -20,34 +20,34 @@ set(PROJECT_SOURCES
 )
 
 if(WIN32)
-    add_executable(${PROJECT_NAME} WIN32
+    add_executable(nfdc WIN32
         ${PROJECT_SOURCES}
         ${QM_FILES}
         ../../res/resource.rc
     )
 else()
-    add_executable(${PROJECT_NAME}
+    add_executable(nfdc
         ${PROJECT_SOURCES}
         ${QM_FILES}
     )
 endif()
 
-target_link_libraries(${PROJECT_NAME} PRIVATE bzip2)
-target_link_libraries(${PROJECT_NAME} PRIVATE lzma)
-target_link_libraries(${PROJECT_NAME} PRIVATE zlib)
-target_link_libraries(${PROJECT_NAME} PRIVATE capstone)
+target_link_libraries(nfdc PRIVATE bzip2)
+target_link_libraries(nfdc PRIVATE lzma)
+target_link_libraries(nfdc PRIVATE zlib)
+target_link_libraries(nfdc PRIVATE capstone)
 
-target_link_libraries(${PROJECT_NAME} PRIVATE Qt${QT_VERSION_MAJOR}::Core)
-target_link_libraries(${PROJECT_NAME} PRIVATE Qt${QT_VERSION_MAJOR}::Concurrent)
+target_link_libraries(nfdc PRIVATE Qt${QT_VERSION_MAJOR}::Core)
+target_link_libraries(nfdc PRIVATE Qt${QT_VERSION_MAJOR}::Concurrent)
 
 find_package(Threads REQUIRED)
-target_link_libraries(${PROJECT_NAME} PRIVATE Threads::Threads)
+target_link_libraries(nfdc PRIVATE Threads::Threads)
 
 if(WIN32)
-    install (TARGETS ${PROJECT_NAME} DESTINATION "./")
+    install (TARGETS nfdc DESTINATION "./")
     include(../../dep/build_tools/cmake/deploy_qt_windows.cmake)
     include(../../dep/build_tools/cmake/deploy_msvc.cmake)
 elseif(APPLE)
 else()
-    install (TARGETS ${PROJECT_NAME} DESTINATION ${CMAKE_INSTALL_BINDIR})
+    install (TARGETS nfdc DESTINATION ${CMAKE_INSTALL_BINDIR})
 endif()

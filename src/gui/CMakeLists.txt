@@ -4,7 +4,7 @@ project(NauzFileDetector VERSION ${X_PROJECT_VERSION} LANGUAGES CXX)
 
 include(../../dep/build_tools/cmake/cpp_standart_setup.cmake)
 
-set(X_RESOURCES ${CMAKE_INSTALL_LIBDIR}/${PROJECT_NAME})
+set(X_RESOURCES ${CMAKE_INSTALL_LIBDIR}/NauzFileDetector)
 
 add_definitions(-DUSE_DEX)
 add_definitions(-DUSE_PDF)
@@ -42,25 +42,25 @@ include(../../dep/build_tools/cmake/create_translation.cmake)
 endif()
 
 if(WIN32)
-    add_executable(${PROJECT_NAME} WIN32
+    add_executable(NauzFileDetector WIN32
         ${PROJECT_SOURCES}
         ${QM_FILES}
         ../../res/resource_icon.rc
     )
 elseif(APPLE)
-    add_executable(${PROJECT_NAME}
+    add_executable(NauzFileDetector
         MACOSX_BUNDLE
         ${PROJECT_SOURCES}
         ${QM_FILES}
     )
 else()
-    add_executable(${PROJECT_NAME}
+    add_executable(NauzFileDetector
         ${PROJECT_SOURCES}
         ${QM_FILES}
     )
 endif()
 
-set_target_properties(${PROJECT_NAME} PROPERTIES
+set_target_properties(NauzFileDetector PROPERTIES
     ${BUNDLE_ID_OPTION}
     MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
     MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
@@ -72,19 +72,19 @@ if(APPLE)
     include(../../dep/build_tools/cmake/macdeployqt.cmake)
 endif()
 
-target_link_libraries(${PROJECT_NAME} PRIVATE bzip2)
-target_link_libraries(${PROJECT_NAME} PRIVATE lzma)
-target_link_libraries(${PROJECT_NAME} PRIVATE zlib)
-target_link_libraries(${PROJECT_NAME} PRIVATE capstone)
+target_link_libraries(NauzFileDetector PRIVATE bzip2)
+target_link_libraries(NauzFileDetector PRIVATE lzma)
+target_link_libraries(NauzFileDetector PRIVATE zlib)
+target_link_libraries(NauzFileDetector PRIVATE capstone)
 
-target_link_libraries(${PROJECT_NAME} PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
-target_link_libraries(${PROJECT_NAME} PRIVATE Qt${QT_VERSION_MAJOR}::Concurrent)
-target_link_libraries(${PROJECT_NAME} PRIVATE Qt${QT_VERSION_MAJOR}::PrintSupport)
-target_link_libraries(${PROJECT_NAME} PRIVATE Qt${QT_VERSION_MAJOR}::OpenGL)
-target_link_libraries(${PROJECT_NAME} PRIVATE Qt${QT_VERSION_MAJOR}::Svg)
+target_link_libraries(NauzFileDetector PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
+target_link_libraries(NauzFileDetector PRIVATE Qt${QT_VERSION_MAJOR}::Concurrent)
+target_link_libraries(NauzFileDetector PRIVATE Qt${QT_VERSION_MAJOR}::PrintSupport)
+target_link_libraries(NauzFileDetector PRIVATE Qt${QT_VERSION_MAJOR}::OpenGL)
+target_link_libraries(NauzFileDetector PRIVATE Qt${QT_VERSION_MAJOR}::Svg)
 
 find_package(Threads REQUIRED)
-target_link_libraries(${PROJECT_NAME} PRIVATE Threads::Threads)
+target_link_libraries(NauzFileDetector PRIVATE Threads::Threads)
 
 message(STATUS "CMAKE_PREFIX_PATH: ${CMAKE_PREFIX_PATH}")
 message(STATUS "CMAKE_INSTALL_PREFIX: ${CMAKE_INSTALL_PREFIX}")
@@ -92,16 +92,16 @@ message(STATUS "CMAKE_INSTALL_BINDIR: ${CMAKE_INSTALL_BINDIR}")
 message(STATUS "CMAKE_INSTALL_LIBDIR: ${CMAKE_INSTALL_LIBDIR}")
 
 if(WIN32)
-    install (TARGETS ${PROJECT_NAME} DESTINATION "./")
+    install (TARGETS NauzFileDetector DESTINATION "./")
     include(../../dep/build_tools/cmake/deploy_qt_windows.cmake)
     include(../../dep/build_tools/cmake/deploy_msvc.cmake)
     include(../../dep/build_tools/cmake/deploy_openssl.cmake)
 elseif(APPLE)
-    install(TARGETS ${PROJECT_NAME}
+    install(TARGETS NauzFileDetector
         BUNDLE DESTINATION .
         LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
         RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
     )
 else()
-    install (TARGETS ${PROJECT_NAME} DESTINATION ${CMAKE_INSTALL_BINDIR})
+    install (TARGETS NauzFileDetector DESTINATION ${CMAKE_INSTALL_BINDIR})
 endif()
