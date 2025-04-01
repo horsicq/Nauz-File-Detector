@@ -27,10 +27,11 @@ jobs:
     - name: Build
       working-directory: ${{ env.SRC_PATH }}
       run: |
+        qtchooser -print-env
         mkdir tmp_build
         cd tmp_build
         cmake -DCMAKE_BUILD_TYPE=MinSizeRel ..
-        nmake
+        make
         cpack -G DEB
 
     - name: Upload Release as Download
