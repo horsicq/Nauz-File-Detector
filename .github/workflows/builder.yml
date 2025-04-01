@@ -1,0 +1,45 @@
+name: builder
+
+on:
+  workflow_dispatch:
+  release:
+    types: [created]
+  schedule:
+    - cron: '0 0 * * MON'
+
+env:
+  SRC_PATH: ${{ github.workspace }}/src
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        submodules: recursive
+  
+    - name: Install Qt (Ubuntu)
+      run: |
+        sudo apt-get update
+        sudo apt-get install cmake qtbase5-dev qtscript5-dev qttools5-dev-tools libqt5svg5-dev qtchooser qt5-qmake build-essential -y
+
+    - name: Build
+        working-directory: ${{ env.SRC_PATH }}
+        run: |
+          mkdir tmp_build
+          cd tmp_build
+          cmake -DCMAKE_BUILD_TYPE=MinSizeRel
+          nmake
+          cpack -G DEB
+
+    - name: Upload Release as Download
+        uses: softprops/action-gh-release@v2
+        env:
+          RELEASE_TOKEN: ${{ secrets.RELEASE_TOKEN }}
+        with:
+          tag_name: Beta
+          draft: false
+          prerelease: true
+          files: |
+            ${{ env.SRC_PATH }}/tmp_build/packages/*.deb
