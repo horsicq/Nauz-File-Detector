@@ -53,6 +53,14 @@ elseif(APPLE)
         ${PROJECT_SOURCES}
         ${QM_FILES}
     )
+
+    set_target_properties(NauzFileDetector PROPERTIES
+        MACOSX_BUNDLE_GUI_IDENTIFIER ${BUNDLE_ID_OPTION}
+        MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
+        MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
+        MACOSX_BUNDLE_COPYRIGHT ${X_MAINTAINER}
+        MACOSX_BUNDLE_ICON_FILE "main.icns"
+    )
 else()
     add_executable(NauzFileDetector
         ${PROJECT_SOURCES}
@@ -60,16 +68,10 @@ else()
     )
 endif()
 
-set_target_properties(NauzFileDetector PROPERTIES
-    ${BUNDLE_ID_OPTION}
-    MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
-    MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
-    MACOSX_BUNDLE TRUE
-    WIN32_EXECUTABLE TRUE
-)
-
-if(APPLE)
-    include(../../dep/build_tools/cmake/macdeployqt.cmake)
+if(CMAKE_BUILD_TYPE STREQUAL "Release" OR CMAKE_BUILD_TYPE STREQUAL "MinSizeRel")
+    if(APPLE)
+        include(../../dep/build_tools/cmake/macdeployqt.cmake)
+    endif()
 endif()
 
 target_link_libraries(NauzFileDetector PRIVATE bzip2)

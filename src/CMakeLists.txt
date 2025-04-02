@@ -14,7 +14,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets Concurrent Network PrintSupport OpenGL Svg LinguistTools)
 endif()
 
-file (STRINGS ${PROJECT_SOURCE_DIR}/release_version.txt X_PROJECT_VERSION)
+file (STRINGS ${CMAKE_CURRENT_LIST_DIR}/../release_version.txt X_PROJECT_VERSION)
 project(NFD_project VERSION ${X_PROJECT_VERSION} LANGUAGES CXX)
 
 set(X_COMPANYNAME "ntinfo")

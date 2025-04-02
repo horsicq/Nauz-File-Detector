@@ -12,7 +12,7 @@ if(WIN32)
     add_definitions(-DNOMINMAX)
 endif()
 
-include(${PROJECT_SOURCE_DIR}/../../dep/SpecAbstract/specabstract.cmake)
+include(${CMAKE_CURRENT_LIST_DIR}/../../dep/SpecAbstract/specabstract.cmake)
 
 set(PROJECT_SOURCES
     ${SPECABSTRACT_SOURCES}
