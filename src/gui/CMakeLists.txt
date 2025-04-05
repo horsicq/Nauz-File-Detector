@@ -86,8 +86,8 @@ target_link_libraries(NauzFileDetector PRIVATE Qt${QT_VERSION_MAJOR}::OpenGL)
 target_link_libraries(NauzFileDetector PRIVATE Qt${QT_VERSION_MAJOR}::Svg)
 
 if(WIN32)
-    target_link_libraries(XBinaryViewer PRIVATE Wintrust)
-    target_link_libraries(XBinaryViewer PRIVATE Crypt32)
+    target_link_libraries(NauzFileDetector PRIVATE Wintrust)
+    target_link_libraries(NauzFileDetector PRIVATE Crypt32)
 endif()
 
 find_package(Threads REQUIRED)
