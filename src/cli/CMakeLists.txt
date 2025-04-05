@@ -40,6 +40,11 @@ target_link_libraries(nfdc PRIVATE capstone)
 target_link_libraries(nfdc PRIVATE Qt${QT_VERSION_MAJOR}::Core)
 target_link_libraries(nfdc PRIVATE Qt${QT_VERSION_MAJOR}::Concurrent)
 
+if(WIN32)
+    target_link_libraries(XBinaryViewer PRIVATE Wintrust)
+    target_link_libraries(XBinaryViewer PRIVATE Crypt32)
+endif()
+
 find_package(Threads REQUIRED)
 target_link_libraries(nfdc PRIVATE Threads::Threads)
 
