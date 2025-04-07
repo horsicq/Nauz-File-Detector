@@ -31,7 +31,7 @@ int main(int argc, char *argv[])
 #ifdef Q_OS_MAC
 #ifndef QT_DEBUG
     QString sLibraryPath = QString(argv[0]);
-    sLibraryPath = sLibraryPath.remove("MacOS/NFD") + "PlugIns";
+    sLibraryPath = sLibraryPath.remove("MacOS/NauzFileDetector") + "PlugIns";
     QCoreApplication::setLibraryPaths(QStringList(sLibraryPath));
 #endif
 #endif
