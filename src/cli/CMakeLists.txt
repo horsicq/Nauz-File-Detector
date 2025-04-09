@@ -20,39 +20,40 @@ set(PROJECT_SOURCES
 )
 
 if(WIN32)
-    add_executable(nfdc WIN32
+    add_executable(${PROJECT_NAME} WIN32
         ${PROJECT_SOURCES}
         ${QM_FILES}
         ../../res/resource.rc
     )
 else()
-    add_executable(nfdc
+    add_executable(${PROJECT_NAME}
         ${PROJECT_SOURCES}
         ${QM_FILES}
     )
 endif()
 
-target_link_libraries(nfdc PRIVATE bzip2)
-target_link_libraries(nfdc PRIVATE lzma)
-target_link_libraries(nfdc PRIVATE zlib)
-target_link_libraries(nfdc PRIVATE capstone)
+target_link_libraries(${PROJECT_NAME} PRIVATE bzip2)
+target_link_libraries(${PROJECT_NAME} PRIVATE lzma)
+target_link_libraries(${PROJECT_NAME} PRIVATE zlib)
+target_link_libraries(${PROJECT_NAME} PRIVATE capstone)
 
-target_link_libraries(nfdc PRIVATE Qt${QT_VERSION_MAJOR}::Core)
-target_link_libraries(nfdc PRIVATE Qt${QT_VERSION_MAJOR}::Concurrent)
+target_link_libraries(${PROJECT_NAME} PRIVATE Qt${QT_VERSION_MAJOR}::Core)
+target_link_libraries(${PROJECT_NAME} PRIVATE Qt${QT_VERSION_MAJOR}::Concurrent)
 
 if(WIN32)
-    target_link_libraries(nfdc PRIVATE Wintrust)
-    target_link_libraries(nfdc PRIVATE Crypt32)
+    target_link_libraries(${PROJECT_NAME} PRIVATE Wintrust)
+    target_link_libraries(${PROJECT_NAME} PRIVATE Crypt32)
 endif()
 
 find_package(Threads REQUIRED)
-target_link_libraries(nfdc PRIVATE Threads::Threads)
+target_link_libraries(${PROJECT_NAME} PRIVATE Threads::Threads)
 
 if(WIN32)
-    install (TARGETS nfdc DESTINATION "./")
+    install (TARGETS ${PROJECT_NAME} DESTINATION "./")
     include(../../dep/build_tools/cmake/deploy_qt_windows.cmake)
     include(../../dep/build_tools/cmake/deploy_msvc.cmake)
 elseif(APPLE)
+    # no console version for macOS app bundle
 else()
-    install (TARGETS nfdc DESTINATION ${CMAKE_INSTALL_BINDIR})
+    install (TARGETS ${PROJECT_NAME} DESTINATION ${CMAKE_INSTALL_BINDIR})
 endif()
