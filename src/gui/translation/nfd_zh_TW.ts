@@ -648,6 +648,10 @@
         <source>Buffer size</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Format result</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>NFDWidgetAdvanced</name>
