@@ -51,10 +51,10 @@ jobs:
          submodules: 'recursive'
          path: ${{ env.SRC_PATH }}
 
-        - name: Setup MSVC
-          uses: ilammy/msvc-dev-cmd@v1
-          with:
-           arch: x86
+      - name: Setup MSVC
+        uses: ilammy/msvc-dev-cmd@v1
+        with:
+         arch: x86
 
       - name: Install Qt
         uses: jurplel/install-qt-action@v4
