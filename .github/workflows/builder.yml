@@ -143,6 +143,8 @@ jobs:
         run: |
           brew update
           brew install cmake qt5
+          export QTDIR=/usr/local/opt/qt5
+          export PATH=$PATH:$QTDIR/bin
 
       - name: Build
         working-directory: ${{ env.SRC_PATH }}
