@@ -279,11 +279,12 @@ void GuiMainWindow::on_pushButtonClear_clicked()
 
 void GuiMainWindow::on_pushButtonSave_clicked()
 {
-    QAbstractItemModel *pModel = ui->treeViewResult->model();
+    QString _sFileName = QFileDialog::getSaveFileName(this, tr("Save"), tr("Result"), QString("%1 (*.txt);;%2 (*)").arg(tr("Text files"), tr("All files")));
 
-    if (pModel) {
-        QString sSaveDirectory = XBinary::getResultFileName(ui->lineEditFileName->text(), QString("%1.txt").arg(tr("Result")));
-        DialogNFDScanProcess::saveResult(this, (ScanItemModel *)pModel, sSaveDirectory);
+    if (!_sFileName.isEmpty()) {
+        if (!XOptions::saveTreeModel(ui->treeViewResult->model(), _sFileName)) {
+            QMessageBox::critical(XOptions::getMainWidget(this), tr("Error"), QString("%1: %2").arg(tr("Cannot save file"), _sFileName));
+        }
     }
 }
 
