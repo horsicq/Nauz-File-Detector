@@ -30,7 +30,8 @@
 #include "dialogabout.h"
 #include "dialogoptions.h"
 #include "dialognfdscandirectory.h"
-#include "dialognfdscanprocess.h"
+#include "specabstract.h"
+#include "xdialogprocess.h"
 #include "xoptions.h"
 
 namespace Ui {

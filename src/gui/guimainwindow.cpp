@@ -104,10 +104,13 @@ void GuiMainWindow::scanFile(const QString &sFileName)
         //         options.bIsTest=true;
         // #endif
 
-        DialogNFDScanProcess ds(this);
+        SpecAbstract specAbstract;
+
+        XDialogProcess ds(this, &specAbstract);
         ds.setGlobal(&g_xShortcuts, &g_xOptions);
-        ds.setData(sFileName, &scanOptions, &scanResult);
-        ds.exec();
+        specAbstract.setData(sFileName, &scanOptions, &scanResult, ds.getPdStruct());
+        ds.start();
+        ds.showDialogDelay();
 
         ui->labelTime->clear();
 
