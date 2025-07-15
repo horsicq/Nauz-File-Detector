@@ -130,38 +130,3 @@ jobs:
           prerelease: true
           files: |
             ${{ env.SRC_PATH }}/tmp_build/packages/*.zip
-            
-  build-macos:
-    runs-on: macos-latest
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          submodules: recursive
-          path: ${{ env.SRC_PATH }}
-
-      - name: Install Qt (macOS)
-        run: |
-          brew update
-          brew install cmake qt5
-          export QTDIR=/usr/local/opt/qt5
-          export PATH=$PATH:$QTDIR/bin
-
-      - name: Build
-        working-directory: ${{ env.SRC_PATH }}
-        run: |
-          mkdir tmp_build
-          cd tmp_build
-          cmake -DCMAKE_BUILD_TYPE=MinSizeRel -DCMAKE_PREFIX_PATH="$(brew --prefix qt@5)/lib/cmake/Qt5" ..
-          make
-          cpack -G ZIP
-
-      - name: Upload Release as Download
-        uses: softprops/action-gh-release@v2
-        env:
-          RELEASE_TOKEN: ${{ secrets.RELEASE_TOKEN }}
-        with:
-          tag_name: Beta
-          draft: false
-          prerelease: true
-          files: |
-            ${{ env.SRC_PATH }}/tmp_build/packages/*.zip
