@@ -20,7 +20,7 @@ set(PROJECT_SOURCES
 )
 
 if(WIN32)
-    add_executable(${PROJECT_NAME} WIN32
+    add_executable(${PROJECT_NAME}
         ${PROJECT_SOURCES}
         ${QM_FILES}
         ../../res/resource.rc
@@ -47,6 +47,11 @@ endif()
 
 find_package(Threads REQUIRED)
 target_link_libraries(${PROJECT_NAME} PRIVATE Threads::Threads)
+
+# On Windows create a console subsystem explicitly for clarity
+if(WIN32)
+    target_link_options(${PROJECT_NAME} PRIVATE /SUBSYSTEM:CONSOLE)
+endif()
 
 if(WIN32)
     install (TARGETS ${PROJECT_NAME} DESTINATION "./")
