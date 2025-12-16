@@ -92,7 +92,7 @@ void GuiMainWindow::scanFile(const QString &sFileName)
         scanOptions.bShowInfo = true;
         scanOptions.bShowVersion = true;
         scanOptions.fileType = (XBinary::FT)(ui->comboBoxType->currentData().toInt());
-        scanOptions.nBufferSize = g_xOptions.getValue(XOptions::ID_SCAN_BUFFERSIZE).toULongLong();
+        scanOptions.nBufferSize = g_xOptions.getValue(XOptions::ID_ENGINE_BUFFERSIZE).toULongLong();
         scanOptions.bIsHighlight = g_xOptions.getValue(XOptions::ID_SCAN_HIGHLIGHT).toBool();
 
         quint64 nFlags = ui->comboBoxFlags->getValue().toULongLong();
