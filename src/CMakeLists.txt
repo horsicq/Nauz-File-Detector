@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.10)
 
-find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Core)
+find_package(QT NAMES Qt6 Qt5 REQUIRED)
 
 if(${QT_VERSION_MAJOR} EQUAL 5)
     if(${QT_VERSION} VERSION_GREATER_EQUAL 5.6.0)
@@ -11,7 +11,7 @@ if(${QT_VERSION_MAJOR} EQUAL 5)
 endif()
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
-    find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets Concurrent Network PrintSupport OpenGL Svg LinguistTools)
+    find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core Widgets Concurrent Network PrintSupport OpenGL Svg LinguistTools)
 endif()
 
 file (STRINGS ${CMAKE_CURRENT_LIST_DIR}/../release_version.txt X_PROJECT_VERSION)
