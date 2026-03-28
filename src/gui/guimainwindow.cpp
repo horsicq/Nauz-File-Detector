@@ -92,8 +92,6 @@ void GuiMainWindow::scanFile(const QString &sFileName)
         scanOptions.bShowInfo = true;
         scanOptions.bShowVersion = true;
         scanOptions.fileType = (XBinary::FT)(ui->comboBoxType->currentData().toInt());
-        scanOptions.nBufferSize = g_xOptions.getValue(XOptions::ID_ENGINE_BUFFERSIZE).toULongLong();
-        scanOptions.bIsHighlight = g_xOptions.getValue(XOptions::ID_SCAN_HIGHLIGHT).toBool();
 
         quint64 nFlags = ui->comboBoxFlags->getValue().toULongLong();
         XScanEngine::setScanFlags(&scanOptions, nFlags);
@@ -116,7 +114,7 @@ void GuiMainWindow::scanFile(const QString &sFileName)
 
         QAbstractItemModel *pOldModel = ui->treeViewResult->model();
 
-        g_pModel = new ScanItemModel(&scanOptions, &(scanResult.listRecords), 1);
+        g_pModel = new ScanItemModel(&scanOptions, &(scanResult.listRecords), 1, &g_xOptions);
         ui->treeViewResult->setModel(g_pModel);
         ui->treeViewResult->expandAll();
 
