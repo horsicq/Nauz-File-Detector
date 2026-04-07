@@ -103,10 +103,11 @@ void GuiMainWindow::scanFile(const QString &sFileName)
         // #endif
 
         SpecAbstract specAbstract;
+        XScanEngineProcess scanEngineProcess(&specAbstract);
 
-        XDialogProcess ds(this, &specAbstract);
+        XDialogProcess ds(this, &scanEngineProcess);
         ds.setGlobal(&g_xShortcuts, &g_xOptions);
-        specAbstract.setData(sFileName, &scanOptions, &scanResult, ds.getPdStruct());
+        scanEngineProcess.setData(sFileName, &scanOptions, &scanResult, ds.getPdStruct());
         ds.start();
         ds.showDialogDelay();
 
