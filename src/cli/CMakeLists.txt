@@ -38,6 +38,7 @@ target_link_libraries(${PROJECT_NAME} PRIVATE lzma)
 target_link_libraries(${PROJECT_NAME} PRIVATE zlib)
 target_link_libraries(${PROJECT_NAME} PRIVATE ppmd)
 target_link_libraries(${PROJECT_NAME} PRIVATE capstone)
+target_link_libraries(${PROJECT_NAME} PRIVATE xsimd)
 
 target_link_libraries(${PROJECT_NAME} PRIVATE Qt${QT_VERSION_MAJOR}::Core)
 target_link_libraries(${PROJECT_NAME} PRIVATE Qt${QT_VERSION_MAJOR}::Concurrent)
