@@ -12,6 +12,7 @@ message("PROJECT_NAME " ${PROJECT_NAME})
 add_definitions(-DUSE_DEX)
 add_definitions(-DUSE_PDF)
 add_definitions(-DUSE_ARCHIVE)
+add_definitions(-DUSE_XSIMD)
 
 if(WIN32)
     add_definitions(-DNOMINMAX)
