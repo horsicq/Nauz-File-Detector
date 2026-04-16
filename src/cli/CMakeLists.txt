@@ -13,10 +13,12 @@ if(WIN32)
     add_definitions(-DNOMINMAX)
 endif()
 
-include(${CMAKE_CURRENT_LIST_DIR}/../../dep/SpecAbstract/specabstract.cmake)
+include("${CMAKE_CURRENT_LIST_DIR}/../../dep/SpecAbstract/specabstract.cmake")
+include("${CMAKE_CURRENT_LIST_DIR}/../../dep/XScanEngine/xscanengineconsole.cmake")
 
 set(PROJECT_SOURCES
     ${SPECABSTRACT_SOURCES}
+    ${XSCANENGINECONSOLE_SOURCES}
     main_console.cpp
 )
 

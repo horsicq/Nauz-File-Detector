@@ -34,6 +34,6 @@ message(STATUS X_PROJECT_ARCH: ${X_PROJECT_ARCH})
 
 add_subdirectory(../dep/XCapstone XCapstone)
 add_subdirectory(../dep/XArchive XArchive)
-add_subdirectory(../dep/Formats/xsimd xsimd)
+add_subdirectory(../dep/Formats/xsimd XSIMD)
 add_subdirectory(gui nfd)
 add_subdirectory(cli nfdc)

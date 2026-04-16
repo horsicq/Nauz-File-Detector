@@ -18,64 +18,24 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+#ifndef USE_ARCHIVE
+#define USE_ARCHIVE
+#endif
+#ifndef USE_DEX
+#define USE_DEX
+#endif
+#ifndef USE_PDF
+#define USE_PDF
+#endif
+
+#include <QCoreApplication>
 #include <QCommandLineOption>
 #include <QCommandLineParser>
-#include <QCoreApplication>
 
 #include "../global.h"
-#include "scanitemmodel.h"
-#include "specabstract.h"
 #include "xoptions.h"
-
-XOptions::CR ScanFiles(QList<QString> *pListArgs, XScanEngine::SCAN_OPTIONS *pScanOptions)
-{
-    XOptions::CR result = XOptions::CR_SUCCESS;
-
-    QList<QString> listFileNames;
-
-    for (qint32 i = 0; i < pListArgs->count(); i++) {
-        QString sFileName = pListArgs->at(i);
-
-        if (QFileInfo::exists(sFileName)) {
-            XBinary::findFiles(sFileName, &listFileNames);
-        } else {
-            printf("Cannot find: %s\n", sFileName.toUtf8().data());
-
-            result = XOptions::CR_CANNOTFINDFILE;
-        }
-    }
-
-    bool bShowFileName = listFileNames.count() > 1;
-
-    for (qint32 i = 0; i < listFileNames.count(); i++) {
-        QString sFileName = listFileNames.at(i);
-
-        if (bShowFileName) {
-            printf("%s:\n", sFileName.toUtf8().data());
-        }
-
-        XScanEngine::SCAN_RESULT scanResult = SpecAbstract().scanFile(sFileName, pScanOptions);
-
-        ScanItemModel model(pScanOptions, &(scanResult.listRecords), 1, nullptr);
-
-        XBinary::FORMATTYPE formatType = XBinary::FORMATTYPE_TEXT;
-
-        if (pScanOptions->bResultAsCSV) formatType = XBinary::FORMATTYPE_CSV;
-        else if (pScanOptions->bResultAsJSON) formatType = XBinary::FORMATTYPE_JSON;
-        else if (pScanOptions->bResultAsTSV) formatType = XBinary::FORMATTYPE_TSV;
-        else if (pScanOptions->bResultAsXML) formatType = XBinary::FORMATTYPE_XML;
-        else if (pScanOptions->bResultAsPlainText) formatType = XBinary::FORMATTYPE_PLAINTEXT;
-
-        if (formatType != XBinary::FORMATTYPE_TEXT) {
-            printf("%s\n", model.toString(formatType).toUtf8().data());
-        } else {
-            // Colored text
-            model.coloredOutput();
-        }
-    }
-
-    return result;
-}
+#include "specabstract.h"
+#include "xscanengineconsole.h"
 
 int main(int argc, char *argv[])
 {
@@ -88,94 +48,17 @@ int main(int argc, char *argv[])
 
     QCoreApplication app(argc, argv);
 
-    QCommandLineParser parser;
+#ifdef USE_XSIMD
+    xsimd_init();
+#endif
+
     QString sDescription;
     sDescription.append(QString("%1 v%2\n").arg(X_APPLICATIONDISPLAYNAME, X_APPLICATIONVERSION));
     sDescription.append(QString("%1\n").arg("Copyright(C) 2017-2026 hors<horsicq@gmail.com> Web: http://ntinfo.biz"));
-    parser.setApplicationDescription(sDescription);
-    parser.addHelpOption();
-    parser.addVersionOption();
 
-    parser.addPositionalArgument("target", "The file or directory to open.");
-
-    QCommandLineOption clRecursiveScan(QStringList() << "r"
-                                                     << "recursivescan",
-                                       "Recursive scan.");
-    QCommandLineOption clDeepScan(QStringList() << "d"
-                                                << "deepscan",
-                                  "Deep scan.");
-    QCommandLineOption clHeuristicScan(QStringList() << "u"
-                                                     << "heuristicscan",
-                                       "Heuristic scan.");
-    QCommandLineOption clAggresiveScan(QStringList() << "g"
-                                                     << "aggressivecscan",
-                                       "Aggressive scan.");
-    QCommandLineOption clVerbose(QStringList() << "b"
-                                               << "verbose",
-                                 "Verbose.");
-    QCommandLineOption clAllTypesScan(QStringList() << "a"
-                                                    << "alltypes",
-                                      "Scan all types.");
-    QCommandLineOption clFormatResult(QStringList() << "f"
-                                                    << "format",
-                                      "Format result.");
-    QCommandLineOption clResultAsXml(QStringList() << "x"
-                                                   << "xml",
-                                     "Result as XML.");
-    QCommandLineOption clResultAsJson(QStringList() << "j"
-                                                    << "json",
-                                      "Result as JSON.");
-    QCommandLineOption clResultAsCSV(QStringList() << "c"
-                                                   << "csv",
-                                     "Result as CSV.");
-    QCommandLineOption clResultAsTSV(QStringList() << "t"
-                                                   << "tsv",
-                                     "Result as TSV.");
-    QCommandLineOption clResultAsPlainText(QStringList() << "p"
-                                                         << "plaintext",
-                                           "Result as Plain Text.");
-
-    parser.addOption(clRecursiveScan);
-    parser.addOption(clDeepScan);
-    parser.addOption(clHeuristicScan);
-    parser.addOption(clAggresiveScan);
-    parser.addOption(clVerbose);
-    parser.addOption(clAllTypesScan);
-    parser.addOption(clFormatResult);
-    parser.addOption(clResultAsXml);
-    parser.addOption(clResultAsJson);
-    parser.addOption(clResultAsCSV);
-    parser.addOption(clResultAsTSV);
-    parser.addOption(clResultAsPlainText);
-
-    parser.process(app);
-
-    QList<QString> listArgs = parser.positionalArguments();
-
-    XScanEngine::SCAN_OPTIONS scanOptions = {0};
-
-    scanOptions.bShowType = true;
-    scanOptions.bShowInfo = true;
-    scanOptions.bShowVersion = true;
-    scanOptions.bIsRecursiveScan = parser.isSet(clRecursiveScan);
-    scanOptions.bIsDeepScan = parser.isSet(clDeepScan);
-    scanOptions.bIsHeuristicScan = parser.isSet(clHeuristicScan);
-    scanOptions.bIsVerbose = parser.isSet(clVerbose);
-    scanOptions.bIsAggressiveScan = parser.isSet(clAggresiveScan);
-    scanOptions.bIsAllTypesScan = parser.isSet(clAllTypesScan);
-    scanOptions.bFormatResult = parser.isSet(clFormatResult);
-    scanOptions.bResultAsXML = parser.isSet(clResultAsXml);
-    scanOptions.bResultAsJSON = parser.isSet(clResultAsJson);
-    scanOptions.bResultAsCSV = parser.isSet(clResultAsCSV);
-    scanOptions.bResultAsTSV = parser.isSet(clResultAsTSV);
-    scanOptions.bResultAsPlainText = parser.isSet(clResultAsPlainText);
-
-    if (listArgs.count()) {
-        nResult = ScanFiles(&listArgs, &scanOptions);
-    } else {
-        parser.showHelp();
-        Q_UNREACHABLE();
-    }
+    SpecAbstract specAbstract;
+    XScanEngineConsole scanEngineConsole(&app, &specAbstract, sDescription);
+    nResult = scanEngineConsole.process();
 
     return nResult;
 }

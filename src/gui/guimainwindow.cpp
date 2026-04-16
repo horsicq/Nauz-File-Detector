@@ -26,6 +26,10 @@ GuiMainWindow::GuiMainWindow(QWidget *pParent) : QMainWindow(pParent), ui(new Ui
 {
     ui->setupUi(this);
 
+#ifdef USE_XSIMD
+    xsimd_init();
+#endif
+
     g_pModel = nullptr;
 
     setWindowTitle(XOptions::getTitle(X_APPLICATIONDISPLAYNAME, X_APPLICATIONVERSION));
