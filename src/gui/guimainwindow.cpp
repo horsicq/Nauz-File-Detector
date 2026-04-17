@@ -30,8 +30,6 @@ GuiMainWindow::GuiMainWindow(QWidget *pParent) : QMainWindow(pParent), ui(new Ui
     xsimd_init();
 #endif
 
-    g_pModel = nullptr;
-
     setWindowTitle(XOptions::getTitle(X_APPLICATIONDISPLAYNAME, X_APPLICATIONVERSION));
 
     setAcceptDrops(true);
@@ -50,10 +48,24 @@ GuiMainWindow::GuiMainWindow(QWidget *pParent) : QMainWindow(pParent), ui(new Ui
     g_xOptions.addID(XOptions::ID_FILE_SAVERECENTFILES, true);
 
 #ifdef Q_OS_WIN
-    g_xOptions.addID(XOptions::ID_FILE_CONTEXT, "*");
+    if (!g_xOptions.isNative()) {
+        g_xOptions.addID(XOptions::ID_FILE_CONTEXT, "*");
+    }
 #endif
 
-    NFDOptionsWidget::setDefaultValues(&g_xOptions);
+    g_xOptions.addID(XOptions::ID_FEATURE_READBUFFERSIZE, 8 * 1024);
+    g_xOptions.addID(XOptions::ID_FEATURE_FILEBUFFERSIZE, 2 * 1024 * 1024);
+
+#ifdef USE_XSIMD
+#ifdef Q_PROCESSOR_X86
+    g_xOptions.addID(XOptions::ID_FEATURE_SSE2, true);
+    g_xOptions.addID(XOptions::ID_FEATURE_AVX2, true);
+#endif
+#endif
+
+    g_xOptions.addID(XOptions::ID_SCAN_ENGINE_NFD_ENABLED, true);
+
+    XScanEngineOptionsWidget::setDefaultValues(&g_xOptions);
 
     g_xOptions.load();
 
@@ -69,7 +81,7 @@ GuiMainWindow::GuiMainWindow(QWidget *pParent) : QMainWindow(pParent), ui(new Ui
 
     ui->toolButtonRecentFiles->setEnabled(g_xOptions.getRecentFiles().count());
 
-    ui->comboBoxFlags->setData(XScanEngine::getScanFlags(), XComboBoxEx::CBTYPE_FLAGS, 0, tr("Flags"));
+    ui->widgetResult->setGlobal(&g_xShortcuts, &g_xOptions);
 
     adjustView();
 
@@ -85,80 +97,28 @@ GuiMainWindow::~GuiMainWindow()
     delete ui;
 }
 
-void GuiMainWindow::scanFile(const QString &sFileName)
+void GuiMainWindow::_scan(const QString &sFileName)
 {
-    if (sFileName != "") {
-        XScanEngine::SCAN_RESULT scanResult = {0};
+    QFileInfo fi(sFileName);
 
-        XScanEngine::SCAN_OPTIONS scanOptions = {0};
+    if (fi.isFile()) {
+        bool bBlock1 = ui->lineEditFileName->blockSignals(true);
+        ui->lineEditFileName->setText(QDir().toNativeSeparators(sFileName));
+        ui->lineEditFileName->blockSignals(bBlock1);
 
-        scanOptions.bShowType = true;
-        scanOptions.bShowInfo = true;
-        scanOptions.bShowVersion = true;
-        scanOptions.fileType = (XBinary::FT)(ui->comboBoxType->currentData().toInt());
-
-        quint64 nFlags = ui->comboBoxFlags->getValue().toULongLong();
-        XScanEngine::setScanFlags(&scanOptions, nFlags);
-
-        XScanEngine::setScanFlagsToGlobalOptions(&g_xOptions, nFlags);
-
-        // #ifdef QT_DEBUG
-        //         options.bIsTest=true;
-        // #endif
-
-        SpecAbstract specAbstract;
-        XScanEngineProcess scanEngineProcess(&specAbstract);
-
-        XDialogProcess ds(this, &scanEngineProcess);
-        ds.setGlobal(&g_xShortcuts, &g_xOptions);
-        scanEngineProcess.setData(sFileName, &scanOptions, &scanResult, ds.getPdStruct());
-        ds.start();
-        ds.showDialogDelay();
-
-        ui->labelTime->clear();
-
-        QAbstractItemModel *pOldModel = ui->treeViewResult->model();
-
-        g_pModel = new ScanItemModel(&scanOptions, &(scanResult.listRecords), 1, &g_xOptions);
-        ui->treeViewResult->setModel(g_pModel);
-        ui->treeViewResult->expandAll();
-
-        delete pOldModel;  // TODO Thread
-
-        ui->labelTime->setText(QString("%1 %2").arg(QString::number(scanResult.nScanTime), tr("msec")));
+        ui->widgetResult->setData(sFileName, g_xOptions.isScanAfterOpen());
 
         g_xOptions.setLastFileName(sFileName);
 
         ui->toolButtonRecentFiles->setEnabled(g_xOptions.getRecentFiles().count());
-    }
-}
-
-void GuiMainWindow::_scan(const QString &sName)
-{
-    QFileInfo fi(sName);
-
-    if (fi.isFile()) {
-        bool bBlock1 = ui->lineEditFileName->blockSignals(true);
-        ui->lineEditFileName->setText(QDir().toNativeSeparators(sName));
-        ui->lineEditFileName->blockSignals(bBlock1);
-
-        XFormats::setFileTypeComboBox(XBinary::FT_UNKNOWN, sName, ui->comboBoxType);
-
-        process();
     } else if (fi.isDir()) {
-        DialogNFDScanDirectory dds(this, sName);
+        DialogXScanEngineDirectory dds(this);
         dds.setGlobal(&g_xShortcuts, &g_xOptions);
 
         dds.exec();
 
         adjustView();
     }
-}
-
-void GuiMainWindow::process()
-{
-    QString sFileName = ui->lineEditFileName->text().trimmed();
-    scanFile(sFileName);
 }
 
 void GuiMainWindow::errorMessageSlot(const QString &sText)
@@ -184,11 +144,6 @@ void GuiMainWindow::on_pushButtonOpenFile_clicked()
             _scan(sFileName);
         }
     }
-}
-
-void GuiMainWindow::on_pushButtonScan_clicked()
-{
-    process();
 }
 
 void GuiMainWindow::on_pushButtonAbout_clicked()
@@ -237,34 +192,6 @@ void GuiMainWindow::on_pushButtonOptions_clicked()
     adjustView();
 }
 
-void GuiMainWindow::adjustView()
-{
-    if (g_xOptions.isIDPresent(XOptions::ID_VIEW_STAYONTOP)) {
-        g_xOptions.adjustStayOnTop(this);
-    }
-
-    g_xOptions.adjustWidget(this, XOptions::ID_VIEW_FONT_CONTROLS);
-    g_xOptions.adjustTreeView(ui->treeViewResult, XOptions::ID_VIEW_FONT_TREEVIEWS);
-
-    quint64 nFlags = XScanEngine::getScanFlagsFromGlobalOptions(&g_xOptions);
-    ui->comboBoxFlags->setValue(nFlags);
-}
-
-void GuiMainWindow::on_pushButtonDirectoryScan_clicked()
-{
-    QString sFolderPath = QFileInfo(ui->lineEditFileName->text()).absolutePath();
-
-    if (sFolderPath == "") {
-        sFolderPath = g_xOptions.getLastDirectory();
-    }
-
-    DialogNFDScanDirectory dds(this, sFolderPath);
-    dds.setGlobal(&g_xShortcuts, &g_xOptions);
-    dds.exec();
-
-    adjustView();
-}
-
 void GuiMainWindow::on_toolButtonRecentFiles_clicked()
 {
     g_pRecentFilesMenu->exec(QCursor::pos());
@@ -272,49 +199,14 @@ void GuiMainWindow::on_toolButtonRecentFiles_clicked()
     ui->toolButtonRecentFiles->setEnabled(g_xOptions.getRecentFiles().count());
 }
 
-void GuiMainWindow::on_pushButtonClear_clicked()
+void GuiMainWindow::adjustView()
 {
-    QAbstractItemModel *pOldModel = ui->treeViewResult->model();
-
-    ui->treeViewResult->setModel(nullptr);
-
-    delete pOldModel;  // TODO Thread
-
-    ui->labelTime->clear();
-}
-
-void GuiMainWindow::on_pushButtonSave_clicked()
-{
-    QString _sFileName = QFileDialog::getSaveFileName(this, tr("Save"), tr("Result"), QString("%1 (*.txt);;%2 (*)").arg(tr("Text files"), tr("All files")));
-
-    if (!_sFileName.isEmpty()) {
-        if (!XOptions::saveTreeModel(ui->treeViewResult->model(), _sFileName)) {
-            QMessageBox::critical(XOptions::getMainWidget(this), tr("Error"), QString("%1: %2").arg(tr("Cannot save file"), _sFileName));
-        }
+    if (g_xOptions.isIDPresent(XOptions::ID_VIEW_STAYONTOP)) {
+        g_xOptions.adjustStayOnTop(this);
     }
+
+    g_xOptions.adjustWidget(this, XOptions::ID_VIEW_FONT_CONTROLS);
+    ui->widgetResult->adjustView();
 }
 
-void GuiMainWindow::on_pushButtonExtra_clicked()
-{
-    if (g_pModel) {
-        DialogTextInfo dialogTextInfo(this);
 
-        QString sText = ((ScanItemModel *)g_pModel)->toFormattedString();
-
-        dialogTextInfo.setText(sText);
-
-        dialogTextInfo.exec();
-    }
-}
-
-void GuiMainWindow::on_comboBoxType_currentIndexChanged(int nIndex)
-{
-    Q_UNUSED(nIndex)
-
-    process();
-}
-
-void GuiMainWindow::on_lineEditFileName_textChanged(const QString &sString)
-{
-    XFormats::setFileTypeComboBox(XBinary::FT_UNKNOWN, sString, ui->comboBoxType);
-}

@@ -26,15 +26,12 @@ DialogOptions::DialogOptions(QWidget *pParent, XOptions *pOptions, XOptions::GRO
 {
     ui->setupUi(this);
 
-    g_pNFDOptionsWidget = new NFDOptionsWidget(this);
-
-    this->g_pOptions = pOptions;
+    m_pScanEngineOptionsWidget = new XScanEngineOptionsWidget(this);
 
     ui->widgetOptions->setOptions(pOptions, X_APPLICATIONDISPLAYNAME);
 
-    ui->widgetOptions->addPage(g_pNFDOptionsWidget, tr("Scan"));
-    g_pNFDOptionsWidget->setOptions(pOptions);
-    g_pNFDOptionsWidget->setGlobal(getShortcuts(), getGlobalOptions());
+    ui->widgetOptions->addPage(m_pScanEngineOptionsWidget, tr("Scan"));
+    m_pScanEngineOptionsWidget->setOptions(pOptions);
 
     ui->widgetOptions->setCurrentPage(groupId);
 }
@@ -46,11 +43,13 @@ DialogOptions::~DialogOptions()
 
 void DialogOptions::setGlobal(XShortcuts *pShortcuts, XOptions *pXOptions)
 {
-
+    ui->widgetOptions->setGlobal(pShortcuts, pXOptions);
+    XShortcutsDialog::setGlobal(pShortcuts, pXOptions);
 }
 
 void DialogOptions::adjustView()
 {
+    ui->widgetOptions->adjustView();
 }
 
 void DialogOptions::registerShortcuts(bool bState)

@@ -29,10 +29,10 @@
 #include "../global.h"
 #include "dialogabout.h"
 #include "dialogoptions.h"
-#include "dialognfdscandirectory.h"
 #include "specabstract.h"
 #include "xdialogprocess.h"
 #include "xoptions.h"
+#include "xscanenginewidget.h"
 
 namespace Ui {
 class GuiMainWindow;
@@ -46,23 +46,14 @@ public:
     ~GuiMainWindow() override;
 
 private slots:
-    void scanFile(const QString &sFileName);
-    void _scan(const QString &sName);
-    void process();
+    void _scan(const QString &sFileName);
     void errorMessageSlot(const QString &sText);
-    void on_pushButtonScan_clicked();
     void on_pushButtonExit_clicked();
     void on_pushButtonOpenFile_clicked();
     void on_pushButtonAbout_clicked();
     void on_pushButtonOptions_clicked();
-    void adjustView();
-    void on_pushButtonDirectoryScan_clicked();
     void on_toolButtonRecentFiles_clicked();
-    void on_pushButtonClear_clicked();
-    void on_pushButtonSave_clicked();
-    void on_pushButtonExtra_clicked();
-    void on_comboBoxType_currentIndexChanged(int nIndex);
-    void on_lineEditFileName_textChanged(const QString &sString);
+    void adjustView();
 
 protected:
     void dragEnterEvent(QDragEnterEvent *pEvent) override;
@@ -74,7 +65,6 @@ private:
     XOptions g_xOptions;
     XShortcuts g_xShortcuts;
     QMenu *g_pRecentFilesMenu;
-    QAbstractItemModel *g_pModel;
 };
 
 #endif  // GUIMAINWINDOW_H
