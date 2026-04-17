@@ -22,14 +22,9 @@
 #define DIALOGOPTIONS_H
 
 #include <QDialog>
-#include <QDir>
-#include <QMessageBox>
-#include <QSettings>
 
 #include "../global.h"
-#include "nfdoptionswidget.h"
-#include "xoptions.h"
-#include "xshortcutsdialog.h"
+#include "xscanengineoptionswidget.h"
 
 namespace Ui {
 class DialogOptions;
@@ -41,6 +36,7 @@ class DialogOptions : public XShortcutsDialog {
 public:
     explicit DialogOptions(QWidget *pParent, XOptions *pOptions, XOptions::GROUPID groupId);
     ~DialogOptions();
+    void setGlobal(XShortcuts *pShortcuts, XOptions *pXOptions);
 
     virtual void adjustView();
 
@@ -49,8 +45,7 @@ protected:
 
 private:
     Ui::DialogOptions *ui;
-    NFDOptionsWidget *g_pNFDOptionsWidget;
-    XOptions *g_pOptions;
+    XScanEngineOptionsWidget *m_pScanEngineOptionsWidget;
 };
 
 #endif  // DIALOGOPTIONS_H
