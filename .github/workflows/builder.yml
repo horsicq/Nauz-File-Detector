@@ -33,7 +33,7 @@ jobs:
         cpack -G DEB
 
     - name: Upload Release as Download
-      uses: softprops/action-gh-release@v2
+      uses: softprops/action-gh-release@v3
       env:
         RELEASE_TOKEN: ${{ secrets.RELEASE_TOKEN }}
       with:
@@ -77,7 +77,7 @@ jobs:
           nmake
           cpack -G ZIP
       - name: Upload Release as Download
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3
         env:
           RELEASE_TOKEN: ${{ secrets.RELEASE_TOKEN }}
         with:
@@ -121,7 +121,7 @@ jobs:
           nmake
           cpack -G ZIP
       - name: Upload Release as Download
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3
         env:
           RELEASE_TOKEN: ${{ secrets.RELEASE_TOKEN }}
         with:
