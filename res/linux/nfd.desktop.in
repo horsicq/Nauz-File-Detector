@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=@PROJECT_VERSION@
+Type=Application
+Name=Nauz File Detector
+Comment=Portable linker/compiler/packer identifier utility
+Exec=nfd
+Icon=nfd
+Terminal=false
+Categories=Development;Utility;
