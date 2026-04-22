@@ -18,17 +18,17 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-#ifndef _GLOBAL_H
-#define _GLOBAL_H
+#ifndef GLOBAL_H
+#define GLOBAL_H
 
-#include <QString>
+#include <QtGlobal>
 
 #define X_APPLICATIONDISPLAYNAME "Nauz File Detector"
 #define X_APPLICATIONNAME "nfd"
-#define X_APPLICATIONVERSION "0.10"
+#define X_APPLICATIONVERSION "0.1.0"
 #define X_ORGANIZATIONNAME "NTInfo"
 #define X_ORGANIZATIONDOMAIN "ntinfo.biz"
 #define X_OPTIONSFILE "nfd.ini"
 #define X_SHORTCUTSFILE "shortcuts.ini"
 
-#endif  // _GLOBAL_H
+#endif  // GLOBAL_H

@@ -1,36 +1,23 @@
-cmake_minimum_required(VERSION 3.16)
-
-project(NauzFileDetector VERSION ${X_PROJECT_VERSION} LANGUAGES CXX)
-
-message("X_RESOURCES " ${X_RESOURCES})
-
 include(../../dep/build_tools/cmake/cpp_standart_setup.cmake)
-
-message("X_RESOURCES " ${X_RESOURCES})
-message("PROJECT_NAME " ${PROJECT_NAME})
 
 add_definitions(-DUSE_DEX)
 add_definitions(-DUSE_PDF)
 add_definitions(-DUSE_ARCHIVE)
 add_definitions(-DUSE_XSIMD)
 
-if(WIN32)
-    add_definitions(-DNOMINMAX)
-endif()
+include(${CMAKE_CURRENT_LIST_DIR}/../../dep/nfd_widget/nfd_widget.cmake)
+include(${CMAKE_CURRENT_LIST_DIR}/../../dep/XOptions/xoptionswidget.cmake)
+include(${CMAKE_CURRENT_LIST_DIR}/../../dep/XAboutWidget/xaboutwidget.cmake)
+include(${CMAKE_CURRENT_LIST_DIR}/../../dep/XStyles/xstyles.cmake)
 
-if(CMAKE_BUILD_TYPE STREQUAL "Release" OR CMAKE_BUILD_TYPE STREQUAL "MinSizeRel")
-include(../../dep/build_tools/cmake/init_translation.cmake)
-endif()
+find_package(Threads REQUIRED)
 
-include(${CMAKE_CURRENT_SOURCE_DIR}/../../dep/nfd_widget/nfd_widget.cmake)
-include(${CMAKE_CURRENT_SOURCE_DIR}/../../dep/XOptions/xoptionswidget.cmake)
-include(${CMAKE_CURRENT_SOURCE_DIR}/../../dep/XAboutWidget/xaboutwidget.cmake)
-include(${CMAKE_CURRENT_SOURCE_DIR}/../../dep/XStyles/xstyles.cmake)
-
-set(PROJECT_SOURCES
+set(NFD_GUI_TARGET NauzFileDetector)
+set(NFD_GUI_SOURCES
     ${NFD_WIDGET_SOURCES}
     ${XOPTIONSWIDGET_SOURCES}
     ${XABOUTWIDGET_SOURCES}
+    ${XSTYLES_SOURCES}
     dialogabout.cpp
     dialogabout.h
     dialogabout.ui
@@ -44,77 +31,115 @@ set(PROJECT_SOURCES
     resources.qrc
 )
 
-if(CMAKE_BUILD_TYPE STREQUAL "Release" OR CMAKE_BUILD_TYPE STREQUAL "MinSizeRel")
-include(../../dep/build_tools/cmake/create_translation.cmake)
+if(WIN32 AND EXISTS "${X_WINDOWS_RESOURCE_ICON_RC}")
+    list(APPEND NFD_GUI_SOURCES "${X_WINDOWS_RESOURCE_ICON_RC}")
 endif()
+
+if(APPLE AND EXISTS "${X_MACOS_ICON}")
+    set_source_files_properties("${X_MACOS_ICON}" PROPERTIES
+        MACOSX_PACKAGE_LOCATION "Resources"
+    )
+    list(APPEND NFD_GUI_SOURCES "${X_MACOS_ICON}")
+endif()
+
+add_executable(${NFD_GUI_TARGET} WIN32
+    ${NFD_GUI_SOURCES}
+)
+
+set_target_properties(${NFD_GUI_TARGET} PROPERTIES
+    WIN32_EXECUTABLE TRUE
+    MACOSX_BUNDLE TRUE
+    MACOSX_BUNDLE_GUI_IDENTIFIER "${MACOSX_BUNDLE_GUI_IDENTIFIER}"
+    OUTPUT_NAME "${X_ORIGINAL_FILENAME}"
+)
+
+target_include_directories(${NFD_GUI_TARGET} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
+
+target_link_libraries(${NFD_GUI_TARGET} PRIVATE
+    bzip2
+    lzma
+    zlib
+    ppmd
+    capstone
+    xsimd
+    Qt${NFD_QT_MAJOR}::Widgets
+    Qt${NFD_QT_MAJOR}::Concurrent
+    Qt${NFD_QT_MAJOR}::PrintSupport
+    Qt${NFD_QT_MAJOR}::OpenGL
+    Qt${NFD_QT_MAJOR}::Svg
+    Threads::Threads
+)
 
 if(WIN32)
-    add_executable(${PROJECT_NAME} WIN32
-        ${PROJECT_SOURCES}
-        ${QM_FILES}
-        ../../res/resource_icon.rc
-    )
-elseif(APPLE)
-    add_executable(${PROJECT_NAME}
-        MACOSX_BUNDLE
-        ${PROJECT_SOURCES}
-        ${QM_FILES}
-    )
-
-    set_source_files_properties(${CMAKE_CURRENT_SOURCE_DIR}/../../res/main.icns PROPERTIES
-        MACOSX_PACKAGE_LOCATION "Resources")
-    target_sources(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../../res/main.icns)
-
-else()
-    add_executable(${PROJECT_NAME}
-        ${PROJECT_SOURCES}
-        ${QM_FILES}
-    )
+    target_link_libraries(${NFD_GUI_TARGET} PRIVATE Wintrust Crypt32)
 endif()
 
-if(CMAKE_BUILD_TYPE STREQUAL "Release" OR CMAKE_BUILD_TYPE STREQUAL "MinSizeRel")
-    if(APPLE)
-        include(../../dep/build_tools/cmake/macdeployqt.cmake)
+if(TARGET nfd_translations)
+    add_dependencies(${NFD_GUI_TARGET} nfd_translations)
+endif()
+
+if(UNIX AND NOT APPLE)
+    set(NFD_RUNTIME_DESTINATION "${CMAKE_INSTALL_BINDIR}")
+    set(NFD_DOC_DESTINATION "${CMAKE_INSTALL_DOCDIR}/nauzfiledetector")
+    set(NFD_DESKTOP_TEMPLATE "${CMAKE_CURRENT_SOURCE_DIR}/../../res/linux/nfd.desktop.in")
+    set(NFD_DESKTOP_FILE "${CMAKE_CURRENT_BINARY_DIR}/nfd.desktop")
+
+    if(EXISTS "${NFD_DESKTOP_TEMPLATE}")
+        configure_file("${NFD_DESKTOP_TEMPLATE}" "${NFD_DESKTOP_FILE}" @ONLY)
     endif()
-endif()
-
-target_link_libraries(${PROJECT_NAME} PRIVATE bzip2)
-target_link_libraries(${PROJECT_NAME} PRIVATE lzma)
-target_link_libraries(${PROJECT_NAME} PRIVATE zlib)
-target_link_libraries(${PROJECT_NAME} PRIVATE ppmd)
-target_link_libraries(${PROJECT_NAME} PRIVATE capstone)
-target_link_libraries(${PROJECT_NAME} PRIVATE xsimd)
-
-target_link_libraries(${PROJECT_NAME} PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
-target_link_libraries(${PROJECT_NAME} PRIVATE Qt${QT_VERSION_MAJOR}::Concurrent)
-target_link_libraries(${PROJECT_NAME} PRIVATE Qt${QT_VERSION_MAJOR}::PrintSupport)
-target_link_libraries(${PROJECT_NAME} PRIVATE Qt${QT_VERSION_MAJOR}::OpenGL)
-target_link_libraries(${PROJECT_NAME} PRIVATE Qt${QT_VERSION_MAJOR}::Svg)
-
-if(WIN32)
-    target_link_libraries(${PROJECT_NAME} PRIVATE Wintrust)
-    target_link_libraries(${PROJECT_NAME} PRIVATE Crypt32)
-endif()
-
-find_package(Threads REQUIRED)
-target_link_libraries(${PROJECT_NAME} PRIVATE Threads::Threads)
-
-message(STATUS "CMAKE_PREFIX_PATH: ${CMAKE_PREFIX_PATH}")
-message(STATUS "CMAKE_INSTALL_PREFIX: ${CMAKE_INSTALL_PREFIX}")
-message(STATUS "CMAKE_INSTALL_BINDIR: ${CMAKE_INSTALL_BINDIR}")
-message(STATUS "CMAKE_INSTALL_LIBDIR: ${CMAKE_INSTALL_LIBDIR}")
-
-if(WIN32)
-    install (TARGETS ${PROJECT_NAME} DESTINATION "./")
-    include(../../dep/build_tools/cmake/deploy_qt_windows.cmake)
-    include(../../dep/build_tools/cmake/deploy_msvc.cmake)
-    include(../../dep/build_tools/cmake/deploy_openssl.cmake)
-elseif(APPLE)
-    install(TARGETS ${PROJECT_NAME}
-        BUNDLE DESTINATION .
-        LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-        RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
-    )
 else()
-    install (TARGETS ${PROJECT_NAME} DESTINATION ${CMAKE_INSTALL_BINDIR})
+    set(NFD_RUNTIME_DESTINATION ".")
+    set(NFD_DOC_DESTINATION ".")
+endif()
+
+install(TARGETS ${NFD_GUI_TARGET}
+    RUNTIME DESTINATION ${NFD_RUNTIME_DESTINATION}
+    BUNDLE DESTINATION .
+)
+
+if(UNIX AND NOT APPLE)
+    install(FILES
+        "${CMAKE_CURRENT_SOURCE_DIR}/../../LICENSE"
+        "${CMAKE_CURRENT_SOURCE_DIR}/../../README.md"
+        DESTINATION ${NFD_DOC_DESTINATION}
+        OPTIONAL
+    )
+
+    if(EXISTS "${NFD_DESKTOP_FILE}")
+        install(FILES "${NFD_DESKTOP_FILE}"
+            DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/applications")
+    endif()
+
+    if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/../../res/linux/hicolor")
+        install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/../../res/linux/hicolor/"
+            DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor")
+    endif()
+else()
+    install(FILES
+        "${CMAKE_CURRENT_SOURCE_DIR}/../../LICENSE"
+        DESTINATION .
+        RENAME LICENSE.txt
+        OPTIONAL
+    )
+
+    install(FILES
+        "${CMAKE_CURRENT_SOURCE_DIR}/../../README.md"
+        "${CMAKE_CURRENT_SOURCE_DIR}/../../res/license.txt"
+        "${CMAKE_CURRENT_SOURCE_DIR}/../../res/readme.txt"
+        "${X_WINDOWS_ICON}"
+        DESTINATION .
+        OPTIONAL
+    )
+
+    install(CODE [[file(WRITE "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/portable" "")]])
+endif()
+
+if(APPLE)
+    include(${CMAKE_CURRENT_LIST_DIR}/../../dep/build_tools/cmake/macdeployqt.cmake)
+endif()
+
+if(WIN32)
+    include(${CMAKE_CURRENT_LIST_DIR}/../../dep/build_tools/cmake/deploy_qt_windows.cmake)
+    include(${CMAKE_CURRENT_LIST_DIR}/../../dep/build_tools/cmake/deploy_msvc.cmake)
+    include(${CMAKE_CURRENT_LIST_DIR}/../../dep/build_tools/cmake/deploy_openssl.cmake)
 endif()
