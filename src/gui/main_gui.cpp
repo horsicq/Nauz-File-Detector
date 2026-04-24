@@ -63,7 +63,7 @@ int main(int argc, char *argv[])
     }
 
     QApplication application(argc, argv);
-    application.setWindowIcon(QIcon(QStringLiteral(":/images/main.png")));
+    application.setWindowIcon(QIcon(QStringLiteral(":/main.png")));
 
 #ifdef Q_OS_LINUX
 #if QT_VERSION >= QT_VERSION_CHECK(5, 7, 0)

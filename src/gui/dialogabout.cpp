@@ -60,9 +60,9 @@ DialogAbout::DialogAbout(QWidget *pParent) : QDialog(pParent), ui(new Ui::Dialog
             "underline; color:#ff0000;\">http://qt-project.org</span></a></p>")
             .arg(QT_VERSION_STR);
 
-    _data.sLogoPath = ":/images/main.png";
+    _data.sLogoPath = ":/images/logo.png";
     _data.sUpdatesLink = "https://github.com/horsicq/Nauz-File-Detector/releases";
-    _data.sThanksLink = "https://github.com/horsicq/Nauz-File-Detector/blob/master/doc/THANKS.md";
+    _data.sThanksLink = "https://github.com/horsicq/Nauz-File-Detector/blob/master/THANKS.md";
 
     ui->widgetAbout->setData(_data);
 }

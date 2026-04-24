@@ -28,7 +28,7 @@ set(NFD_GUI_SOURCES
     guimainwindow.h
     guimainwindow.ui
     main_gui.cpp
-    resources.qrc
+    "${CMAKE_CURRENT_LIST_DIR}/../../res/resources_gui.qrc"
 )
 
 if(WIN32 AND EXISTS "${X_WINDOWS_RESOURCE_ICON_RC}")

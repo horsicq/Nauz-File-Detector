@@ -18,8 +18,8 @@ if(MSVC)
     add_compile_options($<$<CONFIG:Debug>:/Z7> $<$<CONFIG:RelWithDebInfo>:/Z7>)
 endif()
 
-include(${CMAKE_CURRENT_LIST_DIR}/../../../_mylibs/SpecAbstract/specabstract.cmake)
-include(${CMAKE_CURRENT_LIST_DIR}/../../../_mylibs/XScanEngine/xscanengineconsole.cmake)
+include(${CMAKE_CURRENT_LIST_DIR}/../../dep/SpecAbstract/specabstract.cmake)
+include(${CMAKE_CURRENT_LIST_DIR}/../../dep/XScanEngine/xscanengineconsole.cmake)
 
 find_package(Threads REQUIRED)
 

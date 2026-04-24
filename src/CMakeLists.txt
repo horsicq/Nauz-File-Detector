@@ -96,6 +96,7 @@ if(EXISTS "${NFD_TRANSLATION_HELPER}")
     deploy_add_translations(
         TARGET_NAME nfd_translations
         ADD_TO_ALL
+        SOURCE_DIRS "${CMAKE_CURRENT_LIST_DIR}"
         TS_FILES ${NFD_TS_FILES}
         INSTALL_DESTINATION lang
         WINDOWS_APPDATA_SUBDIR "${X_PROJECTNAME}"
