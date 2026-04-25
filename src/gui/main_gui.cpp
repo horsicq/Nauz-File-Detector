@@ -53,10 +53,8 @@ int main(int argc, char *argv[])
 
     configureApplicationMetadata();
 
-    if ((argc == 2) && ((QString::fromLocal8Bit(argv[1]) == QStringLiteral("--version")) ||
-                        (QString::fromLocal8Bit(argv[1]) == QStringLiteral("-v")))) {
-        const QString info = QStringLiteral("%1 v%2").arg(QStringLiteral(X_APPLICATIONDISPLAYNAME),
-                                                         QStringLiteral(X_APPLICATIONVERSION));
+    if ((argc == 2) && ((QString::fromLocal8Bit(argv[1]) == QStringLiteral("--version")) || (QString::fromLocal8Bit(argv[1]) == QStringLiteral("-v")))) {
+        const QString info = QStringLiteral("%1 v%2").arg(QStringLiteral(X_APPLICATIONDISPLAYNAME), QStringLiteral(X_APPLICATIONVERSION));
         std::printf("%s\n", info.toUtf8().constData());
 
         return 0;

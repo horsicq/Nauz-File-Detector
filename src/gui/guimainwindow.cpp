@@ -208,5 +208,3 @@ void GuiMainWindow::adjustView()
     g_xOptions.adjustWidget(this, XOptions::ID_VIEW_FONT_CONTROLS);
     ui->widgetResult->adjustView();
 }
-
-

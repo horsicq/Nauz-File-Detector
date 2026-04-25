@@ -48,8 +48,7 @@ void configureApplicationMetadata()
 QString buildDescription()
 {
     QString description;
-    description.append(QStringLiteral("%1 v%2\n").arg(QStringLiteral(X_APPLICATIONDISPLAYNAME),
-                                                      QStringLiteral(X_APPLICATIONVERSION)));
+    description.append(QStringLiteral("%1 v%2\n").arg(QStringLiteral(X_APPLICATIONDISPLAYNAME), QStringLiteral(X_APPLICATIONVERSION)));
     description.append(QStringLiteral("Copyright(C) 2017-2026 hors<horsicq@gmail.com> Web: http://ntinfo.biz\n"));
 
     return description;
