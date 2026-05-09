@@ -67,7 +67,7 @@ int main(int argc, char *argv[])
 #endif
 
     SpecAbstract specAbstract;
-    XScanEngineConsole scanEngineConsole(&application, &specAbstract, buildDescription());
+    XScanEngineConsole scanEngineConsole(application, specAbstract, buildDescription());
 
     return scanEngineConsole.process();
 }
