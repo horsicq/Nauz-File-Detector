@@ -52,7 +52,7 @@ jobs:
          path: ${{ env.SRC_PATH }}
 
       - name: Setup MSVC
-        uses: ilammy/msvc-dev-cmd@v1
+        uses: ilammy/msvc-dev-cmd@v2
         with:
          arch: x86
 
@@ -96,7 +96,7 @@ jobs:
          path: ${{ env.SRC_PATH }}
 
       - name: Setup MSVC
-        uses: ilammy/msvc-dev-cmd@v1
+        uses: ilammy/msvc-dev-cmd@v2
         with:
          arch: x64
 
