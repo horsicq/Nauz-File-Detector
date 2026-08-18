@@ -40,6 +40,7 @@ target_link_libraries(nfdc PRIVATE
     lzma
     zlib
     ppmd
+    xarchive_7zip
     capstone
     xsimd
     Qt${NFD_QT_MAJOR}::Core
