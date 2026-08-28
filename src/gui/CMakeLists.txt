@@ -60,7 +60,6 @@ target_link_libraries(${NFD_GUI_TARGET} PRIVATE
     lzma
     zlib
     ppmd
-    xarchive_7zip
     capstone
     xsimd
     Qt${NFD_QT_MAJOR}::Widgets

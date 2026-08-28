@@ -160,6 +160,26 @@ jobs:
           path: release-assets
           merge-multiple: true
 
+      - name: Remove stale Beta release assets
+        env:
+          GH_TOKEN: ${{ secrets.RELEASE_TOKEN || github.token }}
+          REPO: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+          release_id="$(gh api "repos/$REPO/releases/tags/Beta" --jq '.id' 2>/dev/null || true)"
+          if [ -z "$release_id" ]; then
+            echo "No existing Beta release; nothing to clean."
+            exit 0
+          fi
+          echo "Cleaning assets from Beta release $release_id"
+          gh api --paginate "repos/$REPO/releases/$release_id/assets" \
+            --jq '.[] | "\(.id)\t\(.name)"' \
+            | while IFS=$'\t' read -r asset_id asset_name; do
+                [ -n "$asset_id" ] || continue
+                echo "Deleting stale asset: $asset_name (id=$asset_id)"
+                gh api -X DELETE "repos/$REPO/releases/assets/$asset_id"
+              done
+
       - name: Upload Release as Download
         uses: softprops/action-gh-release@v2
         with:
