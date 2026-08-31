@@ -21,12 +21,6 @@
 #ifndef USE_ARCHIVE
 #define USE_ARCHIVE
 #endif
-#ifndef USE_DEX
-#define USE_DEX
-#endif
-#ifndef USE_PDF
-#define USE_PDF
-#endif
 
 #include <QCoreApplication>
 

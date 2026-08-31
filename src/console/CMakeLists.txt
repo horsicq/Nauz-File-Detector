@@ -3,8 +3,6 @@ set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
-add_definitions(-DUSE_DEX)
-add_definitions(-DUSE_PDF)
 add_definitions(-DUSE_ARCHIVE)
 add_definitions(-DUSE_XSIMD)
 

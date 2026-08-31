@@ -147,6 +147,9 @@ jobs:
 
   publish-release:
     runs-on: ubuntu-latest
+    concurrency:
+      group: beta-release-publish
+      cancel-in-progress: false
     needs:
       - build-ubuntu
       - build-windows-32
