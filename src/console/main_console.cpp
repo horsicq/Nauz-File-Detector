@@ -48,29 +48,6 @@ QString buildDescription()
     return description;
 }
 
-class NFDConsole : public XScanEngineConsole {
-public:
-    NFDConsole(QCoreApplication &application, XScanEngine &scanEngine, const QString &description)
-        : XScanEngineConsole(application, scanEngine, description), m_clFormatResult(XOptions::getCommandLineOption(XOptions::CONSOLE_OPTION_ID_FORMAT))
-    {
-    }
-
-protected:
-    void addEngineOptions(QCommandLineParser *pParser) override
-    {
-        pParser->addOption(m_clFormatResult);
-    }
-
-    void applyEngineOptions(const QCommandLineParser *pParser, XScanEngine::SCAN_OPTIONS *pScanOptions) override
-    {
-        // Match diec's compact default spelling and its opt-in --format mode.
-        pScanOptions->bFormatResult = pParser->isSet(m_clFormatResult);
-    }
-
-private:
-    QCommandLineOption m_clFormatResult;
-};
-
 }  // namespace
 
 int main(int argc, char *argv[])
@@ -84,7 +61,7 @@ int main(int argc, char *argv[])
 #endif
 
     SpecAbstract specAbstract;
-    NFDConsole scanEngineConsole(application, specAbstract, buildDescription());
+    XScanEngineConsole scanEngineConsole(application, specAbstract, buildDescription());
 
     return scanEngineConsole.process();
 }
