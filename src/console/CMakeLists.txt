@@ -1,5 +1,5 @@
 set(CMAKE_AUTOMOC ON)
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
@@ -12,7 +12,14 @@ endif()
 if(MSVC)
     add_compile_definitions(_CRT_SECURE_NO_WARNINGS _SCL_SECURE_NO_WARNINGS _CRT_NONSTDC_NO_DEPRECATE)
     add_compile_options(/FS)
-    add_compile_options($<$<CONFIG:Debug>:/Z7> $<$<CONFIG:RelWithDebInfo>:/Z7>)
+    # Older CMake versions (and caches made before CMP0141) put /Zi in
+    # these flags. Remove only the debug format in this directory's scope;
+    # the console target selects Embedded below. Preserve runtime/optimizer
+    # flags and leave sibling targets' flag variables untouched.
+    foreach(nfd_debug_config DEBUG RELWITHDEBINFO)
+        string(REGEX REPLACE "(^|[ \t])[-/]Z[iI7]([ \t]|$)" "\\1\\2"
+            CMAKE_CXX_FLAGS_${nfd_debug_config} "${CMAKE_CXX_FLAGS_${nfd_debug_config}}")
+    endforeach()
 endif()
 
 include(${CMAKE_CURRENT_LIST_DIR}/../../dep/SpecAbstract/specabstract.cmake)
@@ -29,6 +36,16 @@ add_executable(nfdc
     ${XSCANENGINECONSOLE_SOURCES}
     main_console.cpp
 )
+
+if(MSVC)
+    if(POLICY CMP0141)
+        set_property(TARGET nfdc PROPERTY MSVC_DEBUG_INFORMATION_FORMAT
+            "$<$<CONFIG:Debug,RelWithDebInfo>:Embedded>")
+    else()
+        target_compile_options(nfdc PRIVATE
+            "$<$<CONFIG:Debug>:/Z7>" "$<$<CONFIG:RelWithDebInfo>:/Z7>")
+    endif()
+endif()
 
 target_include_directories(nfdc PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 
