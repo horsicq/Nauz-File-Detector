@@ -53,10 +53,6 @@ set_target_properties(${NFD_GUI_TARGET} PROPERTIES
 target_include_directories(${NFD_GUI_TARGET} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 
 target_link_libraries(${NFD_GUI_TARGET} PRIVATE
-    bzip2
-    lzma
-    zlib
-    ppmd
     capstone
     xsimd
     Qt${NFD_QT_MAJOR}::Widgets

@@ -105,7 +105,6 @@ if(EXISTS "${NFD_TRANSLATION_HELPER}")
 endif()
 
 add_subdirectory(../dep/XCapstone XCapstone)
-add_subdirectory(../dep/XArchive XArchive)
 add_subdirectory(../dep/Formats/xsimd XSIMD)
 add_subdirectory(gui)
 add_subdirectory(console)

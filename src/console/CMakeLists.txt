@@ -50,10 +50,6 @@ endif()
 target_include_directories(nfdc PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 
 target_link_libraries(nfdc PRIVATE
-    bzip2
-    lzma
-    zlib
-    ppmd
     capstone
     xsimd
     Qt${NFD_QT_MAJOR}::Core
